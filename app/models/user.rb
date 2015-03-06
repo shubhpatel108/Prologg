@@ -4,5 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_one :gplus_link
+  has_one :gplus_link, dependent: :destroy
+  has_one :facebook_link, dependent: :destroy
 end
