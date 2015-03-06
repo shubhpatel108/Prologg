@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_one :facebook_link, dependent: :destroy
   has_one :website_link, dependent: :destroy
   has_one :twitter_link, dependent: :destroy
+  has_one :blog_link, dependent: :destroy
 end
