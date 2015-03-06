@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20150306184720) do
   end
 
   create_table "quora_links", force: true do |t|
+    t.string "user_id", null: false
+    t.string "url",     null: false
   end
 
   create_table "twitter_links", force: true do |t|
