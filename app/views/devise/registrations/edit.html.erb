@@ -22,6 +22,15 @@
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
+  <div class="field">
+    <%= f.check_box :availability %><%= f.label :available %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_bio %><br />
+    <%= f.text_field :short_bio %>
+  </div>
+
   <div class="actions">
     <% gender_options = [["Male", true], ["Female", false]]%>
     <%= f.select :gender, options_for_select(gender_options, selected: resource.gender) %>
