@@ -7,7 +7,7 @@ class ProfilesController < ApplicationController
 		username = params[:username]
 		@user = User.where(username: username).first
 		if @user.nil?
-			render status: 404, template: '404.html'
+			render file: 'public/404', status: 404, formats: [:html]
 		end
 	end
 
