@@ -1,10 +1,59 @@
-<%= @user.username %>
-<%= @user.full_name %>
-<%= @user.short_bio %>
-<%= "available" if @user.availability %>
-<%= @user.website_link.url unless @user.website_link.nil? %>
-<%= @user.gplus_link.url unless @user.gplus_link.nil? %>
-<%= @user.facebook_link.url unless @user.facebook_link.nil? %>
-<%= @user.twitter_link.url unless @user.twitter_link.nil? %>
-<%= @user.quora_link.url unless @user.quora_link.nil? %>
-<%= @user.blog_link.url unless @user.blog_link.nil? %>
+<!-- BEGIN PROFILE CARD  -->
+
+<div class="col-lg-3">
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-12">
+			<div class="the-box no-border full card-info">
+				<div class="the-box no-border text-center no-margin">
+					<% if not current_user.nil? and @user==current_user %>
+						<div class="right-action">
+							<a href="<%= edit_user_registration_path %>">
+								<button class="btn btn-danger btn-square btn-xs">Edit</button>
+							</a>
+						</div><!-- /.right-action -->
+					<% end %>
+					<img src="assets/avatar-4.jpg" class="social-avatar has-margin has-light-shadow img-circle" alt="Avatar">
+					<h4 class="bolded"><%= @user.full_name %></h4>
+					<h5>username: <%= @user.username %></h5>
+					<% if @user.availability? %>
+						<span class="label label-success">Available</span>
+					<% else %>
+						<span class="label label-warning">Unavailable</span>
+					<% end %>
+					<p class="text-muted">
+						<%= @user.short_bio unless @user.short_bio.nil? %>
+					</p>
+					<p class="bordered"><i class="fa fa-map-marker"></i> <strong>San Francisco, CA</strong></p>
+					<% unless @user.website_link.nil? %>
+					<p>
+						<a href="<%= @user.website_link.url %>">
+							<%= @user.website_link.url %>
+						</a>
+					</p>
+					<% end %>
+					<p class="social-icon">
+						<% unless @user.gplus_link.nil? %>
+							<a href="<%= @user.blog_link.url %>"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress" target="_blank"></i></a>
+						<% end %>
+						<% unless @user.gplus_link.nil? %>
+							<a href="<%= @user.gplus_link.url %>"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus" target="_blank"></i></a>
+						<% end %>
+						<% unless @user.facebook_link.nil? %>
+							<a href="<%= @user.facebook_link.url %>"><i class="fa fa-facebook icon-xs icon-circle icon-facebook" target="_blank"></i></a>
+						<% end %>
+						<% unless @user.twitter_link.nil? %>
+							<a href="<%= @user.twitter_link.url %>"><i class="fa fa-twitter icon-xs icon-circle icon-twitter" target="_blank"></i></a>
+						<% end %>
+						<% unless @user.quora_link.nil? %>
+							<a href="<%= @user.quora_link.url %>"><i class="fa fa-reddit-square icon-xs icon-circle icon-dribbble" target="_blank"></i></a>
+						<% end %>
+					</p>
+				</div><!-- /.the-box .no-border .bg-info .no-margin -->
+				<% if (not current_user.nil? and @user!=current_user) or current_user.nil? %>
+					<button class="btn btn-danger btn-block"><i class="fa fa-envelope"></i> Message</button>
+				<% end %>
+			</div><!-- /.the-box -->
+			<!-- END PROFILE CARD  -->
+			</div><!-- /.col-sm-6 .col-md-6 .col-lg-12 -->
+	</div><!-- /.row -->
+</div><!-- /.col-lg-4 -->
