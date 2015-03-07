@@ -32,17 +32,17 @@
 					</p>
 					<% end %>
 					<p class="social-icon">
-						<% unless @user.gplus_link.nil? %>
+						<% unless @user.blog_link.nil? %>
 							<a href="<%= @user.blog_link.url %>"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress" target="_blank"></i></a>
 						<% end %>
 						<% unless @user.gplus_link.nil? %>
-							<a href="<%= @user.gplus_link.url %>"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus" target="_blank"></i></a>
+							<a href="<%= @user.gplus_link.nurl %>"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus" target="_blank"></i></a>
 						<% end %>
 						<% unless @user.facebook_link.nil? %>
-							<a href="<%= @user.facebook_link.url %>"><i class="fa fa-facebook icon-xs icon-circle icon-facebook" target="_blank"></i></a>
+							<a href="<%= @user.facebook_link.nurl %>"><i class="fa fa-facebook icon-xs icon-circle icon-facebook" target="_blank"></i></a>
 						<% end %>
 						<% unless @user.twitter_link.nil? %>
-							<a href="<%= @user.twitter_link.url %>"><i class="fa fa-twitter icon-xs icon-circle icon-twitter" target="_blank"></i></a>
+							<a href="<%= @user.twitter_link.nurl %>"><i class="fa fa-twitter icon-xs icon-circle icon-twitter" target="_blank"></i></a>
 						<% end %>
 						<% unless @user.quora_link.nil? %>
 							<a href="<%= @user.quora_link.url %>"><i class="fa fa-reddit-square icon-xs icon-circle icon-dribbble" target="_blank"></i></a>
