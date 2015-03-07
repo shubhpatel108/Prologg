@@ -1,0 +1,9 @@
+<%= form_tag({controller: "/profiles", action: "update_links"}) do %>
+	<%= label_tag :website_link %> <%= text_field_tag :website_link, @website_link, placeholder: "http://" %>
+	<%= label_tag :blog_link %> <%= text_field_tag :blog_link, @blog_link, placeholder: "http://" %>
+	<%= label_tag :gplus_link %> <%= text_field_tag :gplus_link, @gplus_link, placeholder: "http://" %>
+	<%= label_tag :facebook_link %> <%= text_field_tag :facebook_link, @facebook_link, placeholder: "http://" %>
+	<%= label_tag :twitter_link %> <%= text_field_tag :twitter_link, @twitter_link, placeholder: "http://" %>
+	<%= label_tag :quora_link %> <%= text_field_tag :quora_link, @quora_link, placeholder: "http://" %>
+	<%= submit_tag "Done"%>
+<% end %>
