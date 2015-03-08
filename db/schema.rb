@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307132935) do
+ActiveRecord::Schema.define(version: 20150308182709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150307132935) do
     t.datetime "last_online",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.json     "metadata",     default: {}
   end
 
   create_table "facebook_links", force: true do |t|
