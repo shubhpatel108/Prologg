@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/:username', to: 'profiles#show', as: :profile
   get '/users/edit_links', to: 'profiles#edit_links', as: :edit_links
   post '/users/update_links', to: 'profiles#update_links'
+
+  get '/integrations/codeforces/new', to: 'codeforces_profile#new'
+  post '/integrations/codeforces/create', to: 'codeforces_profile#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
