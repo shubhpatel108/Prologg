@@ -61,6 +61,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.5.1)
     multi_json (1.11.0)
+    netrc (0.7.7)
     orm_adapter (0.5.0)
     pg (0.18.1)
     polyglot (0.3.5)
@@ -87,6 +88,9 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     sass (3.2.19)
     sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
@@ -130,8 +134,10 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  json
   pg
   rails (= 4.1.4)
+  rest-client
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   spring

@@ -32,19 +32,19 @@ class ProfilesController < ApplicationController
 		if current_user.gplus_link.nil?
 			@gplus_link = ""
 		else
-			@gplus_link = current_user.gplus_link.url
+			@gplus_link = current_user.gplus_link.nurl
 		end
 
 		if current_user.facebook_link.nil?
 			@facebook_link = ""
 		else
-			@facebook_link = current_user.facebook_link.url
+			@facebook_link = current_user.facebook_link.nurl
 		end
 
 		if current_user.twitter_link.nil?
 			@twitter_link = ""
 		else
-			@twitter_link = current_user.twitter_link.url
+			@twitter_link = current_user.twitter_link.nurl
 		end
 
 		if current_user.quora_link.nil?
@@ -58,6 +58,9 @@ class ProfilesController < ApplicationController
 	def update_links
 		logger.info(params)
 		u = current_user
+		params[:gplus_link] = GplusLink.normalize_url(params[:gplus_link])
+		params[:facebook_link] = FacebookLink.normalize_url(params[:facebook_link])
+		params[:twitter_link] = TwitterLink.normalize_url(params[:twitter_link])
 
 		if not u.website_link.nil?
 			u.website_link.url = params[:website_link]
