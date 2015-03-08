@@ -1,44 +1,73 @@
-<h2>Sign up</h2>
+<body class="login tooltips">
+<h2 class="heading">Sign up</h2>
 
+<div class="login-header text-center">
+      <!-- <img src="assets/images/download.jpg" class="logo" alt="Logo"> -->
+      <%= image_tag "download.jpg", class: "logo" %>
+</div>
+<div class="login-wrapper">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :full_name %><br />
-    <%= f.text_field :full_name, autofocus: true %>
+  <div class="form-group has-feedback lg left-feedback no-label">
+    <!-- <%= f.label :full_name %><br /> -->
+    <%= f.text_field :full_name, autofocus: true, class: "form-control no-border input-lg rounded", placeholder: "Full name" %>
+    <span class="fa fa-male form-control-feedback"></span>
   </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+  <div class="form-group lg gendersetting ">
+    <p class="form-control no-border input-lg rounded" >  
+      <i class="fa fa-user  gendericon"></i>
+       Gender
+    <i class="fa fa-male  gendericon"></i>
+    <%= f.radio_button :gender , 'male', checked: true %>
+    <%= label :gender_male, 'Male' %>
+    <i class="fa fa-female  gendericon"></i>
+    <%= f.radio_button :gender , 'female' %>
+    <%= label :gender_female, 'Female' %>
+    
+    </p>
+  </div>
+  <!-- <div class="form-group  lg gendersetting ">
+  <p class="Gendersignup  no-border input-lg rounded" >
+  <i class="fa fa-user  gendericon"></i>    
+    <% gender_options = [["Male", true], ["Female", false]]%>
+    <%= f.select :gender, options_for_select(gender_options, selected: gender_options[0]), class: "form-control no-border select-lg rounded" %>
+    </p>
+  </div> -->
+
+  <div class="form-group has-feedback lg left-feedback no-label">
+    <!-- <%= f.label :username %><br /> -->
+    <%= f.text_field :username, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
+    <span class="fa fa-user form-control-feedback"></span>
   </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
+  <div class="form-group has-feedback lg left-feedback no-label">
+    <!-- <%= f.label :email %><br /> -->
+    <%= f.email_field :email, class: "form-control no-border input-lg rounded", placeholder: "Email" %>
+    <span class="fa fa-envelope form-control-feedback"></span>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="form-group has-feedback lg left-feedback no-label" >
+    <!-- <%= f.label :password %> -->
     <% if @validatable %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Password" %>
+    <span class="fa fa-lock form-control-feedback" style="top: 20px"></span>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <% gender_options = [["Male", true], ["Female", false]]%>
-    <%= f.select :gender, options_for_select(gender_options, selected: gender_options[0]) %>
+  <div class="form-group has-feedback lg left-feedback no-label">
+    <!-- <%= f.label :password_confirmation %><br /> -->
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Conform Password" %>
+    <span class="fa fa-unlock form-control-feedback"></span>  
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: "btn btn-warning btn-lg btn-perspective btn-block" %>
   </div>
 <% end %>
 
+</div><!-- /.login-wrapper -->
 <%= render "devise/shared/links" %>
+</body>
