@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag	 'bootstrap.min.css', 'font-awesome.min.css', 'style-responsive.css', 'style.css' %>
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -16,7 +17,7 @@
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 	<% if user_signed_in? %>
-		<%= link_to current_user.full_name, edit_user_registration_path%>
+		<%= link_to current_user.full_name, profile_path(username: current_user.username)%>
 		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 	<% else %>
 		<%= link_to "Sign In", new_user_session_path %>
