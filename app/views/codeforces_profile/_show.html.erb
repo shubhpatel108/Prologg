@@ -1,0 +1,13 @@
+<% unless @cfp.nil? %>
+	handle: <%= @cfp.handle %></br>
+	contribution: <%= @cfp.contribution %></br>
+	rank: <%= @cfp.rank %></br>
+	max_rank: <%= @cfp.max_rank %></br>
+	rating: <%= @cfp.rating %></br>
+	max_rating: <%= @cfp.max_rating %></br>
+	last_online: <%= @cfp.last_online %></br>
+
+	tags and count in solved problems: <%= @cfp.metadata["tags"] %></br>
+	languages and solved problems: <%= @cfp.metadata["languages"] %></br>
+	change in ratings: <%= @cfp.metadata["ratings"] %></br>
+<% end %>

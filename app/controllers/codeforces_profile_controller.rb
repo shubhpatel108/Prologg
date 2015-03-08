@@ -60,6 +60,9 @@ class CodeforcesProfileController < ApplicationController
 			end
 			resp_rates.slice!(resp_rates.length-4..resp_rates.length)
 
+			tags_count = tags_count.to_a.sort_by {|tag| tag[1]}.reverse.to_h
+			langs = langs.to_a.sort_by {|lang| lang[1]}.reverse.to_h
+
 			@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
 			@codeforces_profile.save!
 

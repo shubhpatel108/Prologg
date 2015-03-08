@@ -7,6 +7,8 @@ class ProfilesController < ApplicationController
 	def show
 		username = params[:username]
 		@user = User.where(username: username).first
+		@cfp = @user.codeforces_profile 			#cfp - short for CodeForcesProfile
+
 		if @user.nil?
 			render file: 'public/404', status: 404, formats: [:html]
 		end
