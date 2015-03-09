@@ -10,4 +10,8 @@
 	tags and count in solved problems: <%= @cfp.metadata["tags"] %></br>
 	languages and solved problems: <%= @cfp.metadata["languages"] %></br>
 	change in ratings: <%= @cfp.metadata["ratings"] %></br>
+
+	<%= link_to "Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs"} %>
+	<div id="recent_subs">
+	</div>
 <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308182709) do
+ActiveRecord::Schema.define(version: 20150309094247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,14 +22,14 @@ ActiveRecord::Schema.define(version: 20150308182709) do
   end
 
   create_table "codeforces_profiles", force: true do |t|
-    t.integer  "user_id",                   null: false
-    t.integer  "handle",       default: 0,  null: false
-    t.integer  "contribution", default: 0,  null: false
-    t.string   "rank",         default: "", null: false
-    t.string   "max_rank",     default: "", null: false
-    t.integer  "rating",       default: 0,  null: false
-    t.integer  "max_rating",   default: 0,  null: false
-    t.datetime "last_online",               null: false
+    t.integer  "user_id",                    null: false
+    t.string   "handle",       default: "0", null: false
+    t.integer  "contribution", default: 0,   null: false
+    t.string   "rank",         default: "",  null: false
+    t.string   "max_rank",     default: "",  null: false
+    t.integer  "rating",       default: 0,   null: false
+    t.integer  "max_rating",   default: 0,   null: false
+    t.datetime "last_online",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.json     "metadata",     default: {}
