@@ -1,0 +1,12 @@
+<% unless notice.nil? %>
+  <div class="alert alert-warning alert-bold-border fade in alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Note!</strong> <%= notice %>
+  </div>
+<% end %>
+<% unless alert.nil? %>
+  <div class="alert alert-danger alert-bold-border fade in alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <strong>Alert!</strong> <%= alert %>
+  </div>
+<% end %>
