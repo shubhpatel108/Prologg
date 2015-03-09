@@ -26,12 +26,11 @@
 							<i class="fa fa-search"></i>
 						Search a developer</button>
 
-						<button class="btn btn-primary" style="
+							<% if user_signed_in? %>
+							<button class="btn btn-primary" style="
     							margin-left: 500px;
     							margin-top: 13px;
 								">Update</button>
-
-							<% if user_signed_in? %>
 								<!-- Begin user session nav -->
 								<ul class="nav-user navbar-right">
 									<li class="dropdown">
