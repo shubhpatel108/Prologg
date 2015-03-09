@@ -1,0 +1,75 @@
+.Gendersignup {
+	background-color: #ffffff;
+	
+	width: 300px;
+	height: 45px;
+	border-radius: 5px;
+	color : #656D78;
+	font-family: inherit;
+	position: relative;
+}
+
+.gendericon {
+	padding-right: 5px;
+	padding-left: 5px;
+	color: #AAB2BD;
+	font-size: 15px;
+}
+
+.gendersetting{
+	padding-left: 0px;
+	
+}
+
+.headerlogo {
+	width: 250px;
+	height: 60px;
+}
+
+.footertext{
+	margin-left: 450px;
+}
+
+.sociallinks {
+	margin-left: 505px;
+	margin-top: 5px;
+}
+
+.spaceforleftpanel{
+	width: 250px;
+	height: 545px;
+	background-color: #f8f8f8;
+	position: absolute;
+	margin-top: -10px;
+}
+
+.mainpagecontent{
+
+margin-left: 0px;
+margin-top: 10px;
+}
+
+.menubarpad {
+position: relative;
+display: inline-block;
+vertical-align: middle;
+}
+
+.contentwrapper{
+	position: relative;
+	margin-left: 260px;
+	width: 1025px;
+	height: 100px;
+	margin-top: 10px;
+	background-color: #f8f8f8;
+}
+
+.btn-styling {
+	margin-left: 57px;
+	margin-right: 60px;
+}
+
+.searchbtnstyle {
+	margin-left: 10px;
+	margin-top: 10px;
+}

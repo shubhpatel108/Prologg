@@ -13,17 +13,67 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body class="tooltips">
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
-	<% if user_signed_in? %>
-		<%= link_to current_user.full_name, profile_path(username: current_user.username)%>
-		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-	<% else %>
-		<%= link_to "Sign In", new_user_session_path %>
-		<%= link_to "Sign Up", new_user_registration_path %>
-	<% end %>
-	<%= yield %>
+	<div class="wrapper">
+		<!-- BEGIN TOP NAV -->
+		<div class="top-navbar" style="margin-top: 25px; margin-left: 25px;">
+			<div class="top-navbar-inner">
+				
+				<!-- Begin Logo brand -->
+				<div class="logo-brand">
+					<%= link_to image_tag("download.jpg"), "#" %>
+				</div><!-- /.logo-brand -->
+				<!-- End Logo brand -->
+				
+				<div class="top-nav-content">
 
+					<!-- Begin button nav toggle -->
+					<!-- <div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
+						<i class="fa fa-plus icon-plus"></i>
+					</div> --><!-- /.btn-collapse-sidebar-right -->
+					<!-- End button nav toggle -->
+					
+					<!-- Begin Collapse menu nav -->
+					<div class="collapse navbar-collapse" id="main-fixed-nav">
+						<!-- Begin nav search form -->
+						<button class="btn btn-primary  searchbtnstyle" style="margin-top: 13px;">
+							<i class="fa fa-search"></i>
+						Search a developer</button>
+
+							<% if user_signed_in? %>
+								<%= link_to current_user.full_name, profile_path(username: current_user.username) %>
+								<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+							<% else %>
+								<%= link_to "Sign In", new_user_session_path, class: "btn btn-primary", style: " margin-left: 700px; margin-top: 13px;"  %>
+								<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary", style: " margin-top: 13px; margin-right: -13px;" %>
+							<% end %>
+						<!-- End nav search form -->
+						
+					</div><!-- /.navbar-collapse -->
+					<!-- End Collapse menu nav -->
+				</div><!-- /.top-nav-content -->
+			</div><!-- /.top-navbar-inner -->
+		</div><!-- /.top-navbar -->
+		<!-- END TOP NAV -->
+	<%= yield %>
+	<nav class = "navbar navbar-default navbar-fixed-bottom" role = "navigation">
+			
+		<div class = "container">
+			<div class= "footertext"> Last updated at xx:xx:xx on dd:mm:yy </div>
+			<div class="sociallinks">
+				<i class="fa fa-facebook icon-xs icon-circle icon-facebook"></i>
+				<i class="fa fa-twitter icon-xs icon-circle icon-twitter"></i>
+				<i class="fa fa-dribbble icon-xs icon-circle icon-dribbble"></i>
+				<i class="fa fa-google-plus icon-xs icon-circle icon-google-plus"></i>
+			</div>
+			<div>
+				<a href="blankpage.html" class="footertext" style="margin-left : 535px">Contact us</a>
+			</div>
+		</div>
+	
+			
+		</nav>
 </body>
 </html>
