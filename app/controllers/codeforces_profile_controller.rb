@@ -1,5 +1,6 @@
 class CodeforcesProfileController < ApplicationController
 	before_filter :authenticate_user!
+	protect_from_forgery except: :recent_submissions
 
 	def new
 	end
@@ -22,7 +23,7 @@ class CodeforcesProfileController < ApplicationController
 		if status_info == "OK" and status_subs == "OK" and status_rates == "OK"
 			@codeforces_profile = CodeforcesProfile.new(
 				user_id: current_user.id,
-				handle: handle,
+				handle: resp_info["handle"],
 				contribution: resp_info["contribution"],
 				rank: resp_info["rank"],
 				max_rank: resp_info["maxRank"],
@@ -74,4 +75,22 @@ class CodeforcesProfileController < ApplicationController
 		end
 	end
 
+	def recent_submissions
+		handle = params[:handle]
+		response = CodeforcesProfile.get_recent_submissions(handle)
+		status = response[0]
+		@resp = response[1]["result"]
+
+		if status=="OK"
+			@resp.each do |sub|
+				sub.select! {|k,v| ["problem", "programmingLanguage", "creationTimeSecond", "verdict"].include?(k) }
+				sub["problem"].select! {|k,v| ["name"].include?(k) }
+			end
+			respond_to do |format|
+				format.js
+			end
+		else
+			render js: ""
+		end
+	end
 end

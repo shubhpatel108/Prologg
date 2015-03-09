@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/integrations/codeforces/new', to: 'codeforces_profile#new'
   post '/integrations/codeforces/create', to: 'codeforces_profile#create'
+  get '/integrations/codeforces/recent_submissions/:handle', to: 'codeforces_profile#recent_submissions', as: :cfp_submissions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
