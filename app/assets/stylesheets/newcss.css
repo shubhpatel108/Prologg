@@ -56,8 +56,8 @@ vertical-align: middle;
 }
 
 .contentwrapper{
-	position: relative;
-	margin-left: 260px;
+	position: absolute;
+	margin-left: 325px;
 	width: 1025px;
 	height: 100px;
 	margin-top: 10px;
@@ -70,6 +70,10 @@ vertical-align: middle;
 }
 
 .searchbtnstyle {
-	margin-left: 10px;
-	margin-top: 10px;
+	margin-left: 20px;
+	margin-top: 13px;
+}
+
+.actions {
+	margin-bottom: 25px;
 }
