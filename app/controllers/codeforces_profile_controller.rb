@@ -83,7 +83,7 @@ class CodeforcesProfileController < ApplicationController
 
 		if status=="OK"
 			@resp.each do |sub|
-				sub.select! {|k,v| ["problem", "programmingLanguage", "creationTimeSecond", "verdict"].include?(k) }
+				sub.select! {|k,v| ["problem", "programmingLanguage", "creationTimeSeconds", "verdict"].include?(k) }
 				sub["problem"].select! {|k,v| ["name"].include?(k) }
 			end
 			respond_to do |format|
