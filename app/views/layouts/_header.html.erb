@@ -1,9 +1,6 @@
-</br>
-</br>
-</br>
 	<div class="wrapper">
 		<!-- BEGIN TOP NAV -->
-		<div class="top-navbar" style="margin-top: 10px; margin-left: 80px;">
+		<div class="top-navbar" style="margin-top: 0px; margin-left: 0px;">
 			<div class="top-navbar-inner">
 				
 				<!-- Begin Logo brand -->
@@ -28,17 +25,14 @@
 						Search a developer</button>
 
 							<% if user_signed_in? %>
-							<button class="btn btn-primary" style="
-    							margin-left: 500px;
-    							margin-top: 13px;
-								">Update</button>
 								<!-- Begin user session nav -->
 								<ul class="nav-user navbar-right">
+									<button class="btn btn-primary" style="margin-top: 13px; float: left;">Update</button>
 									<li class="dropdown">
 									  <a href="blank.html#fakelink" class="dropdown-toggle" data-toggle="dropdown">
 										<!-- <img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="Avatar"> -->
 										<%= image_tag("avatar-4.jpg", class: "avatar img-circle") %>
-										Hi, <strong><%= current_user.full_name %></strong>
+										Hi, <strong><%= current_user.full_name.split(" ").first %></strong>
 									  </a>
 									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
 										<li><%= link_to "Edit Profile", edit_user_registration_path %></li>

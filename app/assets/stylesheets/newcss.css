@@ -47,6 +47,7 @@
 
 margin-left: 0px;
 margin-top: 10px;
+width: 950px;
 }
 
 .menubarpad {
@@ -57,23 +58,52 @@ vertical-align: middle;
 
 .contentwrapper{
 	position: absolute;
-	margin-left: 325px;
-	width: 1025px;
-	height: 100px;
-	margin-top: 10px;
-	background-color: #f8f8f8;
+	margin-left: 307px;
+	width: 950px;
+	height: 100%;
+	margin-top: 14px;
+	background-color: white;
 }
 
 .btn-styling {
-	margin-left: 57px;
-	margin-right: 60px;
+	margin-left: 48px;
+	margin-right: 50px;
 }
 
 .searchbtnstyle {
-	margin-left: 20px;
+	margin-left: 0px;
 	margin-top: 13px;
 }
 
 .actions {
 	margin-bottom: 25px;
+}
+
+#left-profile-box {
+	margin-top: 14px;
+}
+
+.page-content {
+	margin-left: 0px !important;
+	width: 100%;
+	margin-top: 30px !important;
+}
+
+.top-nav-content {
+	margin-left: 25% !important;
+}
+
+.logo-brand {
+	width: 23% !important;
+	left: 12px !important;
+}
+
+.logo-brand img {
+	width: 75% !important;
+	height: 60px !important;
+}
+
+ul.nav-user {
+	right: 8px !important;
+	width: 254px !important;
 }
