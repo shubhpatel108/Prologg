@@ -1,14 +1,14 @@
-<body class="login tooltips">
-<h2 class="heading">Sign up</h2>
-
+<script type="text/javascript">
+  $("#header-id").remove();
+  $("body").css({"background": "#37BC9B"})
+</script>
+<div class="login toolkits">
 <div class="login-header text-center">
-      <!-- <img src="assets/images/download.jpg" class="logo" alt="Logo"> -->
-      <%= image_tag "download.jpg", class: "logo" %>
-</div>
+      <%= image_tag ("download.jpg"), class: "logo" %>
+    </div>
 <div class="login-wrapper">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
   <div class="form-group has-feedback lg left-feedback no-label">
     <!-- <%= f.label :full_name %><br /> -->
     <%= f.text_field :full_name, autofocus: true, class: "form-control no-border input-lg rounded", placeholder: "Full name" %>
@@ -70,4 +70,4 @@
 
 </div><!-- /.login-wrapper -->
 <%= render "devise/shared/links" %>
-</body>
+</div>

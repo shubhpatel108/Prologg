@@ -1,0 +1,60 @@
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+	<div class="wrapper">
+		<!-- BEGIN TOP NAV -->
+		<div class="top-navbar" style="margin-top: 25px; margin-left: 25px;">
+			<div class="top-navbar-inner">
+				
+				<!-- Begin Logo brand -->
+				<div class="logo-brand">
+					<%= link_to image_tag("download.jpg"), "#" %>
+				</div><!-- /.logo-brand -->
+				<!-- End Logo brand -->
+				
+				<div class="top-nav-content">
+
+					<!-- Begin button nav toggle -->
+					<!-- <div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
+						<i class="fa fa-plus icon-plus"></i>
+					</div> --><!-- /.btn-collapse-sidebar-right -->
+					<!-- End button nav toggle -->
+					
+					<!-- Begin Collapse menu nav -->
+					<div class="collapse navbar-collapse" id="main-fixed-nav">
+						<!-- Begin nav search form -->
+						<button class="btn btn-primary  searchbtnstyle" style="margin-top: 13px;">
+							<i class="fa fa-search"></i>
+						Search a developer</button>
+
+							<% if user_signed_in? %>
+								<!-- Begin user session nav -->
+								<ul class="nav-user navbar-right">
+									<li class="dropdown">
+									  <a href="blank.html#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+										<!-- <img src="assets/img/avatar/avatar-1.jpg" class="avatar img-circle" alt="Avatar"> -->
+										<%= image_tag("avatar-4.jpg", class: "avatar img-circle") %>
+										Hi, <strong><%= current_user.full_name %></strong>
+									  </a>
+									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
+										<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+										<li><a href="blank.html#fakelink">Edit Integrations</a></li>
+										<li><a href="blank.html#fakelink">Change password</a></li>
+										<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+									  </ul>
+									</li>
+								</ul>
+								<!-- End user session nav -->
+								
+							<% else %>
+								<%= link_to "Sign In", new_user_session_path, class: "btn btn-primary", style: " margin-left: 700px; margin-top: 13px;"  %>
+								<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary", style: " margin-top: 13px; margin-right: -13px;" %>
+							<% end %>
+						<!-- End nav search form -->
+						
+					</div><!-- /.navbar-collapse -->
+					<!-- End Collapse menu nav -->
+				</div><!-- /.top-nav-content -->
+			</div><!-- /.top-navbar-inner -->
+		</div><!-- /.top-navbar -->
+		<!-- END TOP NAV -->
+		</div>
