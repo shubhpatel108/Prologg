@@ -10,8 +10,7 @@
 <div class="login-wrapper">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group has-feedback lg left-feedback no-label">
-    <!-- <%= f.label :username %><br /> -->
-    <%= f.text_field :username, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
+    <%= f.text_field :email, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
     <span class="fa fa-user form-control-feedback"></span>
   </div>
 
