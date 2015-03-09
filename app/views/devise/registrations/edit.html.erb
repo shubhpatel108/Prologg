@@ -1,65 +1,95 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :full_name %><br />
-    <%= f.text_field :full_name, autofocus: true %>
+<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
+<script type="text/javascript">
+  $("#header-id").remove();
+  $("body").css({"background": "#37BC9B"})
+</script>
+<div class="login toolkits">
+  <div class="login-header text-center">
+    <%= image_tag ("download.jpg"), class: "logo" %>
   </div>
+  <div class="login-wrapper">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+    <div class="form-group has-feedback lg left-feedback no-label">
+      <!-- <%= f.label :full_name %><br /> -->
+      <%= f.text_field :full_name, autofocus: true, class: "form-control no-border input-lg rounded", placeholder: "Full name" %>
+      <span class="fa fa-male form-control-feedback"></span>
+    </div>
+
+    <div class="form-group lg gendersetting ">
+      <p class="form-control no-border input-lg rounded" >  
+        <i class="fa fa-user  gendericon"></i>
+         Gender
+      <i class="fa fa-male  gendericon"></i>
+      <%= f.radio_button :gender , 'male', checked: true %>
+      <%= label :gender_male, 'Male' %>
+      <i class="fa fa-female  gendericon"></i>
+      <%= f.radio_button :gender , 'female' %>
+      <%= label :gender_female, 'Female' %>
+      </p>
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label">
+      <!-- <%= f.label :username %><br /> -->
+      <%= f.text_field :username, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
+      <span class="fa fa-user form-control-feedback"></span>
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label">
+      <!-- <%= f.label :email %><br /> -->
+      <%= f.email_field :email, class: "form-control no-border input-lg rounded", placeholder: "Email" %>
+      <span class="fa fa-envelope form-control-feedback"></span>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+        <%= f.check_box :availability, class: "i-yellow-flat" %>
+        <%= f.label :availabile %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label">
+      <!-- <%= f.label :short_bio %><br /> -->
+      <%= f.text_area :short_bio, class: "form-control no-border input-lg rounded", placeholder: "short_bio" %>
+      <span class="fa fa-pencil form-control-feedback"></span>
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label" >
+      <!-- <%= f.label :password %> --><i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Password" %>
+      <span class="fa fa-lock form-control-feedback" style="top: 20px"></span>
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label">
+      <!-- <%= f.label :password_confirmation %><br /> -->
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Conform Password" %>
+      <span class="fa fa-unlock form-control-feedback"></span>  
+    </div>
+
+    <div class="form-group has-feedback lg left-feedback no-label" >
+      <!-- <%= f.label :current_password %> --><i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "current_password" %>
+      <span class="fa fa-lock form-control-feedback" style="top: 40px"></span>
+    </div>
+
+
+    <div class="actions">
+    <%= f.submit "Update", class: "btn btn-warning btn-lg btn-perspective btn-block" %>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div class="field">
-    <%= f.check_box :availability %><%= f.label :available %>
+  <h3>Cancel my account</h3>
+
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-warning btn-lg btn-perspective btn-block" %></p>
+
+  <%= button_to "Edit links", edit_links_path, class: "btn btn-danger btn-lg btn-perspective btn-block", style: "margin-bottom: 20px; margin-top: 5px; width: 45%; float: left;" %>
+  <%= button_to "Back", :back, class: "btn btn-danger btn-lg btn-perspective btn-block", style: "margin-bottom: 100px; margin-top: 5px; width: 45%; float: right;" %>
   </div>
-
-  <div class="field">
-    <%= f.label :short_bio %><br />
-    <%= f.text_field :short_bio %>
-  </div>
-
-  <div class="actions">
-    <% gender_options = [["Male", true], ["Female", false]]%>
-    <%= f.select :gender, options_for_select(gender_options, selected: resource.gender) %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Edit links", edit_links_path %>
-<%= link_to "Back", :back %>
+</div>
