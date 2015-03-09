@@ -2,7 +2,7 @@
 <p class="alert"><%= alert %></p>
 	<div class="wrapper">
 		<!-- BEGIN TOP NAV -->
-		<div class="top-navbar" style="margin-top: 25px; margin-left: 25px;">
+		<div class="top-navbar" style="margin-top: 10px; margin-left: 80px;">
 			<div class="top-navbar-inner">
 				
 				<!-- Begin Logo brand -->
@@ -26,6 +26,11 @@
 							<i class="fa fa-search"></i>
 						Search a developer</button>
 
+						<button class="btn btn-primary" style="
+    							margin-left: 500px;
+    							margin-top: 13px;
+								">Update</button>
+
 							<% if user_signed_in? %>
 								<!-- Begin user session nav -->
 								<ul class="nav-user navbar-right">
@@ -46,7 +51,7 @@
 								<!-- End user session nav -->
 								
 							<% else %>
-								<%= link_to "Sign In", new_user_session_path, class: "btn btn-primary", style: " margin-left: 700px; margin-top: 13px;"  %>
+								<%= link_to "Sign In", new_user_session_path, class: "btn btn-primary", style: " margin-left: 650px; margin-top: 13px;"  %>
 								<%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary", style: " margin-top: 13px; margin-right: -13px;" %>
 							<% end %>
 						<!-- End nav search form -->
@@ -58,3 +63,48 @@
 		</div><!-- /.top-navbar -->
 		<!-- END TOP NAV -->
 		</div>
+
+		<div class="contentwrapper">
+					
+
+				<div class="mainpagecontent">
+					
+					<div class="menubarpad" style="background-color :#29AF8E ; width : 1025px">
+									<button type="button" class="btn btn-primary btn-styling ">Work summary</button>
+									<div class="menubarpad">
+										 
+
+										  <div class="menubarpad">
+											<button type="button" class="btn btn-primary btn-styling dropdown-toggle" data-toggle="dropdown">
+											  Application Profile
+											  <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu btn-styling">
+											  <li><a href="element-button.html#fakelink">Application Profile</a></li>
+											  <li><a href="element-button.html#fakelink">Github</a></li>
+											  <li><a href="element-button.html#fakelink">Linkedin</a></li>
+											</ul>
+										  </div>
+										</div>
+									
+									<div class="menubarpad">
+										 
+
+										  <div class="menubarpad">
+											<button type="button" class="btn btn-primary btn-styling dropdown-toggle" data-toggle="dropdown">
+											  Algorithm Profile
+											  <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu btn-styling">
+											  <li><a href="element-button.html#fakelink">Algorithm Profile</a></li>
+											  <li><a href="element-button.html#fakelink">Codeforces</a></li>
+											  <li><a href="element-button.html#fakelink">Topcoder</a></li>
+											</ul>
+										  </div>
+										</div>
+
+										<button type="button" class="btn btn-primary btn-styling ">Stack Overflow</button>
+					</div>
+
+				</div>
+				</div>
