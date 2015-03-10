@@ -36,7 +36,7 @@
 }
 
 .spaceforleftpanel{
-	width: 250px;
+	width: 325px;
 	height: 545px;
 	background-color: #f8f8f8;
 	position: absolute;
@@ -58,7 +58,7 @@ vertical-align: middle;
 
 .contentwrapper{
 	position: absolute;
-	margin-left: 307px;
+	margin-left: 322px;
 	width: 950px;
 	height: 100%;
 	margin-top: 14px;
@@ -71,8 +71,8 @@ vertical-align: middle;
 }
 
 .searchbtnstyle {
-	margin-left: 0px;
-	margin-top: 13px;
+	margin-left: 20px;
+	margin-top: 10px;
 }
 
 .actions {
@@ -89,14 +89,14 @@ vertical-align: middle;
 	margin-top: 30px !important;
 }
 
-.top-nav-content {
+/*.top-nav-content {
 	margin-left: 25% !important;
-}
+}*/
 
-.logo-brand {
+/*.logo-brand {
 	width: 23% !important;
 	left: 12px !important;
-}
+}*/
 
 .logo-brand img {
 	width: 75% !important;
