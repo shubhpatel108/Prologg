@@ -1,0 +1,13 @@
+development:
+  github_key: "YOUR_KEY"
+  github_secret: "YOUR_SECRET"
+
+  linkedin_key: "YOUR_KEY"
+  linkedin_secret: "YOUR_SECRET"
+
+production:
+  github_key: "YOUR_KEY"
+  github_secret: "YOUR_SECRET"
+
+  linkedin_key: "YOUR_KEY"
+  linkedin_secret: "YOUR_SECRET"
