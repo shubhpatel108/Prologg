@@ -1,5 +1,5 @@
 
-		<div class="menubarpad" style="background-color :#29AF8E ; width : 950px; margin-top:-10px;">
+		<div class="menubarpad" style="background-color :#29AF8E ; width : 1000px; margin-top:-10px;">
 			<button type="button" class="btn btn-primary btn-styling ">Work summary</button>
 			<div class="menubarpad">
 			  <div class="menubarpad">
@@ -23,7 +23,7 @@
 				</button>
 				<ul class="dropdown-menu btn-styling">
 				  <li><a href="element-button.html#fakelink">Algorithm Profile</a></li>
-				  <li><a href="element-button.html#fakelink">Codeforces</a></li>
+				  <li><%= link_to "Codeforces", cfp_show_profile_path(handle: @cfp.handle), {remote: true, id: 'cfp_profile'} %><!-- <a href="" data-remote="true">Codeforces</a> --></li>
 				  <li><a href="element-button.html#fakelink">Topcoder</a></li>
 				</ul>
 			  </div>

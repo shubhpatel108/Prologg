@@ -1,0 +1,78 @@
+.directionlinestyle {
+
+	width: 950px;
+	background-color: #f8f8f8;
+	line-height: 2.0em;
+
+}
+
+.algocfstyle {
+	width: 460px;
+	background-color: #FE8;
+	height: 500px;
+	position: absolute;
+
+}
+
+.algotcstyle {
+	width: 460px;
+	background-color: #FE8;
+	height: 50px;
+	position: absolute;
+	margin-left: 500px;
+}
+
+.statisticswrapper{
+
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
+.seperator {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.cflogoimg{
+	width: 130px;
+	height: 40px;
+	margin-left: 160px;
+}
+
+.cfhandlestyle {
+	width: 130px;
+height: 40px;
+margin-left: 340px;
+}
+
+.logoline {
+	margin-top: 10px;	
+}
+
+.codeforcelogo {
+	margin-left: 15px;
+}
+
+.handlecodeforces{
+	width: 150px;
+	height: 40px;
+	margin-left: 40px;
+}
+
+.currentstat {
+    height: 100px;
+	margin-top: 5px;
+	width: 100%;
+	background-color: #f8f8f8;
+}
+
+.Ratinggraph {
+	position: absolute;
+}
+
+.langgraph {
+	margin-left: 500px;
+
+	
+}

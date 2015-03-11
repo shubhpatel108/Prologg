@@ -1,17 +1,174 @@
 <% unless @cfp.nil? %>
-	handle: <%= @cfp.handle %></br>
-	contribution: <%= @cfp.contribution %></br>
-	rank: <%= @cfp.rank %></br>
-	max_rank: <%= @cfp.max_rank %></br>
-	rating: <%= @cfp.rating %></br>
-	max_rating: <%= @cfp.max_rating %></br>
-	last_online: <%= @cfp.last_online %></br>
-
-	tags and count in solved problems: <%= @cfp.metadata["tags"] %></br>
-	languages and solved problems: <%= @cfp.metadata["languages"] %></br>
-	change in ratings: <%= @cfp.metadata["ratings"] %></br>
-
-	<%= link_to "Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs"} %>
-	<div id="recent_subs">
+<div class = "directionlinestyle">
+	<div style="margin-left : 15px; font-size : 15px;">
+		<a href="homepage.html"> Home </a>
+		<i class="fa fa-chevron-right"></i>
+		<a href="homepage.html"> Algorithm profile </a>
+		<i class="fa fa-chevron-right"></i>
+		<a href="homepage.html"> Codeforces </a>
 	</div>
+	<hr class="seperator">
+</div>
+<!-- direction line ends here -->
+
+<div class="logoline">
+	<!-- <img src="images.jpg" class="codeforcelogo" > -->
+	<%= image_tag("images.jpg", class: "codeforcelogo") %>
+	<a href="index.html" class="handlecodeforces" > @<%= @cfp.handle.downcase %> </a>
+	<span>  (Last seen at <%= @cfp.last_online %>)  </span>
+	<hr class="seperator" style ="margin-top:5px;">
+</div>
+
+<!-- current stat starts -->
+<div class="currentstat">
+	<div style="width : 15% ; position : absolute ; margin-left : 10px;margin-top : 5px">
+		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
+			<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Current Ranking</p>
+				<h4 class="bolded" style="margin-top:25%"><%= @cfp.rank.capitalize %></h4> 							
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+
+	<div style="width: 15%;position: absolute; margin-left: 170px; margin-top : 5px">
+		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
+		<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Current Rating</p>
+				<h1 class="bolded"><%= @cfp.rating %></h1> 							
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+
+	<div style="width: 16%;position: absolute; margin-left: 335px; margin-top : 5px">
+		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
+		<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Maximum Ranking</p>
+				<h4 class="bolded" style="margin-top:25%"><%= @cfp.max_rank.capitalize %></h4> 								
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+
+	<div style="width: 15%;position: absolute; margin-left: 510px; margin-top : 5px">
+		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
+			<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Maximum Rating</p>
+				<h1 class="bolded"><%= @cfp.max_rating %></h1> 
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+
+	<div style="width: 15%;position: absolute; margin-left: 675px; margin-top : 5px">
+		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
+			<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Problems Solved</p>
+				<h1 class="bolded"><%= @cfp.metadata["solved_probs"] %></h1> 	
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+
+	<div style="width: 15%;position: absolute; margin-left: 840px; margin-top : 5px">
+		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
+			<i class="fa fa-users icon-bg"></i>
+			<div class="tiles-inner text-center" style="margin-top : -10px">
+				<p>Contributions</p>
+				<h1 class="bolded"><%= @cfp.contribution %></h1> 	
+			</div><!-- /.the-box no-border -->
+		</div><!-- /.col-sm-3 -->
+	</div>
+</div> 
+<!-- currentstat ends here -->
+
+<div class = "directionlinestyle">
+	<div style="margin-left : 15px; font-size : 15px; font-color :#29AF8E">
+		Graphical Overview	
+	</div>
+	<hr class="seperator">
+</div>
+
+<div class = "graphicalprogress" style="width : 100%">
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="the-box">
+				<h4 class="small-title">MORRIS LINE</h4>
+				<div id="morris-line-example" style="height: 250px;"></div>	
+			</div><!-- .the-box -->
+		</div><!-- /.col-sm-6 -->
+	<div class="col-lg-4">
+		<div class="the-box">
+			<h4 class="small-title">MORRIS BAR</h4>
+				<div id="morris-bar-example" style="height: 250px;"></div>
+		</div><!-- .the-box -->	
+	</div><!-- /.col-sm-6 -->
+	<div class="col-lg-4">
+		<div class="the-box" style="height:318px;">
+			<h4 class="small-title">Tags on Problem solved</h4>
+				<div style="height:250px; overflow-y:scroll;">
+					<% @cfp.metadata["tags"].each_with_index do |key, index|%>
+						<p class="small"><%= key[0].capitalize %>- <span class="text-<%= color(index+1) %>"><%= key[1]%></span></p>
+						<div class="progress no-rounded progress-xs">
+							<div class="progress-bar progress-bar-<%= color(index+1) %>" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= key[1]*100/@cfp.metadata["solved_probs"] %>%">
+							</div><!-- /.progress-bar .progress-bar-danger -->
+						</div><!-- /.progress .no-rounded -->
+					<% end -%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class = "directionlinestyle">
+	<div style="margin-left : 15px; font-size : 15px; margin-top : -25px ; margin-bottom :  10px">
+		Recently Submitted Problems
+		<%= link_to "see Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
+	</div>
+	<hr class="seperator">
+</div>
+
+<div id="recent_subs">
+</div>
 <% end %>
+
+<!-- direction line starts here -->
+<script src="/assets/raphael.min.js"></script>
+<script src="/assets/morris.min.js"></script>
+<!-- <script src="/assets/example.js"></script> -->
+<script type="text/javascript">
+	/********************************* BEGIN EXAMPLE MORRIS LINE *********************************/
+Morris.Line({
+  element: 'morris-line-example',
+  data: [
+  	<% for item in @cfp.metadata["ratings"] %>
+  		{ y: '<%= Time.at(item["ratingUpdateTimeSeconds"]).to_date.strftime("%d-%m-%y") %>', a: <%= item["newRating"] %>},
+  	<% end -%>
+  ],
+  xkey: 'y',
+  ykeys: ['a'],
+  labels: ['Rating'],
+  resize: true,
+  lineColors: ['#8CC152', '#F6BB42']
+});
+/********************************* END EXAMPLE MORRIS LINE *********************************/
+
+
+/********************************* BEGIN EXAMPLE MORRIS BAR *********************************/
+Morris.Bar({
+  element: 'morris-bar-example',
+  data: [
+  	<% @cfp.metadata["languages"].each_with_index do |key, index| %>
+  		{ y: '<%= key[0] %>', a: <%= key[1] %>},
+  	<% end -%>
+  ],
+  xkey: 'y',
+  ykeys: ['a'],
+  labels: ['Problems solved'],
+  resize: true,
+  barColors: ['#3BAFDA', '#8CC152']
+});
+/********************************* END EXAMPLE MORRIS BAR *********************************/
+
+</script>

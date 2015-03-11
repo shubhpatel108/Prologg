@@ -79,7 +79,7 @@ class CodeforcesProfileController < ApplicationController
 		handle = params[:handle]
 		response = CodeforcesProfile.get_recent_submissions(handle)
 		status = response[0]
-		@resp = response[1]["result"]
+		@resp = response[1]["result"].paginate(page: params[:page], per_page: 4 )
 
 		if status=="OK"
 			@resp.each do |sub|
@@ -91,6 +91,20 @@ class CodeforcesProfileController < ApplicationController
 			end
 		else
 			render js: ""
+		end
+	end
+
+	def show_cfp_profile
+		@user = current_user
+		@cfp = @user.codeforces_profile
+
+		if @user.nil?
+			render file: 'public/404', status: 404, formats: [:html]
+		end
+
+		respond_to do |format|
+			format.js
+			format.html
 		end
 	end
 end

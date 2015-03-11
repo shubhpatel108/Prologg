@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+gem 'rails_12factor', group: :production
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -17,6 +18,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'rest-client'
 gem 'json'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
