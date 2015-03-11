@@ -79,7 +79,7 @@ class CodeforcesProfileController < ApplicationController
 		handle = params[:handle]
 		response = CodeforcesProfile.get_recent_submissions(handle)
 		status = response[0]
-		@resp = response[1]["result"]
+		@resp = response[1]["result"].paginate(page: params[:page], per_page: 4 )
 
 		if status=="OK"
 			@resp.each do |sub|

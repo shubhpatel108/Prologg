@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'devise'
 gem 'rest-client'
 gem 'json'
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
