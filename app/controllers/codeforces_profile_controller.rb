@@ -93,4 +93,18 @@ class CodeforcesProfileController < ApplicationController
 			render js: ""
 		end
 	end
+
+	def show_cfp_profile
+		@user = current_user
+		@cfp = @user.codeforces_profile
+
+		if @user.nil?
+			render file: 'public/404', status: 404, formats: [:html]
+		end
+
+		respond_to do |format|
+			format.js
+			format.html
+		end
+	end
 end
