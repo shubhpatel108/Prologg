@@ -1,0 +1,27 @@
+<h1>Repos</h1>
+<p>Information per repo:</p><%= @ghp.data["repos"][0].keys %>
+<br/>
+<br/>
+<p>access: repo["key"]</p>
+<br/>
+<br/>
+<p>Data (Array):</p>
+<%= @ghp.data["repos"] %>
+
+<br/>
+<br/>
+
+Number of Influenced/Interestd people who had work with him : <%= @ghp.data["interested_people"] %>
+Followers:<%= @ghp.data["followers_count"] %>
+
+<br/>
+<br/>
+Orgs:
+<br/>
+<%= @ghp.data["orgs"] %>
+
+<br/>
+<br/>
+user activities:
+<br/>
+<%= @ghp.data["activities"] %>

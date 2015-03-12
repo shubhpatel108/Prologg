@@ -95,7 +95,7 @@ class CodeforcesProfileController < ApplicationController
 	end
 
 	def show_cfp_profile
-		@user = current_user
+		@user = User.where(username: params[:username]).first
 		@cfp = @user.codeforces_profile
 
 		if @user.nil?

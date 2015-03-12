@@ -19,8 +19,8 @@ class GithubProfileController < ApplicationController
 		user_activities = {}
 		user_activities.merge!(:issues_created => activities.map(&:type).select {|e| e=="IssuesEvent"}.count)
 		user_activities.merge!(:total_prs => activities.map(&:type).select {|e| e=="PullRequestEvent"}.count)
-		user_activities.merge!(:merged_prs => activities.map(&:type).select {|e| e=="PullRequestEvent" && e.payload.pull_request.merged?}.count)
-		metadata.merge!(:activities => :user_activities)
+		user_activities.merge!(:merged_prs => activities.select {|e| e.type=="PullRequestEvent" && e.payload.pull_request.merged?}.count)
+		metadata.merge!(:activities => user_activities)
 
 		activities_rec = (github.activity.events.received user: username).body
 		metadata.merge!(:interested_people => activities_rec.map(&:actor).uniq.count)
@@ -41,6 +41,18 @@ class GithubProfileController < ApplicationController
 
 		flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
 		redirect_to profile_path(:username => current_user.username)
+	end
+
+	def show
+		@user = User.where(username: params[:username]).first
+		if @user.nil?
+			render file: 'public/404', status: 404, formats: [:html]
+		end
+		@ghp = @user.github_profile #ghi stands for GitHubProfile
+
+		respond_to do |format|
+			format.js
+		end
 	end
 
 end
