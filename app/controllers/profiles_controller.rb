@@ -109,4 +109,7 @@ class ProfilesController < ApplicationController
 		redirect_to :root
 	end
 
+	def edit_integrations
+	end
+
 end

@@ -1,0 +1,5 @@
+<%- if Devise.mappings[:user].omniauthable? %>
+  <%- Devise.omniauth_providers.each do |provider| %>
+    <%= link_to "Add #{provider.to_s.titleize} Account", user_omniauth_authorize_path(provider) %><br />
+  <% end -%>
+<% end -%>
