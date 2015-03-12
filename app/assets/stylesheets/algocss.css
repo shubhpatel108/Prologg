@@ -1,9 +1,6 @@
 .directionlinestyle {
-
-	width: 950px;
 	background-color: #f8f8f8;
 	line-height: 2.0em;
-
 }
 
 .algocfstyle {
@@ -54,17 +51,12 @@ margin-left: 340px;
 	margin-left: 15px;
 }
 
-.handlecodeforces{
-	width: 150px;
-	height: 40px;
-	margin-left: 40px;
-}
-
 .currentstat {
     height: 100px;
 	margin-top: 5px;
 	width: 100%;
 	background-color: #f8f8f8;
+	margin-left: 0px !important;
 }
 
 .Ratinggraph {
@@ -73,6 +65,20 @@ margin-left: 340px;
 
 .langgraph {
 	margin-left: 500px;
+}
 
-	
+.half-width {
+	width: 46%;
+	float: left;
+	margin-left: 10px;
+}
+
+.top-unpadded {
+	margin-top: -8px;
+	height: 50px;
+	margin-bottom: 0px;
+}
+
+.cfcount {
+	font-size: x-large;
 }

@@ -13,17 +13,19 @@
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body class="tooltips">
-	<div id="header-id">
-		<%= render 'layouts/header' %>
-	</div>
-	<%= render 'layouts/notifications' %>
+	<body class="tooltips">
+		<div class="wrapper">
+			<div id="header-id">
+				<%= render 'layouts/header' %>
+			</div>
+			<%= render 'layouts/notifications' %>
 
-	<div class="page-content">
-		<%= yield %>
-	</div>
-	<div id="footer-id">
-		<%= render 'layouts/footer' %>
-	</div>
-</body>
+			<div class="page-content">
+				<%= yield %>
+			</div>
+			<div id="footer-id">
+				<%= render 'layouts/footer' %>
+			</div>
+		</div>
+	</body>
 </html>

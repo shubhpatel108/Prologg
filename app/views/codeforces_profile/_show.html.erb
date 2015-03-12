@@ -11,86 +11,103 @@
 </div>
 <!-- direction line ends here -->
 
-<div class="logoline">
+<div class="logoline row">
 	<!-- <img src="images.jpg" class="codeforcelogo" > -->
-	<%= image_tag("images.jpg", class: "codeforcelogo") %>
-	<a href="index.html" class="handlecodeforces" > @<%= @cfp.handle.downcase %> </a>
-	<span>  (Last seen at <%= @cfp.last_online %>)  </span>
-	<hr class="seperator" style ="margin-top:5px;">
+	<div class="col-lg-3">
+		<%= image_tag("images.jpg", class: "codeforcelogo") %>
+	</div>
+	<div class="col-lg-6 text-center panel-no-border panel-success panel-block-color" style="margin-bottom: 15px;">
+		<div class="panel-heading">
+			<span class="bolded"> @<%= @cfp.handle.downcase %> </span>
+		</div>
+		<div class="panel-body bg-success">
+			<p>  (Last seen on <%= @cfp.last_online %>)  </p>
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="alert alert-warning alert-block square fade in alert-dismissable">
+		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		  <p><strong>Warning!</strong></p>
+		  <p>This account is unverifed.</p>
+		</div>
+	</div>
 </div>
 
+<hr class="seperator" style ="margin-top:5px;">
+
 <!-- current stat starts -->
-<div class="currentstat">
-	<div style="width : 15% ; position : absolute ; margin-left : 10px;margin-top : 5px">
-		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
+<div class="currentstat row">
+	<div class="col-lg-4">
+		<div class="half-width">
+			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
+				<i class="fa fa-users icon-bg"></i>
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Current Ranking</p>
+					<p class="bolded cfcount"><%= @cfp.rank.capitalize %></p>
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
+
+		<div class="half-width">
+			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
 			<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Current Ranking</p>
-				<h4 class="bolded" style="margin-top:25%"><%= @cfp.rank.capitalize %></h4> 							
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Current Rating</p>
+					<p class="bolded cfcount"><%= @cfp.rating %></p>
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
 	</div>
 
-	<div style="width: 15%;position: absolute; margin-left: 170px; margin-top : 5px">
-		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
-		<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Current Rating</p>
-				<h1 class="bolded"><%= @cfp.rating %></h1> 							
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
-	</div>
-
-	<div style="width: 16%;position: absolute; margin-left: 335px; margin-top : 5px">
-		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
-		<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Maximum Ranking</p>
-				<h4 class="bolded" style="margin-top:25%"><%= @cfp.max_rank.capitalize %></h4> 								
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
-	</div>
-
-	<div style="width: 15%;position: absolute; margin-left: 510px; margin-top : 5px">
-		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
+	<div class="col-lg-4">
+		<div class="half-width">
+			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
 			<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Maximum Rating</p>
-				<h1 class="bolded"><%= @cfp.max_rating %></h1> 
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Maximum Ranking</p>
+					<p class="bolded cfcount"><%= @cfp.max_rank.capitalize %></p>
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
+
+		<div class="half-width">
+			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
+				<i class="fa fa-users icon-bg"></i>
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Maximum Rating</p>
+					<p class="bolded cfcount"><%= @cfp.max_rating %></p>
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
 	</div>
 
-	<div style="width: 15%;position: absolute; margin-left: 675px; margin-top : 5px">
-		<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
-			<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Problems Solved</p>
-				<h1 class="bolded"><%= @cfp.metadata["solved_probs"] %></h1> 	
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
-	</div>
+	<div class="col-lg-4">
+		<div class="half-width">
+			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
+				<i class="fa fa-users icon-bg"></i>
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Problems Solved</p>
+					<p class="bolded cfcount"><%= @cfp.metadata["solved_probs"] %></p> 	
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
 
-	<div style="width: 15%;position: absolute; margin-left: 840px; margin-top : 5px">
-		<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
-			<i class="fa fa-users icon-bg"></i>
-			<div class="tiles-inner text-center" style="margin-top : -10px">
-				<p>Contributions</p>
-				<h1 class="bolded"><%= @cfp.contribution %></h1> 	
-			</div><!-- /.the-box no-border -->
-		</div><!-- /.col-sm-3 -->
+		<div class="half-width">
+			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
+				<i class="fa fa-users icon-bg"></i>
+				<div class="tiles-inner text-center">
+					<p class="top-unpadded">Contributions</p>
+					<p class="bolded cfcount"><%= @cfp.contribution %></p>
+				</div><!-- /.the-box no-border -->
+			</div><!-- /.col-sm-3 -->
+		</div>
 	</div>
+<hr class="seperator" style ="margin-top:5px;">
 </div> 
 <!-- currentstat ends here -->
 
-<div class = "directionlinestyle">
-	<div style="margin-left : 15px; font-size : 15px; font-color :#29AF8E">
-		Graphical Overview	
-	</div>
-	<hr class="seperator">
-</div>
 
-<div class = "graphicalprogress" style="width : 100%">
+<div class = "graphicalprogress">
 	<div class="row">
 		<div class="col-lg-4">
 			<div class="the-box">
@@ -98,15 +115,15 @@
 				<div id="morris-line-example" style="height: 250px;"></div>	
 			</div><!-- .the-box -->
 		</div><!-- /.col-sm-6 -->
-	<div class="col-lg-4">
-		<div class="the-box">
-			<h4 class="small-title">MORRIS BAR</h4>
-				<div id="morris-bar-example" style="height: 250px;"></div>
-		</div><!-- .the-box -->	
-	</div><!-- /.col-sm-6 -->
-	<div class="col-lg-4">
-		<div class="the-box" style="height:318px;">
-			<h4 class="small-title">Tags on Problem solved</h4>
+		<div class="col-lg-4">
+			<div class="the-box">
+				<h4 class="small-title">MORRIS BAR</h4>
+					<div id="morris-bar-example" style="height: 250px;"></div>
+			</div><!-- .the-box -->
+		</div><!-- /.col-sm-6 -->
+		<div class="col-lg-4">
+			<div class="the-box" style="height:318px;">
+				<h4 class="small-title">Tags on Problem solved</h4>
 				<div style="height:250px; overflow-y:scroll;">
 					<% @cfp.metadata["tags"].each_with_index do |key, index|%>
 						<p class="small"><%= key[0].capitalize %>- <span class="text-<%= color(index+1) %>"><%= key[1]%></span></p>
