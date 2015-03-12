@@ -15,7 +15,7 @@ class GithubProfileController < ApplicationController
 		end
 		metadata.merge!(:repos => repos)
 
-		activities = (github.activity.events.performed 'shubhpatel108').body
+		activities = (github.activity.events.performed username).body
 		user_activities = {}
 		user_activities.merge!(:issues_created => activities.map(&:type).select {|e| e=="IssuesEvent"}.count)
 		user_activities.merge!(:total_prs => activities.map(&:type).select {|e| e=="PullRequestEvent"}.count)
@@ -27,7 +27,7 @@ class GithubProfileController < ApplicationController
 
 		metadata.merge!(:followers_count => (github.users.followers.list username).body.count )
 
-		orgs = (github.orgs.list user: 'shubhpatel108').body
+		orgs = (github.orgs.list user: username).body
 		orgs.each do |org|
 			org.select! {|k,v| ["login"].include?(k)}
 			org.merge!(:members_count => (github.orgs.members.list org.login).body.count )
@@ -49,7 +49,8 @@ class GithubProfileController < ApplicationController
 			render file: 'public/404', status: 404, formats: [:html]
 		end
 		@ghp = @user.github_profile #ghi stands for GitHubProfile
-
+		@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 )
+		@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5)
 		respond_to do |format|
 			format.js
 		end
