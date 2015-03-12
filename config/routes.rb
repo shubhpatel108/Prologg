@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {sessions: 'users/sessions'}
+  devise_for :users, controllers: {sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
   root to: 'profiles#index'
 
   get '/:username', to: 'profiles#show', as: :profile
@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   post '/integrations/codeforces/create', to: 'codeforces_profile#create'
   get '/integrations/codeforces/recent_submissions/:handle', to: 'codeforces_profile#recent_submissions', as: :cfp_submissions
   get '/integrations/codeforces/show/:handle', to: 'codeforces_profile#show_cfp_profile', as: :cfp_show_profile
+
+  get '/integrations/edit', to: 'profiles#edit_integrations', as: :edit_integrations
+
+  get '/integrations/github/create', to: 'github_profile#create', as: :github_profile_create
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
