@@ -20,6 +20,8 @@ gem 'rest-client'
 gem 'json'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'omniauth-github'
+gem 'github_api'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
