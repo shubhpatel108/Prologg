@@ -22,4 +22,19 @@ module ColorHelper
 			return "danger"	
 		end
 	end
+
+	def color_star(index)
+		if index%5 == 1
+			return "danger"
+		elsif index%5 == 2
+			return "warning"
+		elsif index%5 == 3
+			return "info"
+		elsif index%5 == 4
+			return "active"
+		elsif index%5 == 0
+			return "success"
+		end
+	end
+
 end

@@ -1,6 +1,6 @@
 .directionlinestyle {
 
-	width: 950px;
+	width: 1000px;
 	background-color: #f8f8f8;
 	line-height: 2.0em;
 
@@ -50,11 +50,13 @@ margin-left: 340px;
 	margin-top: 10px;	
 }
 
-.codeforcelogo {
+.sitelogo {
 	margin-left: 15px;
+	height: 64px;
+	width: 169px;
 }
 
-.handlecodeforces{
+.siteusername{
 	width: 150px;
 	height: 40px;
 	margin-left: 40px;
@@ -75,4 +77,27 @@ margin-left: 340px;
 	margin-left: 500px;
 
 	
+}
+
+.pull-req-circle {
+	
+	width: 75px;
+height: 75px;
+border-radius: 50%;
+text-align: center;
+padding: 14px 0;
+font-weight: 700;
+}
+
+.small-heading-merge {
+	font-size: 14px;
+font-weight: 700;
+text-transform: uppercase;
+padding: 10px 0;
+margin:  10px 0;
+color: #000000;
+}
+
+.issuecreated {
+	position: absolute !important;
 }
