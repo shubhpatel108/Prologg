@@ -90,7 +90,7 @@
 
   <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-warning btn-lg btn-perspective btn-block" %></p>
 
-  <%= button_to "Edit links", edit_links_path, class: "btn btn-danger btn-lg btn-perspective btn-block", style: "margin-bottom: 20px; margin-top: 5px; width: 45%; float: left;" %>
+  <%= link_to "Edit links", edit_links_path, class: "btn btn-danger btn-lg btn-perspective btn-block", style: "margin-bottom: 20px; margin-top: 5px; width: 45%; float: left;" %>
   <%= button_to "Back", :back, class: "btn btn-danger btn-lg btn-perspective btn-block", style: "margin-bottom: 100px; margin-top: 5px; width: 45%; float: right;" %>
   </div>
 </div>
