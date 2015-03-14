@@ -106,3 +106,7 @@ ul.nav-user {
 	right: 8px !important;
 	width: 254px !important;
 }
+
+.logoheader {
+	top: -150px !important;
+}
