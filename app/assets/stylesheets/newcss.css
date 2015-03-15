@@ -110,3 +110,24 @@ ul.nav-user {
 .logoheader {
 	top: -150px !important;
 }
+
+.femaleicon {
+	position : absolute;
+}
+
+.iconposition {
+	margin-top: 15px;
+	margin-right: 265px;
+}
+
+.glyphposition {
+	margin-left: 260px;
+}
+
+.solution {
+	padding-left : 40px;
+}
+
+.edit_link_box{
+	margin-top: 0px;
+}
