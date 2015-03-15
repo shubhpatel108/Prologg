@@ -27,12 +27,13 @@
 }
 
 .footertext{
-	margin-left: 450px;
+	text-align: center;	
 }
 
 .sociallinks {
-	margin-left: 505px;
-	margin-top: 5px;
+	/*margin-left: 505px;
+	margin-top: 5px;*/
+	text-align: center;
 }
 
 .spaceforleftpanel{
