@@ -1,131 +1,161 @@
 <% unless @cfp.nil? %>
-<div class = "directionlinestyle">
+<!-- Begin page heading -->
+	<h1 class="page-heading">Codeforces<!-- <small>Sub heading here</small> --></h1>
+<!-- End page heading -->
+<!-- <div class = "directionlinestyle">
 	<div style="margin-left : 15px; font-size : 15px;">
 		<a href="homepage.html"> Home </a>
 		<i class="fa fa-chevron-right"></i>
-		<a href="homepage.html"> Algorithm profile </a>
+		<a href="homepage.html"> Programming </a>
 		<i class="fa fa-chevron-right"></i>
 		<a href="homepage.html"> Codeforces </a>
 	</div>
 	<hr class="seperator">
-</div>
+</div> -->
 <!-- direction line ends here -->
 
 <div class="logoline row">
 	<!-- <img src="images.jpg" class="codeforcelogo" > -->
 	<div class="col-lg-3">
-		<%= image_tag("images.jpg", class: "codeforcelogo") %>
+		<%= image_tag("images.jpg", class: "sitelogo") %>
 	</div>
-	<div class="col-lg-6 text-center panel-no-border panel-success panel-block-color" style="margin-bottom: 15px;">
+	<div class="col-lg-9 text-center panel-no-border panel-success panel-block-color panel-square">
 		<div class="panel-heading">
-			<span class="bolded"> @<%= @cfp.handle.downcase %> </span>
+			<h4 class="panel-title"> @<%= @cfp.handle.downcase %> </h4>
 		</div>
 		<div class="panel-body bg-success">
 			<p>  (Last seen on <%= @cfp.last_online %>)  </p>
 		</div>
 	</div>
 	<div class="col-lg-3">
+		
+	</div>
+</div>
+
+<!-- <hr class="seperator" style ="margin-top:5px;"> -->
+<!-- current stat starts -->
+<div class="row">
+	<div class="col-lg-6">
+		
 		<div class="alert alert-warning alert-block square fade in alert-dismissable">
 		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		  <p><strong>Warning!</strong></p>
 		  <p>This account is unverifed.</p>
 		</div>
+		<!-- BEGIN WEATHER WIDGET 2 -->
+		<div class="panel panel-info panel-square panel-no-border">
+		  <div class="panel-heading">
+			<div class="col-lg-6 text-center">
+			  PROBLEMS SOLVED
+			  </div>
+			  
+			  <div class="col-lg-6 text-center">
+			  CONTRIBUTIONS MADE
+			  </div>
+			</div>
+		  	<div class="panel-body bg-info">
+				<div class="row">
+					<div class="col-sm-14">
+						<div class="weather-widget horizontal">
+							<div class="row">
+								<div class="col-xs-6 text-center">
+									  <span class="fa fa-code" style="
+									    font-size: 50px;
+									"></span>
+									<p class="white-text" style="
+									    font-size: 50px;
+									"><%= @cfp.metadata["solved_probs"] %></p>
+								</div><!-- /.col-xs-6 -->
+								<div class="col-xs-6 text-center">
+									  <span class="fa fa-puzzle-piece" style="
+									    font-size: 50px;
+									"></span>
+									<p class="white-text" style="
+									    font-size: 50px;
+									"><%= @cfp.contribution %></p>			
+								</div><!-- /.col-xs-6 -->
+							</div><!-- /.row -->
+						</div><!-- /.weather-widget -->
+					</div>
+				</div><!-- /.row -->
+		  	</div><!-- /.panel-body -->
+		</div><!-- /.panel panel-success panel-block-color -->
+		<!-- END WEATHER WIDGET 2 -->
+		
+	</div>
+
+	<div class="col-lg-6">
+		<div class="row">
+			
+			<div class="col-lg-6">
+				
+				<!-- BEGIN TODAY VISITOR TILES -->
+				<div class="panel panel-danger panel-square panel-no-border text-center">
+				  <div class="panel-heading">
+					<h3 class="panel-title">CURRENT RANKING</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2 class="bolded tiles-number text-danger"><%= @cfp.rank.capitalize %></h1>
+				  </div><!-- /.panel-body -->
+				</div><!-- /.panel panel-success panel-block-color -->
+				<!-- END TODAY VISITOR TILES -->
+				
+			</div><!-- /.col-sm-6 -->
+			<div class="col-lg-6">
+				
+				<!-- BEGIN TODAY VISITOR TILES -->
+				<div class="panel panel-warning panel-square panel-no-border text-center">
+				  <div class="panel-heading">
+					<h3 class="panel-title">CURRENT RATING</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2 class="bolded tiles-number text-warning"><%= @cfp.rating %></h1>
+				  </div><!-- /.panel-body -->
+				</div><!-- /.panel panel-success panel-block-color -->
+				<!-- END TODAY VISITOR TILES -->
+				
+			</div><!-- /.col-sm-6 -->
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				
+				<!-- BEGIN TODAY VISITOR TILES -->
+				<div class="panel panel-danger panel-square panel-no-border text-center">
+				  <div class="panel-heading">
+					<h3 class="panel-title">MAX RANKING</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2 class="bolded tiles-number text-danger"><%= @cfp.max_rank.capitalize %></h1>
+				  </div><!-- /.panel-body -->
+				</div><!-- /.panel panel-success panel-block-color -->
+				<!-- END TODAY VISITOR TILES -->
+				
+			</div><!-- /.col-sm-6 -->
+			<div class="col-lg-6">
+				
+				<!-- BEGIN TODAY VISITOR TILES -->
+				<div class="panel panel-warning panel-square panel-no-border text-center">
+				  <div class="panel-heading">
+					<h3 class="panel-title">MAX RATING</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2 class="bolded tiles-number text-warning"><%= @cfp.max_rating %></h1>
+				  </div><!-- /.panel-body -->
+				</div><!-- /.panel panel-success panel-block-color -->
+				<!-- END TODAY VISITOR TILES -->
+				
+			</div><!-- /.col-sm-6 -->
+		</div>
 	</div>
 </div>
-
-<hr class="seperator" style ="margin-top:5px;">
-
-<!-- current stat starts -->
-<div class="currentstat row">
-	<div class="col-lg-4">
-		<div class="half-width">
-			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Current Ranking</p>
-					<p class="bolded cfcount"><%= @cfp.rank.capitalize %></p>
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-
-		<div class="half-width">
-			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
-			<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Current Rating</p>
-					<p class="bolded cfcount"><%= @cfp.rating %></p>
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-	</div>
-
-	<div class="col-lg-4">
-		<div class="half-width">
-			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
-			<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Maximum Ranking</p>
-					<p class="bolded cfcount"><%= @cfp.max_rank.capitalize %></p>
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-
-		<div class="half-width">
-			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Maximum Rating</p>
-					<p class="bolded cfcount"><%= @cfp.max_rating %></p>
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-	</div>
-
-	<div class="col-lg-4">
-		<div class="half-width">
-			<div class="the-box no-border bg-success tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Problems Solved</p>
-					<p class="bolded cfcount"><%= @cfp.metadata["solved_probs"] %></p> 	
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-
-		<div class="half-width">
-			<div class="the-box no-border bg-danger tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center">
-					<p class="top-unpadded">Contributions</p>
-					<p class="bolded cfcount"><%= @cfp.contribution %></p>
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-		</div>
-	</div>
-<hr class="seperator" style ="margin-top:5px;">
-</div> 
 <!-- currentstat ends here -->
 
-
-<div class = "graphicalprogress">
-	<div class="row">
-		<div class="col-lg-4">
-			<div class="the-box">
-				<h4 class="small-title">MORRIS LINE</h4>
-				<div id="morris-line-example" style="height: 250px;"></div>	
-			</div><!-- .the-box -->
-		</div><!-- /.col-sm-6 -->
-		<div class="col-lg-4">
-			<div class="the-box">
-				<h4 class="small-title">MORRIS BAR</h4>
-					<div id="morris-bar-example" style="height: 250px;"></div>
-			</div><!-- .the-box -->
-		</div><!-- /.col-sm-6 -->
-		<div class="col-lg-4">
-			<div class="the-box" style="height:318px;">
+<div class="row">
+					<div class="col-lg-6">
+						<div class="the-box no-border" style="height:316px;">
 				<h4 class="small-title">Tags on Problem solved</h4>
-				<div style="height:250px; overflow-y:scroll;">
-					<% @cfp.metadata["tags"].each_with_index do |key, index|%>
+				<div style="height:252px; overflow-y:scroll;">
+						<% @cfp.metadata["tags"].each_with_index do |key, index|%>
 						<p class="small"><%= key[0].capitalize %>- <span class="text-<%= color(index+1) %>"><%= key[1]%></span></p>
 						<div class="progress no-rounded progress-xs">
 							<div class="progress-bar progress-bar-<%= color(index+1) %>" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= key[1]*100/@cfp.metadata["solved_probs"] %>%">
@@ -134,19 +164,39 @@
 					<% end -%>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+					</div>
 
-<div class = "directionlinestyle">
-	<div style="margin-left : 15px; font-size : 15px; margin-top : -25px ; margin-bottom :  10px">
-		Recently Submitted Problems
-		<%= link_to "see Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
+					<div class="col-lg-6">
+						<div class="the-box">
+							<h4 class="small-title">Problems solved in different Languages</h4>
+							<div id="morris-bar-example" style="height: 250px;"></div>
+						</div><!-- .the-box  -->
+					</div>
+
+					</div>
+
+									<div class="row">
+					<div class="col-lg-12">
+						<div class="the-box">
+							<h4 class="small-title">Rescent Ratings (change accounted from rescent contests)</h4>
+							<div id="morris-line-example" style="height: 250px;"></div>
+						</div>
+					</div>
+					
+				</div>
+
+<div class = "row">
+	<div class="col-lg-12">
+	<div class="the-box  recent_sub">
+		<div style="font-size : 15px; margin-bottom :  10px">
+			Recently Submitted Problems
+			<%= link_to "see Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
+		</div>
+	<div id="recent_subs" class="row">
+	</div>
+	</div>
 	</div>
 	<hr class="seperator">
-</div>
-
-<div id="recent_subs">
 </div>
 <% end %>
 
@@ -160,7 +210,7 @@ Morris.Line({
   element: 'morris-line-example',
   data: [
   	<% for item in @cfp.metadata["ratings"] %>
-  		{ y: '<%= Time.at(item["ratingUpdateTimeSeconds"]).to_date.strftime("%d-%m-%y") %>', a: <%= item["newRating"] %>},
+  		{ y: '<%= Time.at(item["ratingUpdateTimeSeconds"]).to_date.strftime("%Y-%m-%d") %>', a: <%= item["newRating"] %>},
   	<% end -%>
   ],
   xkey: 'y',
