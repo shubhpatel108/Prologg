@@ -44,13 +44,12 @@ margin-left: 340px;
 }
 
 .logoline {
-	margin-top: 10px;	
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .sitelogo {
-	margin-left: 15px;
-	height: 64px;
-	width: 169px;
+	width: 250px;
 }
 
 .siteusername{
@@ -112,4 +111,8 @@ font-weight: 700;
 
 .issuecreated {
 	position: absolute !important;
+}
+
+.recent_sub {
+	margin-bottom: 0px !important; 
 }

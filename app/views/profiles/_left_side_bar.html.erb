@@ -1,50 +1,78 @@
-<div class="col-lg-3">
-	<div class="row">
-		<div class="col-sm-6 col-md-6 col-lg-12">
-			<div class="the-box no-border full card-info" id="left-profile-box">
-				<div class="the-box no-border text-center no-margin">
-					<img src="assets/avatar-4.jpg" class="social-avatar has-margin has-light-shadow img-circle" alt="Avatar">
-					<h4 class="bolded"><%= @user.full_name %></h4>
-					<h5>username: <%= @user.username %></h5>
-					<% if @user.availability? %>
-						<span class="label label-success">Available</span>
-					<% else %>
-						<span class="label label-warning">Unavailable</span>
-					<% end %>
-					<p class="text-muted">
-						<%= @user.short_bio unless @user.short_bio.nil? %>
-					</p>
-					<p class="bordered"><i class="fa fa-map-marker"></i> <strong>San Francisco, CA</strong></p>
-					<% unless @user.website_link.nil? %>
-					<p>
-						<a href="<%= @user.website_link.url %>" target="_blank">
-							<%= @user.website_link.url %>
-						</a>
-					</p>
-					<% end %>
-					<p class="social-icon">
-						<% unless @user.blog_link.nil? %>
-							<a href="<%= @user.blog_link.url %>" target="_blank"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress"></i></a>
-						<% end %>
-						<% unless @user.gplus_link.nil? %>
-							<a href="<%= @user.gplus_link.nurl %>" target="_blank"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus"></i></a>
-						<% end %>
-						<% unless @user.facebook_link.nil? %>
-							<a href="<%= @user.facebook_link.nurl %>" target="_blank"><i class="fa fa-facebook icon-xs icon-circle icon-facebook"></i></a>
-						<% end %>
-						<% unless @user.twitter_link.nil? %>
-							<a href="<%= @user.twitter_link.nurl %>" target="_blank"><i class="fa fa-twitter icon-xs icon-circle icon-twitter"></i></a>
-						<% end %>
-						<% unless @user.quora_link.nil? %>
-							<a href="<%= @user.quora_link.url %>" target="_blank"><i class="fa fa-reddit-square icon-xs icon-circle icon-dribbble"></i></a>
-						<% end %>
-					</p>
-				</div><!-- /.the-box .no-border .bg-info .no-margin -->
-				<% if (not current_user.nil? and @user!=current_user) or current_user.nil? %>
-					<button class="btn btn-danger btn-block"><i class="fa fa-envelope"></i> Message</button>
+<div class="sidebar-left sidebar-nicescroller" style="width: 300px;">
+			<div class="the-box no-border full card-info">
+										<div class="the-box no-border text-center no-margin">
+											<h4 class="bolded"><%= @user.full_name %></h4>
+											<img src="assets/avatar-4.jpg" class="social-avatar has-margin has-light-shadow img-circle" alt="Avatar">
+											<p class="text-info">@<%= @user.username %></p>
+											<% if @user.availability? %>
+												<span class="label label-success">Available</span>
+											<% else %>
+												<span class="label label-warning">Unavailable</span>
+											<% end %>
+											<p class="text-muted">
+												<%= @user.short_bio unless @user.short_bio.nil? %>
+											</p>
+											<p class="bordered"><i class="fa fa-map-marker"></i> <strong>San Francisco, CA</strong></p>
+											<% unless @user.website_link.nil? %>
+											<p>
+												<a href="<%= @user.website_link.url %>" target="_blank">
+													<%= @user.website_link.url %>
+												</a>
+											</p>
+											<% end %>
+											<p class="social-icon">
+												<% unless @user.blog_link.nil? %>
+													<a href="<%= @user.blog_link.url %>" target="_blank"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress"></i></a>
+												<% end %>
+												<% unless @user.gplus_link.nil? %>
+													<a href="<%= @user.gplus_link.nurl %>" target="_blank"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus"></i></a>
+												<% end %>
+												<% unless @user.facebook_link.nil? %>
+													<a href="<%= @user.facebook_link.nurl %>" target="_blank"><i class="fa fa-facebook icon-xs icon-circle icon-facebook"></i></a>
+												<% end %>
+												<% unless @user.twitter_link.nil? %>
+													<a href="<%= @user.twitter_link.nurl %>" target="_blank"><i class="fa fa-twitter icon-xs icon-circle icon-twitter"></i></a>
+												<% end %>
+												<% unless @user.quora_link.nil? %>
+													<a href="<%= @user.quora_link.url %>" target="_blank"><i class="fa fa-reddit-square icon-xs icon-circle icon-dribbble"></i></a>
+												<% end %>
+											</p>
+										</div><!-- /.the-box .no-border .bg-info .no-margin -->
+										<% if (not current_user.nil? and @user!=current_user) or current_user.nil? %>
+					<button class="btn btn-primary btn-block btn-lg btn-square"><i class="fa fa-user"></i> Follow</button>
 				<% end %>
-			</div><!-- /.the-box -->
-			<!-- END PROFILE CARD  -->
-			</div><!-- /.col-sm-6 .col-md-6 .col-lg-12 -->
-	</div><!-- /.row -->
-</div><!-- /.col-lg-4 -->
+									</div><!-- /.the-box -->
+									<!-- END PROFILE CARD  -->
+				<%= render partial: 'submenu' %>
+				
+			</div><!-- /.sidebar-left -->
+			<!-- END SIDEBAR LEFT -->
+
+<script type="text/javascript">
+	$(".sidebar-nicescroller").niceScroll({
+		cursorcolor: "#121212",
+		cursorborder: "0px solid #fff",
+		cursorborderradius: "0px",
+		cursorwidth: "0px"
+	});
+
+	$('.sidebar-left ul.sidebar-menu li a').click(function() {
+		"use strict";
+		$('.sidebar-left li').removeClass('active');
+		$(this).closest('li').addClass('active');	
+		var checkElement = $(this).next();
+			if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+				$(this).closest('li').removeClass('active');
+				checkElement.slideUp('fast');
+			}
+			if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+				$('.sidebar-left ul.sidebar-menu ul:visible').slideUp('fast');
+				checkElement.slideDown('fast');
+			}
+			if($(this).closest('li').find('ul').children().length == 0) {
+				return true;
+				} else {
+				return false;	
+			}		
+	});
+</script>

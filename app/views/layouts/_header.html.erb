@@ -1,6 +1,5 @@
-	<div class="wrapper">
 		<!-- BEGIN TOP NAV -->
-		<div class="top-navbar" style="margin-top: 0px; margin-left: 0px;">
+		<div class="top-navbar">
 			<div class="top-navbar-inner">
 				
 				<!-- Begin Logo brand -->
@@ -12,13 +11,14 @@
 				<div class="top-nav-content">
 
 					<!-- Begin button nav toggle -->
-					<!-- <div class="btn-collapse-nav" data-toggle="collapse" data-target="#main-fixed-nav">
-						<i class="fa fa-plus icon-plus"></i>
-					</div> --><!-- /.btn-collapse-sidebar-right -->
-					<!-- End button nav toggle -->
+					<div class="btn-collapse-sidebar-left">
+							<i class="fa fa-bars"></i>
+						</div>
+					<!-- /.btn-collapse-sidebar-right -->
+					 <!-- End button nav toggle -->
 					
 					<!-- Begin Collapse menu nav -->
-					<div class="collapse navbar-collapse" id="main-fixed-nav">
+					<!-- <div class="collapse navbar-collapse" id="main-fixed-nav"> -->
 						<!-- Begin nav search form -->
 						<button class="btn btn-primary  searchbtnstyle" >
 							<i class="fa fa-search"></i>
@@ -34,10 +34,10 @@
 										Hi, <strong><%= current_user.full_name.split(" ").first %></strong>
 									  </a>
 									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
-										<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-										<li><%= link_to "Edit Integrations", edit_integrations_path %></li>
-										<li><a href="blank.html#fakelink">Change password</a></li>
-										<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+											<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+											<li><%= link_to "Edit Integrations", edit_integrations_path %></li>
+											<li><a href="blank.html#fakelink">Change password</a></li>
+											<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 									  </ul>
 									</li>
 								</ul>
@@ -49,10 +49,34 @@
 							<% end %>
 						<!-- End nav search form -->
 						
-					</div><!-- /.navbar-collapse -->
+					<!-- </div> --><!-- /.navbar-collapse -->
 					<!-- End Collapse menu nav -->
 				</div><!-- /.top-nav-content -->
 			</div><!-- /.top-navbar-inner -->
 		</div><!-- /.top-navbar -->
 		<!-- END TOP NAV -->
-		</div>
+
+<script type="text/javascript">
+	$(".btn-collapse-sidebar-left").click(function(){
+		"use strict";
+		$(".top-navbar").toggleClass("toggle");
+		$(".sidebar-left").toggleClass("toggle");
+		$(".page-content").toggleClass("toggle");
+		$(".icon-dinamic").toggleClass("rotate-180");
+		
+		if ($(window).width() > 991) {
+			if($(".sidebar-right").hasClass("toggle-left") === true){
+				$(".sidebar-right").removeClass("toggle-left");
+				$(".top-navbar").removeClass("toggle-left");
+				$(".page-content").removeClass("toggle-left");
+				$(".sidebar-left").removeClass("toggle-left");
+				if($(".sidebar-left").hasClass("toggle") === true){
+					$(".sidebar-left").removeClass("toggle");
+				}
+				if($(".page-content").hasClass("toggle") === true){
+					$(".page-content").removeClass("toggle");
+				}
+			}
+		}
+	});
+</script>

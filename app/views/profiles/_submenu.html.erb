@@ -1,32 +1,36 @@
-<div class="menubarpad" style="background-color :#29AF8E ;">
-	<div class="row">
-		<div class="col-lg-3 col-md-3 col-xs-6">
-			<button type="button" class="btn btn-primary btn-styling ">Work summary</button>
-		</div>
-		<div class="col-lg-3 col-md-3 col-xs-6">
-			<button type="button" class="btn btn-primary btn-styling dropdown-toggle" data-toggle="dropdown">
-			  Application Profile
-			  <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu btn-styling">
-			  <li><a href="element-button.html#fakelink">Application Profile</a></li>
-			  <li><%= link_to "Github", github_show_profile_path(username: @user.username), {remote: true, id: 'github_profile'} %></li>
-			  <li><a href="element-button.html#fakelink">Linkedin</a></li>
-			</ul>
-		</div>
-		<div class="col-lg-3 col-md-3 col-xs-6">
-			<button type="button" class="btn btn-primary btn-styling dropdown-toggle" data-toggle="dropdown">
-			  Algorithm Profile
-			  <span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu btn-styling">
-			  <li><a href="element-button.html#fakelink">Algorithm Profile</a></li>
-			  <li><%= link_to "Codeforces", cfp_show_profile_path(username: @user.username), {remote: true, id: 'cfp_profile'} %><!-- <a href="" data-remote="true">Codeforces</a> --></li>
-			  <li><a href="element-button.html#fakelink">Topcoder</a></li>
-			</ul>
-		</div>
-		<div class="col-lg-3 col-md-3 col-xs-6">
-			<button type="button" class="btn btn-primary btn-styling ">Stack Overflow</button>
-		</div>
-	</div>
-</div>
+
+<ul class="sidebar-menu">
+	<li>
+		<a href="<%= profile_path(username: @user.username) %>">
+			<i class="fa fa-dashboard icon-sidebar"></i>
+			Profile
+			<span class="label label-success span-sidebar">UPDATED</span>
+		</a>
+	</li>
+	<li >
+		<a href= "#">
+			<i class="fa fa-desktop icon-sidebar"></i>
+			<i class="fa fa-angle-right chevron-icon-sidebar"></i>
+			Projects
+			<span class="badge badge-warning span-sidebar">9</span>
+			</a>
+		<ul class="submenu">
+			<li><%= link_to "Github", github_show_profile_path(username: @user.username), {remote: true, id: 'github_profile'} %></li>
+			<li><a href="index.html#fakelink">LinkedIn</a></li>
+			<li><a href="index.html#fakelink">Topcoder</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="#">
+			<i class="fa fa-flask icon-sidebar"></i>
+			<i class="fa fa-angle-right chevron-icon-sidebar"></i>
+			Programming
+		</a>
+		<ul class="submenu">
+			<li><%= link_to "Codeforces", cfp_show_profile_path(username: @user.username), {remote: true, id: 'cfp_profile'} %></li>
+			<li><a href="widget-default.html">Topcoder</a></li>
+		</ul>
+	</li>
+	
+	<li class="static text-center">Last updated on 26th June 2014</li>
+</ul>

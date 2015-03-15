@@ -21,10 +21,12 @@
 			<%= render 'layouts/notifications' %>
 
 			<div class="page-content">
-				<%= yield %>
-			</div>
-			<div id="footer-id">
-				<%= render 'layouts/footer' %>
+					<div class="container-fluid">
+						<%= yield %>
+					</div>
+				<div id="footer-id">
+					<%= render 'layouts/footer' %>
+				</div>
 			</div>
 		</div>
 	</body>
