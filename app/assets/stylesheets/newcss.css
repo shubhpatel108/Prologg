@@ -100,3 +100,25 @@ ul.nav-user {
 	left: 0px !important;
 	right: 0px !important;
 }
+
+.femaleicon {
+	position : absolute;
+}
+
+.iconposition {
+	margin-top: 15px;
+	margin-right: 265px;
+}
+
+.glyphposition {
+	margin-left: 260px;
+}
+
+.solution {
+	padding-left : 40px;
+}
+
+.edit_link_box{
+	margin-top: 0px;
+}
+

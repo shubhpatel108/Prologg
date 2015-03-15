@@ -2,9 +2,13 @@ class GplusLink < ActiveRecord::Base
 	belongs_to :user
 
 	def self.normalize_url(url)
-		url.gsub!("https://", "")
-		url.gsub!("www.", "")
-		url.gsub!("plus.google.com/", "")
+		if url.nil? or url.empty?
+			return ""
+		else
+			url.gsub!("https://", "")
+			url.gsub!("www.", "")
+			url.gsub!("plus.google.com/", "")
+		end
 	end
 
 	def nurl
