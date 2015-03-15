@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   has_one :codeforces_profile, dependent: :destroy
   has_one :github_profile, dependent: :destroy
+  has_one :topcoder_profile, dependent: :destroy
 
   def self.from_omniauth(auth, current_user)
     case auth[:provider]
