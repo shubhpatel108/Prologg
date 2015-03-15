@@ -8,12 +8,12 @@
       <%= image_tag ("download.jpg"), class: "logo" %>
     </div>
 <div class="login-wrapper">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "signupform"}) do |f| %>
   <%= devise_error_messages! %>
-  <div class="form-group has-feedback lg left-feedback no-label">
+  <div class="form-group has-feedback lg right-feedback no-label">
     <!-- <%= f.label :full_name %><br /> -->
-    <%= f.text_field :full_name, autofocus: true, class: "form-control no-border input-lg rounded", placeholder: "Full name" %>
-    <span class="fa fa-male form-control-feedback"></span>
+    <%= f.text_field :full_name, autofocus: true, class: "form-control no-border input-lg rounded solution", placeholder: "Full name" %>
+    <span class="fa fa-male form-control-feedback iconposition"></span>
   </div>
 
   <div class="form-group lg gendersetting ">
@@ -25,7 +25,7 @@
     <%= label :gender_male, 'Male' %>
     <i class="fa fa-female  gendericon"></i>
     <%= f.radio_button :gender , 'female' %>
-    <%= label :gender_female, 'Female' %>
+    <%= label :gender_female , 'Female' , { :class => 'femaleicon' }  %>
     
     </p>
   </div>
@@ -37,31 +37,31 @@
     </p>
   </div> -->
 
-  <div class="form-group has-feedback lg left-feedback no-label">
+  <div class="form-group has-feedback lg right-feedback no-label">
     <!-- <%= f.label :username %><br /> -->
-    <%= f.text_field :username, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
-    <span class="fa fa-user form-control-feedback"></span>
+    <%= f.text_field :username, class: "form-control no-border input-lg rounded solution", placeholder: "Username" %>
+    <span class="fa fa-user form-control-feedback iconposition"></span>
   </div>
 
-  <div class="form-group has-feedback lg left-feedback no-label">
+  <div class="form-group has-feedback lg right-feedback no-label">
     <!-- <%= f.label :email %><br /> -->
-    <%= f.email_field :email, class: "form-control no-border input-lg rounded", placeholder: "Email" %>
-    <span class="fa fa-envelope form-control-feedback"></span>
+    <%= f.email_field :email, class: "form-control no-border input-lg rounded solution", placeholder: "Email" %>
+    <span class="fa fa-envelope form-control-feedback iconposition"></span>
   </div>
 
-  <div class="form-group has-feedback lg left-feedback no-label" >
+  <% if @validatable %>
+  <em>(<%= @minimum_password_length %> characters minimum)</em>
+  <% end %><br />
+  <div class="form-group has-feedback lg right-feedback no-label" >
     <!-- <%= f.label :password %> -->
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Password" %>
-    <span class="fa fa-lock form-control-feedback" style="top: 20px"></span>
+    <span class="fa fa-lock form-control-feedback iconposition"></span>
+    <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg rounded solution", placeholder: "Password" %>
   </div>
 
-  <div class="form-group has-feedback lg left-feedback no-label">
+  <div class="form-group has-feedback lg right-feedback no-label">
     <!-- <%= f.label :password_confirmation %><br /> -->
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Conform Password" %>
-    <span class="fa fa-unlock form-control-feedback"></span>  
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control no-border input-lg rounded solution", placeholder: "Conform Password" %>
+    <span class="fa fa-unlock form-control-feedback iconposition"></span>  
   </div>
 
   <div class="actions">

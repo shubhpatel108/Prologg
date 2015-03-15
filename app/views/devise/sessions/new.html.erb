@@ -12,15 +12,15 @@
 
   <%= render 'layouts/notifications' %>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="form-group has-feedback lg left-feedback no-label">
-      <%= f.text_field :email, class: "form-control no-border input-lg rounded", placeholder: "Username" %>
-      <span class="fa fa-user form-control-feedback"></span>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "signinform", novalidate: "novalidate"}) do |f| %>
+    <div class="form-group has-feedback lg no-label right-feedback">
+      <span class="fa fa-user form-control-feedback iconposition"></span>
+      <%= f.text_field :email, class: "form-control no-border input-lg  solution rounded", placeholder: "Email" %>
     </div>
 
-    <div class="form-group has-feedback lg left-feedback no-label" >
-      <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg rounded", placeholder: "Password" %>
-      <span class="fa fa-lock form-control-feedback"></span>
+    <div class="form-group has-feedback lg right-feedback no-label" >
+      <%= f.password_field :password, autocomplete: "off", class: "form-control no-border input-lg solution rounded", placeholder: "Password" %>
+      <span class="fa fa-lock form-control-feedback iconposition"></span>
     </div>
 
     <% if devise_mapping.rememberable? -%>
