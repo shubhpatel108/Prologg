@@ -1,9 +1,85 @@
-<%= form_tag({controller: "/profiles", action: "update_links"}) do %>
-	<%= label_tag :website_link %> <%= text_field_tag :website_link, @website_link, placeholder: "http://" %>
-	<%= label_tag :blog_link %> <%= text_field_tag :blog_link, @blog_link, placeholder: "http://" %>
-	<%= label_tag :gplus_link %> <%= text_field_tag :gplus_link, @gplus_link, placeholder: "http://" %>
-	<%= label_tag :facebook_link %> <%= text_field_tag :facebook_link, @facebook_link, placeholder: "http://" %>
-	<%= label_tag :twitter_link %> <%= text_field_tag :twitter_link, @twitter_link, placeholder: "http://" %>
-	<%= label_tag :quora_link %> <%= text_field_tag :quora_link, @quora_link, placeholder: "http://" %>
-	<%= submit_tag "Done"%>
-<% end %>
+<script type="text/javascript">
+  $("#header-id").remove();
+  $("body").css({"background": "#37BC9B"})
+</script>
+
+
+<div class="col-sm-3">
+	<!-- space for taking profile in middle -->
+</div>
+
+<div class="col-sm-6 edit_link_box">
+	<!-- BEGIN USER CARD -->
+	<div class="the-box no-border full">
+		<div class="right-action">
+			<button class="btn btn-success btn-square btn-xs">Edit</button>
+		</div><!-- /.right-action -->
+		<img src="/assets/img-1.jpg" class="img-responsive" alt="Image">
+		<div class="the-box no-border bo-margin text-center user-info">
+			<img src="/assets/avatar-4.jpg" class="social-avatar img-circle absolute has-white-shadow" alt="Avatar">
+			<h4>Jayant Pareek</h4>
+			<p class="bordered text-muted">Web and Graphic designer</p>
+			
+			<div role="tabpanel">
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+				
+				<li role="presentation" class="active"><a href="#website" aria-controls="settings" role="tab" data-toggle="tab">Website</a></li>
+				<li role="presentation"><a href="#blogger" aria-controls="profile" role="tab" data-toggle="tab">Blogger</a></li>
+				<li role="presentation"><a href="#google" aria-controls="settings" role="tab" data-toggle="tab">Google+</a></li>
+				<li role="presentation" ><a href="#fb" aria-controls="home" role="tab" data-toggle="tab">Facebook</a></li>
+				<li role="presentation"><a href="#twitter" aria-controls="messages" role="tab" data-toggle="tab">Twitter</a></li>
+				<li role="presentation"><a href="#quora" aria-controls="settings" role="tab" data-toggle="tab">Quora</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<%= form_tag({controller: "/profiles", action: "update_links" , html: {id: "profile_edit_form", novalidate: "novalidate"}}) do %>
+				<div class="tab-content">
+				
+				<div role="tabpanel" class="tab-pane active" id="website">
+					<div class="input-group">
+						<span class="input-group-addon info">@</span>
+						<%= text_field_tag :website_link, @website_link, placeholder: "https://websitelink", class: "form-control" %>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="blogger">
+					<div class="input-group">
+						<span class="input-group-addon primary">@</span>
+						<%= text_field_tag :blog_link, @blog_link, placeholder: "https://bloggerlink", class: "form-control" %>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="google">
+					<div class="input-group">
+						<span class="input-group-addon success">@</span>
+						<%= text_field_tag :gplus_link, @gplus_link, placeholder: "https://google.com/+example-user" , class: "form-control"%>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane " id="fb">
+					<div class="input-group">
+						<span class="input-group-addon info">@</span>
+						<%= text_field_tag :facebook_link, @facebook_link, placeholder: "https://www.facebook.com/example-user", class: "form-control" %>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="twitter">
+					<div class="input-group">
+						<span class="input-group-addon success">@</span>
+						<%= text_field_tag :twitter_link, @twitter_link, placeholder: "https://twitterlink", class: "form-control" %>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="quora">
+					<div class="input-group">
+						<span class="input-group-addon danger">@</span>
+						<%= text_field_tag :quora_link, @quora_link, placeholder: "https://www.quora.com/example-user" , class: "form-control"%>
+					</div>
+				</div>
+
+				
+				</div>
+				<%= submit_tag "Done", class: "btn btn-primary", style: "margin-top:10px;"%>
+				<% end %>
+			</div>
+		</div><!-- /.the-box .no-border .no-margin -->
+	</div><!-- /.the-box .no-border .full -->
+	<!-- END USER CARD -->
+</div>
