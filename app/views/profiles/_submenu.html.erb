@@ -17,7 +17,6 @@
 		<ul class="submenu">
 			<li><%= link_to "Github", github_show_profile_path(username: @user.username), {remote: true, id: 'github_profile'} %></li>
 			<li><a href="index.html#fakelink">LinkedIn</a></li>
-			<li><a href="index.html#fakelink">Topcoder</a></li>
 		</ul>
 	</li>
 	<li>
@@ -28,7 +27,7 @@
 		</a>
 		<ul class="submenu">
 			<li><%= link_to "Codeforces", cfp_show_profile_path(username: @user.username), {remote: true, id: 'cfp_profile'} %></li>
-			<li><a href="widget-default.html">Topcoder</a></li>
+			<li><%= link_to "Topcoder", tcp_show_profile_path(username: @user.username), {remote: true, id: 'tcp_profile'} %></li>
 		</ul>
 	</li>
 	
