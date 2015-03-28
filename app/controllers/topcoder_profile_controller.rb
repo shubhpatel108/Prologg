@@ -10,9 +10,6 @@ class TopcoderProfileController < ApplicationController
 		response_info = TopcoderProfile.connect(handle)
 		status_info = response_info["status"]
 
-		logger.info(response_info)
-		logger.info("++++++++++++++++++++++")
-
 		if status_info=="OK"
 			response_info.delete("handle")
 			response_info.delete("status")
@@ -24,16 +21,17 @@ class TopcoderProfileController < ApplicationController
 			@tpf = TopcoderProfile.create(user_id: current_user.id, handle: handle, data: response_info)
 			
 			response_achivs = TopcoderProfile.get_achievements(handle)
-			status_achivs = response_info["status"]
+			status_achivs = response_achivs["status"]
 
 			if status_achivs=="OK"
-				achievenments = response_achivs["result"]
-				achievenments.each do |a|
+				achievements = response_achivs["result"]
+				achievements.each do |a|
 					a["badgeLink"].delete("url")
 				end
 				data = @tpf.data
-				data.merge!("achievenments" => achievenments)
+				data.merge!("achievements" => achievements)
 				@tpf.data = data
+				@tpf.data_will_change!
 				@tpf.save!
 			end
 

@@ -4,14 +4,10 @@ class TopcoderProfile < ActiveRecord::Base
 	def self.get(url)
 		begin
 			resp = RestClient.get(url)
-			logger.info("========1")
 			resp = JSON.parse(resp)
-			logger.info("========1")
 			if resp.class.to_s == "Array"
-			logger.info("========1")
 				resp = {"result" => resp}
 			end
-			logger.info("========1")
 			resp.merge!("status" => "OK")
 			return resp
 		rescue
