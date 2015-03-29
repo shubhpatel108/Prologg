@@ -190,7 +190,7 @@
 	<div class="the-box  recent_sub">
 		<div style="font-size : 15px; margin-bottom :  10px">
 			Recently Submitted Problems
-			<%= link_to "see Recent Submissions", cfp_submissions_path(handle: @cfp.handle), {remote: true, id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
+			<%= link_to "see Recent Submissions", "javascript:void(0);", {id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
 		</div>
 	<div id="recent_subs" class="row">
 	</div>
@@ -238,4 +238,10 @@ Morris.Bar({
 });
 /********************************* END EXAMPLE MORRIS BAR *********************************/
 
+</script>
+
+<script type="text/javascript">
+	$('#cfp_rec_subs').click(function() {
+		ajaxLoad("<%=cfp_submissions_path(handle: @cfp.handle)%>");
+	});
 </script>

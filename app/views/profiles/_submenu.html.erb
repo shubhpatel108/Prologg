@@ -14,8 +14,8 @@
 			<span class="badge badge-warning span-sidebar">9</span>
 			</a>
 		<ul class="submenu">
-			<li><%= link_to "Github", github_show_profile_path(username: @user.username), {remote: true, id: 'github_profile'} %></li>
-			<li><%= link_to "LinkedIn", linkedin_show_profile_path(username: @user.username), {remote: true, id: 'linkedin_profile'} %></li>
+			<li><%= link_to "Github", "javascript:void(0);", id: 'github_profile' %></li>
+			<li><%= link_to "LinkedIn", "javascript:void(0);", id: 'linkedin_profile' %></li>
 		</ul>
 	</li>
 	<li>
@@ -25,8 +25,8 @@
 			Programming
 		</a>
 		<ul class="submenu">
-			<li><%= link_to "Codeforces", cfp_show_profile_path(username: @user.username), {remote: true, id: 'cfp_profile'} %></li>
-			<li><%= link_to "Topcoder", tcp_show_profile_path(username: @user.username), {remote: true, id: 'tcp_profile'} %></li>
+			<li><%= link_to "Codeforces", "javascript:void(0);", id: 'cfp_profile' %></li>
+			<li><%= link_to "Topcoder", "javascript:void(0);", id: 'tcp_profile' %></li>
 		</ul>
 	</li>
 	

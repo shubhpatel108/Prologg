@@ -58,5 +58,15 @@
 			});
 			/** END BACK TO TOP **/
 		</script>
+
+		<script type="text/javascript">
+			function ajaxLoad(url) {
+				NProgress.start();
+				NProgress.inc();
+				$.get(url, function() {
+					NProgress.done();
+				});
+			};
+		</script>
 	</body>
 </html>
