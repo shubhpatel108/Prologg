@@ -1,1 +1,8 @@
-<%= @lip %>
+<% @lip["loc_count"].each do |place, count| %>
+	place: <%= @geocoder.coordinates(place)%>
+	count: <%= count%>
+	<br/>
+<% end %>
+<%= @lip["skills"] %>
+<%= @lip["awards"] %>
+<%= @lip["courses"] %>

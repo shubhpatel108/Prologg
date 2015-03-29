@@ -1,4 +1,5 @@
 class LinkedinProfileController < ApplicationController
+	include Geocoder
 
 	def create
 		linkedin_profile = current_user.linkedin_profile
@@ -29,36 +30,55 @@ class LinkedinProfileController < ApplicationController
 		end
 		data[:skills] =  @skills
 
-		@awards = client.profile(:fields => 'honors-awards').honors_awards
-		if @awards.nil?
+		awards = client.profile(:fields => 'honors-awards').honors_awards
+		if awards.nil?
 			@awards = []
 		else
-			@awards = @awards.all.map {|h| Hash.new(:name => h.name, :issuer => h.issuer)}
-			i = 0
-			@awards.each do |hash|
-				hash[:id] = i + 1
+			@awards = []
+			awards.all.each do |h|
+				a = Hash.new
+				a[:name] = h[:name]
+				a[:issuer] = h[:issuer]
+				@awards << a
 			end
 		end
 		data[:awards] =  @awards
 
-		@courses = client.profile(:fields => 'courses').courses
-		if @courses.nil?
+		courses = client.profile(:fields => 'courses').courses
+		if courses.nil?
 			@courses = []
 		else
-			@courses = @courses.all.map {|h| Hash.new(name: h.name)}
-			i = 0
-			@courses.each do |hash|
-				hash[:id] = i + 1
+			@courses = []
+			courses.all.each do |h|
+				a = Hash.new
+				a[:name] = h[:name]
+				@courses << a
 			end
 		end
 		data[:courses] = @courses
 
-		linkedin_profile.data = data 
-		linkedin_profile.data_will_change!
-		linkedin_profile.save!
 
 		current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
 		@short_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
+
+		# f = client.profile(:fields => "following")
+		# companies  = f.following.companies.all.map {|h| h.name}
+		# companies.compact!
+
+		# industries  = f.following.industries.all.map {|h| h.name}
+		# industries.compact!
+
+		# people  = f.following.people.all.map {|h| h.name}
+		# people.compact!
+
+		# spl_editions  = f.following.special_editions.all.map {|h| h.name}
+		# spl_editions.compact!
+
+		# data[:following] = companies + industries + people + spl_editions
+
+		linkedin_profile.data = data
+		linkedin_profile.data_will_change!
+		linkedin_profile.save!
 
 		flash[:notice] = "You have successfully integrated LinkedIn in your profile."
 		redirect_to profile_path(username: current_user.username)
@@ -71,6 +91,7 @@ class LinkedinProfileController < ApplicationController
 	def show_profile
 		@user = User.where(username: params[:username]).first
 		@lip = @user.linkedin_profile.data
+		@geocoder = Geocoder
 		respond_to do |format|
 			format.js
 		end

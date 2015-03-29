@@ -53,6 +53,7 @@ GEM
     execjs (2.4.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    geocoder (1.2.8)
     github_api (0.12.2)
       addressable (~> 2.3)
       descendants_tracker (~> 0.0.4)
@@ -188,6 +189,7 @@ DEPENDENCIES
   bootstrap-will_paginate (= 0.0.10)
   coffee-rails (~> 4.0.0)
   devise
+  geocoder
   github_api
   jbuilder (~> 2.0)
   jquery-rails

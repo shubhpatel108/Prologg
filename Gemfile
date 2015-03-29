@@ -24,6 +24,7 @@ gem 'omniauth-github'
 gem 'github_api'
 gem 'omniauth-linkedin'
 gem 'linkedin'
+gem 'geocoder'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
