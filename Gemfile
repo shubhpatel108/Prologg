@@ -22,6 +22,8 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'omniauth-github'
 gem 'github_api'
+gem 'omniauth-linkedin'
+gem 'linkedin'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
