@@ -39,7 +39,7 @@
 											</p>
 										</div><!-- /.the-box .no-border .bg-info .no-margin -->
 										<% if (not current_user.nil? and @user!=current_user) or current_user.nil? %>
-					<button class="btn btn-primary btn-block btn-lg btn-square"><i class="fa fa-user"></i> Follow</button>
+						<a href="<%= new_mails_path(@user.username) %>" class="btn btn-primary btn-block btn-lg btn-square" data-remote="true"><i class="fa fa-user"></i> Contact</a>
 				<% end %>
 									</div><!-- /.the-box -->
 									<!-- END PROFILE CARD  -->

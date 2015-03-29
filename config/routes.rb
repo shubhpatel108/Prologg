@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   get '/integrations/linkedin/create', to: 'linkedin_profile#create', as: :linkedin_profile_create
   get '/integrations/linkedin/show/:username', to: 'linkedin_profile#show_profile', as: :linkedin_show_profile
   post '/integrations/linkedin/refine', to: 'linkedin_profile#refine', as: :linkedin_refine
+
+  #get '/mails/_show'
+  get '/mails/new/:username', to: 'mails#new', as: :new_mails
+  post '/mails/send/:username', to: 'mails#send_mail', as: :send_mails
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

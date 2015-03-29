@@ -1,2 +1,117 @@
-<%= @tcp.handle %>
-<%= @tcp.data %>
+<% unless @tcp.nil? %>
+	<div class="row">
+		<%= image_tag("http://www.topcoder.com/i/reskin/logo.png", class: "sitelogo") %>
+	</div>
+	<div class="logoline row">
+		<div class="col-lg-6">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="text-center panel-no-border panel-success panel-block-color panel-square" style="margin-bottom: 20px;">
+						<div class="panel-heading">
+							<h4 class="panel-title"> @<%= @tcp.handle %> </h4>
+						</div>
+						<div class="panel-body bg-success">
+							<p>  (Topcoder since <%= @tcp.data["memberSince"] %>)  </p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="panel panel-info panel-square panel-no-border text-center">
+					  <div class="panel-heading">
+						<h3 class="panel-title">Total Earnings</h3>
+					  </div>
+					  <div class="panel-body">
+						<h2 class="bolded tiles-number text-info"><i class="fa fa-usd"></i><%= @tcp.data["overallEarning"] %></h2>
+					  </div><!-- /.panel-body -->
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="panel panel-warning panel-square panel-no-border text-center" style="margin-bottom:10px;">
+					  <div class="panel-heading">
+						<h3 class="panel-title">Years of Experience</h3>
+					  </div>
+					  <div class="panel-body">
+						<h2 class="bolded tiles-number text-warning"><%= distance_of_time_in_words_to_now(date_format(@tcp.data["memberSince"])) %></h2>
+					  </div><!-- /.panel-body -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="the-box no-border full">
+				<div class="the-box bg-dark no-border no-margin">
+					<p class="text-center"><i class="fa  fa-quote-left icon-md"></i></p>
+					<h4 class="bolded less-distance text-danger text-center">
+						<% if not @tcp.data["quote"].blank? %>
+							<%= @tcp.data["quote"] %>
+						<% else %>
+							It's up to you how far you go. If you don't try, you'll never know!
+						<% end -%>
+					</h4>
+				</div><!-- /.the-box no-border no-margin -->
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-md-12 col-sm-12">
+			<!-- BEGIN NEWS TICKER WIDGET -->
+			<div class="the-box no-border full">
+				<h4 class="text-center bg-primary" style="padding-top:10px;padding-bottom:10px;margin-bottom:0px;margin-top:-1px;">Achievements (<%= @tcp.data["achievements"].length %>)</h4>
+				<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
+				<ul class="widget-newsticker media-list" style=" height: 278px !important; overflow: hidden;">
+					<% @tcp.data["achievements"].each do |i| %>
+					<li class="media" style="height:90px;">
+						<a class="pull-left" href="widget-default.html#fakelink">
+							<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello", id="tooltip1">
+								<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/>
+							</div>
+						</a>
+						<div class="media-body">
+						  <h4 class="media-heading"><a href="widget-default.html#fakelink"><%= i["description"] %></a></h4>
+						  <p class="text-muted"><small>achieved on <%= date_format(i["date"]).to_date %></small></p>
+						</div>
+					</li>
+					<% end -%>
+				</ul>
+				<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>
+			</div><!-- /.the-box no-border -->
+			<!-- END NEWS TICKER WIDGET -->
+		</div>
+		<div class="col-lg-6">
+			<% @tcp.data["ratingsSummary"].each_with_index do |item, i| %>
+			<div class="col-lg-6">
+				<div class="the-box no-border full text-center">
+					<div class="the-box no-border bg-<%=color(i)%> no-margin">
+						<h4 class="less-distance">Rating</h4>
+						<i class="fa fa-<%= icon(item["name"]) %> icon-xl-size"></i>
+						<h1 class="bolded less-distance"><%= item["rating"] %></h1>
+					</div><!-- /.the-box no-border bg-primary no-margin -->
+					<div class="the-box no-border no-margin">
+						<h4 class="bolded less-distance"><%= item["name"] %></h4>
+					</div><!-- /.the-box no-border no-margin -->
+				</div>
+			</div>
+			<% end -%>
+		</div>
+	</div>
+<% end -%>
+
+<script src="/assets/jquery.newsTicker.min.js"></script>
+<script type="text/javascript">
+	if ($('.widget-newsticker').length > 0){
+		$('.widget-newsticker').newsTicker({
+			row_height: 135,
+			max_rows: 3,
+			speed: 600,
+			direction: 'up',
+			duration: 4000,
+			autostart: 1,
+			pauseOnHover: 1,
+			prevButton: $('#w-newsticker-prev'),
+			nextButton: $('#w-newsticker-next')
+		});
+	}
+</script>
