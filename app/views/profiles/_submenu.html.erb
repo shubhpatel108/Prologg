@@ -1,4 +1,3 @@
-
 <ul class="sidebar-menu">
 	<li>
 		<a href="<%= profile_path(username: @user.username) %>">
@@ -16,7 +15,7 @@
 			</a>
 		<ul class="submenu">
 			<li><%= link_to "Github", github_show_profile_path(username: @user.username), {remote: true, id: 'github_profile'} %></li>
-			<li><a href="index.html#fakelink">LinkedIn</a></li>
+			<li><%= link_to "LinkedIn", linkedin_show_profile_path(username: @user.username), {remote: true, id: 'linkedin_profile'} %></li>
 		</ul>
 	</li>
 	<li>
