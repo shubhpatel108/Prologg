@@ -1,4 +1,5 @@
 class GithubProfileController < ApplicationController
+	before_filter :authenticate_user!, only: [:create]
 
 	def create
 		github = Github.new
