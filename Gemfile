@@ -25,6 +25,7 @@ gem 'github_api'
 gem 'omniauth-linkedin'
 gem 'linkedin'
 gem 'geocoder'
+gem 'gravtastic'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
