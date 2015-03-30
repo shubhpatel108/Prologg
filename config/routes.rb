@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/integrations/topcoder/new', to: 'topcoder_profile#new', as: :topcoder_profile_new
   post '/integrations/topcoder/create', to: 'topcoder_profile#create', as: :topcoder_profile_create
   get '/integrations/topcoder/show/:username', to: 'topcoder_profile#show_tcp_profile', as: :tcp_show_profile
+  get '/integrations/topcoder/update', to: 'topcoder_profile#update', as: :topcoder_update_profile
 
   get '/integrations/linkedin/create', to: 'linkedin_profile#create', as: :linkedin_profile_create
   get '/integrations/linkedin/show/:username', to: 'linkedin_profile#show_profile', as: :linkedin_show_profile
