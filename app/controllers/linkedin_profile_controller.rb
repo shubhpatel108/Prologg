@@ -61,20 +61,20 @@ class LinkedinProfileController < ApplicationController
 		current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
 		@short_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
 
-		# f = client.profile(:fields => "following")
-		# companies  = f.following.companies.all.map {|h| h.name}
-		# companies.compact!
+		f = client.profile(:fields => "following")
+		companies  = f.following.companies.all.map {|h| h.name}
+		companies.compact!
 
-		# industries  = f.following.industries.all.map {|h| h.name}
-		# industries.compact!
+		industries  = f.following.industries.all.map {|h| h.name}
+		industries.compact!
 
-		# people  = f.following.people.all.map {|h| h.name}
-		# people.compact!
+		people  = f.following.people.all.map {|h| h.name}
+		people.compact!
 
-		# spl_editions  = f.following.special_editions.all.map {|h| h.name}
-		# spl_editions.compact!
+		spl_editions  = f.following.special_editions.all.map {|h| h.name}
+		spl_editions.compact!
 
-		# data[:following] = companies + industries + people + spl_editions
+		data[:following] = companies + industries + people + spl_editions
 
 		linkedin_profile.data = data
 		linkedin_profile.data_will_change!

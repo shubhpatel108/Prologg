@@ -1,8 +1,162 @@
+<div class="logoline" style="height: 64px">
+	<!-- <img src="images.jpg" class="codeforcelogo" > -->
+	<div class="col-lg-12">
+		<%= image_tag("linkedin.png", class: "sitelogo") %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">	
+		<div class="the-box no-border tags-cloud skill-cloud">
+			<h4 class="small-heading more-margin-bottom">SKILL CLOUD</h4>
+			<p>
+				<% @lip["skills"].each_with_index do |item, i| %>
+					<a href="#fakelink"><span class="label label-<%= color(i) %>"><%= item %></span></a> 
+				<% end -%>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4 col-sm-6">	
+		<div class="the-box no-border full item-masonry">
+			<div class="the-box bg-dark no-border no-margin">
+				<p class="text-center"><i class="fa  fa-mortar-board  icon-lg"></i></p>
+				<h4 class="bolded less-distance text-danger text-center">Interested In</h4>
+			</div><!-- /.the-box no-border no-margin -->
+			<div class="">
+				<div class="the-box no-border full newoneclass">
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-0"><i class="fa fa-chevron-up"></i></button>
+					<ul id="widget-newsticker-0" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% @lip["courses"].each_with_index do |item, i| %>
+							<li class="media" style="height: 67.5px">
+								<button class="btn btn-<%= color(i) %> btn-block btn-lg"><i class="fa fa-linkdin-square"></i> <%= item["name"] %></button>
+							</li>
+						<% end -%>
+					</ul>
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-0"><i class="fa fa-chevron-down"></i></button>
+				</div><!-- /.the-box no-border -->
+			</div>			
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-6">					
+		<div class="the-box no-border full item-masonry">
+			<div class="the-box bg-dark no-border no-margin">
+				<p class="text-center"><i class="fa fa-trophy icon-lg"></i></p>
+				<h4 class="bolded less-distance text-danger text-center">Awards and Achievements</h4>
+			</div><!-- /.the-box no-border no-margin -->
+			<div class="">
+				<div class="the-box no-border full newoneclass">
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-2"><i class="fa fa-chevron-up"></i></button>
+					<ul id="widget-newsticker-2" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<li class="media" style="height: 67.5px">
+							<% @lip["awards"].each_with_index do |item, i| %>
+								
+								<div class="media-body">
+								  <h4 class="media-heading btn btn-<%= color(i) %> btn-lg"><%= item["issuer"] %></h4> &nbsp;&nbsp;&nbsp;
+								  <strong><%= item["name"] %></strong>
+								  </p>
+								</div>
+							<% end -%>
+						</li>
+					</ul>
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-2"><i class="fa fa-chevron-down"></i></button>
+				</div><!-- /.the-box no-border -->
+			</div>				
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-6">				
+		<div class="the-box no-border full item-masonry">
+			<div class="the-box bg-dark no-border no-margin">
+				<p class="text-center"><i class="fa fa-users icon-lg"></i></p>
+				<h4 class="bolded less-distance text-danger text-center">Following to</h4>
+			</div><!-- /.the-box no-border no-margin -->
+			<div class="">
+				<div class="the-box no-border full newoneclass">
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-1"><i class="fa fa-chevron-up"></i></button>
+					<ul id="widget-newsticker-1" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% @lip["following"].each_with_index do |item, i| %>
+							<li class="media" style="height: 67.5px">
+								<div class="media-body">
+								  <h4 class="media-heading btn btn-<%= color(i) %> btn-block btn-lg" ><%= item %></h4>
+								</div>
+						  	</li>
+						<% end -%>
+					</ul>
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-1"><i class="fa fa-chevron-down"></i></button>
+				</div><!-- /.the-box no-border -->
+			</div>			
+		</div>
+	</div>
+</div>
 <% @lip["loc_count"].each do |place, count| %>
-	place: <%= @geocoder.coordinates(place)%>
+	<!-- place: <%= @geocoder.coordinates(place)%>
 	count: <%= count%>
-	<br/>
+	<br/> -->
 <% end %>
-<%= @lip["skills"] %>
-<%= @lip["awards"] %>
-<%= @lip["courses"] %>
+
+<script src="/assets/jquery.newsTicker.min.js"></script>
+<script type="text/javascript">
+	if ($('#widget-newsticker-0').length > 0){
+		$('#widget-newsticker-0').newsTicker({
+			row_height: 135,
+			<% if  @lip["courses"].count > 4 %>
+				max_rows: 2,
+			<% elsif @lip["courses"].count > 2 %>
+				max_rows: 1,
+			<% else %>
+				max_rows: 0.5,
+			<% end -%>
+			speed: 600,
+			direction: 'up',
+			duration: 4000,
+			autostart: 1,
+			pauseOnHover: 1,
+			prevButton: $('#w-newsticker-next-0'),
+			nextButton: $('#w-newsticker-prev-0')
+		});
+	}
+
+	if ($('#widget-newsticker-1').length > 0){
+		$('#widget-newsticker-1').newsTicker({
+			row_height: 135,
+			<% if  @lip["following"].count > 4 %>
+				max_rows: 2,
+			<% elsif @lip["following"].count > 2 %>
+				max_rows: 1,
+			<% else %>
+				max_rows: 0.5,
+			<% end -%>
+			speed: 600,
+			direction: 'up',
+			duration: 4000,
+			autostart: 1,
+			pauseOnHover: 1,
+			prevButton: $('#w-newsticker-next-1'),
+			nextButton: $('#w-newsticker-prev-1')
+		});
+	}
+
+	if ($('#widget-newsticker-2').length > 0){
+		$('#widget-newsticker-2').newsTicker({
+			row_height: 135,
+			<% if  @lip["awards"].count > 4 %>
+				max_rows: 2,
+			<% elsif @lip["awards"].count > 2 %>
+				max_rows: 1,
+			<% else %>
+				max_rows: 0.5,
+			<% end -%>
+			speed: 600,
+			direction: 'up',
+			duration: 4000,
+			autostart: 1,
+			pauseOnHover: 1,
+			prevButton: $('#w-newsticker-next-2'),
+			nextButton: $('#w-newsticker-prev-2')
+		});
+	}
+</script>
