@@ -1,8 +1,7 @@
 class GithubProfile < ActiveRecord::Base
 	belongs_to :user
 
-	def repos
-		github = Github.new
+	def repos(github)
 		repos = (github.repos.list user: self.username).body
 		repos.each do |repo|
 			repo.select! {|k,v| ["name", "fork", "stargazers_count", "watchers_count"].include?(k)}
@@ -14,8 +13,7 @@ class GithubProfile < ActiveRecord::Base
 		repos
 	end
 
-	def activities
-		github = Github.new
+	def activities(github)
 		activities = (github.activity.events.performed self.username).body
 		user_activities = {}
 		user_activities.merge!(:issues_created => activities.map(&:type).select {|e| e=="IssuesEvent"}.count)
@@ -24,20 +22,20 @@ class GithubProfile < ActiveRecord::Base
 		user_activities
 	end
 
-	def activities_received
-		github = Github.new
+	def activities_received(github)
 		activities_rec = (github.activity.events.received user: self.username).body
 		activities_rec = activities_rec.map(&:actor).uniq.count
 		activities_rec
 	end
 
-	def followers_count
-		github = Github.new
-		(github.users.followers.list self.username).body.count
+	def followers_and_last_updated(github)
+		user = (github.users.get user: self.username).body
+		followers_count = user.followers
+		last_updated = user.updated_at
+		return [followers_count, last_updated]
 	end
 
-	def orgs
-		github = Github.new
+	def orgs(github)
 		orgs = (github.orgs.list user: self.username).body
 		orgs.each do |org|
 			org.select! {|k,v| ["login"].include?(k)}
