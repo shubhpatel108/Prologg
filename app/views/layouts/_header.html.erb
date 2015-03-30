@@ -30,7 +30,7 @@
 									<button class="btn btn-primary" style="margin-top: 13px; float: left;">Update</button>
 									<li class="dropdown">
 									  <a href="blank.html#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<%= image_tag("avatar-4.jpg", class: "avatar img-circle") %>
+										<%= image_tag(current_user.gravatar_url, class: "avatar img-circle") %>
 										Hi, <strong><%= current_user.full_name.split(" ").first %></strong>
 									  </a>
 									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">

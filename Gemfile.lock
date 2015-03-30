@@ -62,6 +62,7 @@ GEM
       multi_json (>= 1.7.5, < 2.0)
       nokogiri (~> 1.6.3)
       oauth2
+    gravtastic (3.2.6)
     hashie (3.4.0)
     hike (1.2.3)
     i18n (0.7.0)
@@ -191,6 +192,7 @@ DEPENDENCIES
   devise
   geocoder
   github_api
+  gravtastic
   jbuilder (~> 2.0)
   jquery-rails
   json
