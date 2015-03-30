@@ -2,6 +2,11 @@ class ProfilesController < ApplicationController
 	before_filter :authenticate_user!, only: [:edit_links, :update_links]
 
 	def index
+		if !current_user.nil?
+			redirect_to profile_path(current_user.username)
+		else
+			redirect_to new_user_session_path
+		end
 	end
 
 	def show
