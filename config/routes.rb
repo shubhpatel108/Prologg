@@ -6,10 +6,11 @@ Rails.application.routes.draw do
   get '/users/edit_links', to: 'profiles#edit_links', as: :edit_links
   post '/users/update_links', to: 'profiles#update_links'
 
-  get '/integrations/codeforces/new', to: 'codeforces_profile#new', as: :codeforces_profile_new
+  get '/integrations/codeforces/new', to: 'codeforces_profile#new', as: :cfp_profile_new
   post '/integrations/codeforces/create', to: 'codeforces_profile#create'
   get '/integrations/codeforces/recent_submissions/:handle', to: 'codeforces_profile#recent_submissions', as: :cfp_submissions
   get '/integrations/codeforces/show/:username', to: 'codeforces_profile#show_cfp_profile', as: :cfp_show_profile
+  get '/integrations/codeforces/update', to: 'codeforces_profile#update', as: :cfp_update_profile
 
   get '/integrations/edit', to: 'profiles#edit_integrations', as: :edit_integrations
 

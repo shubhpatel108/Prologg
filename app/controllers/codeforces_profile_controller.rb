@@ -1,5 +1,5 @@
 class CodeforcesProfileController < ApplicationController
-	before_filter :authenticate_user!, only: [:new, :create]
+	before_filter :authenticate_user!, only: [:new, :create, :update]
 	protect_from_forgery except: :recent_submissions
 
 	def new
@@ -30,39 +30,14 @@ class CodeforcesProfileController < ApplicationController
 				rating: resp_info["rating"],
 				max_rating: resp_info["maxRating"],
 				last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s')
-				)
+			)
 
-			solved_probs = 0		#total number of problems solved
-			langs = {}				#hash of hashes - languages => no of problems solved
-			tags_count = {}			#hash of hashes - tags => total no. of problems in which it is found.
-			resp_subs.select do |h|
-				if h["verdict"]=="OK"
-					if langs.key?(h["programmingLanguage"])
-						langs.merge!(h["programmingLanguage"] => langs[h["programmingLanguage"].to_s] + 1)
-					else
-						langs.merge!(h["programmingLanguage"] => 1)
-					end
-					tags = h["problem"]["tags"]
-					tags.each do |tag|
-						if tags_count.key?(tag)
-							tags_count.merge!(tag => tags_count[tag] + 1)
-						else
-							tags_count.merge!(tag => 1)
-						end
-					end
-					solved_probs = solved_probs + 1
-				end
-			end
+			data1 = CodeforcesProfile.problems_lang_tags(resp_subs)
+			solved_probs = data1[0]			#total number of problems solved
+			tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
+			langs = data1[2]				#hash of hashes - languages => no of problems solved
 
-			resp_rates.each do |h|
-				h.delete("contestId")
-				h.delete("contestName")
-				h.delete("rank")
-			end
-			resp_rates.slice!(resp_rates.length-4..resp_rates.length)
-
-			tags_count = tags_count.to_a.sort_by {|tag| tag[1]}.reverse.to_h
-			langs = langs.to_a.sort_by {|lang| lang[1]}.reverse.to_h
+			resp_rates = CodeforcesProfile.ratings(resp_rates)
 
 			@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
 			@codeforces_profile.save!
@@ -72,6 +47,67 @@ class CodeforcesProfileController < ApplicationController
 		else
 			flash[:alert] = "It seems your credentials are not authentic or something went wrong."
 			redirect_to :back
+		end
+	end
+
+	def update
+		@codeforces_profile = current_user.codeforces_profile
+
+		if @codeforces_profile.nil?
+			flash[:alert] = "You don't have Codeforces account integrated with your profile."
+			redirect_to :back
+		else
+			handle = @codeforces_profile.handle
+
+			response_info = CodeforcesProfile.connect(handle)
+			status_info = response_info[0]
+			resp_info = response_info[1]["result"][0]
+
+			if status_info == "OK"
+				new_last_online = DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s')
+
+				if @codeforces_profile.last_online < new_last_online
+
+					response_subs = CodeforcesProfile.get_submissions(handle)
+					status_subs = response_subs[0]
+					resp_subs = response_subs[1]["result"]
+
+					response_rates = CodeforcesProfile.get_ratings(handle)
+					status_rates = response_rates[0]
+					resp_rates = response_rates[1]["result"]
+
+					if status_subs == "OK" and status_rates == "OK"
+						@codeforces_profile.update_attributes(
+							contribution: resp_info["contribution"],
+							rank: resp_info["rank"],
+							max_rank: resp_info["maxRank"],
+							rating: resp_info["rating"],
+							max_rating: resp_info["maxRating"],
+							last_online: new_last_online
+						)
+
+						data1 = CodeforcesProfile.problems_lang_tags(resp_subs)
+						solved_probs = data1[0]			#total number of problems solved
+						tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
+						langs = data1[2]				#hash of hashes - languages => no of problems solved
+
+						resp_rates = Codeforces.ratings(resp_rates)
+
+						@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
+						@codeforces_profile.metadata_will_change!
+						@codeforces_profile.save!
+					else
+						flash[:alert] = "It seems your credentials are not authentic or something went wrong."
+						redirect_to :back
+					end
+				else
+					flash[:notice] = "Your Codeforces profile is already upto date."
+					redirect_to :back
+				end
+			else
+				flash[:alert] = "It seems your credentials are not authentic or something went wrong."
+				redirect_to :back
+			end
 		end
 	end
 
@@ -107,4 +143,5 @@ class CodeforcesProfileController < ApplicationController
 			format.html
 		end
 	end
+
 end
