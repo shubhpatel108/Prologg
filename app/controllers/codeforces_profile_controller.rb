@@ -96,6 +96,8 @@ class CodeforcesProfileController < ApplicationController
 						@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
 						@codeforces_profile.metadata_will_change!
 						@codeforces_profile.save!
+						flash[:notice] = "Successfully updated your Codeforces profile!"
+						redirect_to profile_path(username: current_user.username)
 					else
 						flash[:alert] = "It seems your credentials are not authentic or something went wrong."
 						redirect_to :back
