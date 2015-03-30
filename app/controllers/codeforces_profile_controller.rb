@@ -1,5 +1,5 @@
 class CodeforcesProfileController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, only: [:new, :create]
 	protect_from_forgery except: :recent_submissions
 
 	def new

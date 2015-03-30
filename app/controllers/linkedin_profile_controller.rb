@@ -1,5 +1,6 @@
 class LinkedinProfileController < ApplicationController
 	include Geocoder
+	before_filter :authenticate_user!, only: [:new, :create]
 
 	def create
 		linkedin_profile = current_user.linkedin_profile
