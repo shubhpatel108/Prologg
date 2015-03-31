@@ -70,5 +70,6 @@ class CodeforcesProfile < ActiveRecord::Base
 			h.delete("rank")
 		end
 		resp_rates.slice!(resp_rates.length-4..resp_rates.length)
+		resp_rates
 	end
 end
