@@ -15,4 +15,7 @@
 	$('#linkedin_profile').click(function() {
 		ajaxLoad("<%=linkedin_show_profile_path(username: @user.username)%>");
 	});
+	$('#contact').click(function() {
+		ajaxLoad("<%=new_mails_path(username: @user.username)%>");
+	});
 </script>
