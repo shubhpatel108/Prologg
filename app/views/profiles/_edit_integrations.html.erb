@@ -1,0 +1,47 @@
+<h1 class="page-heading text-center" >Integrations</h1>
+<hr>
+<%- if Devise.mappings[:user].omniauthable? %>
+  <%- Devise.omniauth_providers.each do |provider| %>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-2">
+		<%= image_tag("#{provider.to_s.downcase}_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;"><%=provider.to_s.titleize%></strong>
+	</div>
+	<div class="col-lg-4">
+		<a href="<%= user_omniauth_authorize_path(provider) %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
+		<a href="<%= github_update_profile_path %>" class="btn btn-success btn-perspective"><i class="fa fa-pencil-square-o"></i>Update</a>
+	</div>
+</div>
+<br>
+  <% end -%>
+ <% end -%>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-2">
+		<%= image_tag("codeforces_small.jpg", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">Codeforces</strong>
+	</div>
+	<div class="col-lg-4">
+		<a href="<%= cfp_profile_new_path %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>Add</a>&nbsp;
+		<a href="<%= cfp_update_profile_path %>" class="btn btn-success btn-perspective"><i class="fa fa-pencil-square-o"></i>Update</a>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-2">
+		<%= image_tag("topcoder_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">Topcoder</strong>
+	</div>
+	<div class="col-lg-4">
+		<a href="<%= topcoder_profile_new_path %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
+		<a href="<%= topcoder_update_profile_path %>" class="btn btn-success btn-perspective"><i class="fa fa-pencil-square-o"></i>Update</a>
+	</div>
+</div>
+
+<!-- 
+<%= link_to "Add Codeforces Account", cfp_profile_new_path %><br />
+<%= link_to "Add Topcoder Account", topcoder_profile_new_path %><br />
+
+<%= link_to "Update Codeforces Account", cfp_update_profile_path %><br />
+<%= link_to "Update Github Account", github_update_profile_path %><br />
+<%= link_to "Update Topcoder Account", topcoder_update_profile_path %><br />
+ -->
