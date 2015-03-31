@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314121120) do
+ActiveRecord::Schema.define(version: 20150330091418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 20150314121120) do
   create_table "gplus_links", force: true do |t|
     t.string "user_id", null: false
     t.string "url",     null: false
+  end
+
+  create_table "mail_notifications", force: true do |t|
+    t.integer  "sender_id",                   null: false
+    t.integer  "receiver_id",                 null: false
+    t.boolean  "status",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "quora_links", force: true do |t|
