@@ -8,8 +8,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if github_profile.persisted?
       redirect_to github_profile_create_path(github_username: github_profile.username)
     else
-      session["devise.user_attributes"] = @user.attributes
-      redirect_to new_user_registration_url
+      redirect_to profile_path(current_user.username)
+    end
+  end
+
+  def linkedin
+    p env["omniauth.auth"]
+    linkedin_profile = User.create_linkedin(env["omniauth.auth"], current_user)
+
+    if linkedin_profile.persisted?
+      redirect_to linkedin_profile_create_path(:linkedin_profile_id => linkedin_profile.id)
+    else
+      redirect_to profile_path(current_user.username)
     end
   end
 

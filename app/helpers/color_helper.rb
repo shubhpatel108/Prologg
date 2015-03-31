@@ -7,7 +7,7 @@ module ColorHelper
 		elsif index%5 == 3
 			return "info"
 		elsif index%5 == 4
-			return "active"
+			return "primary"
 		elsif index%5 == 0
 			return "success"
 		end

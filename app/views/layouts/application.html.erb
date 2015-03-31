@@ -18,10 +18,10 @@
 			<div id="header-id">
 				<%= render 'layouts/header' %>
 			</div>
-			<%= render 'layouts/notifications' %>
 
 			<div class="page-content">
 					<div class="container-fluid">
+						<%= render 'layouts/notifications' %>
 						<%= yield %>
 					</div>
 			</div>
@@ -58,6 +58,16 @@
 			});
 			/** END BACK TO TOP **/
 			  $("[data-toggle=tooltip]").tooltip();
+		</script>
+
+		<script type="text/javascript">
+			function ajaxLoad(url) {
+				NProgress.start();
+				NProgress.inc();
+				$.get(url, function() {
+					NProgress.done();
+				});
+			};
 		</script>
 	</body>
 </html>

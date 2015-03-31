@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 20150330091418) do
     t.datetime "updated_at"
   end
 
+  create_table "linkedin_profiles", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "uid",        null: false
+    t.string   "token",      null: false
+    t.string   "secret",     null: false
+    t.json     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quora_links", force: true do |t|
     t.string "user_id", null: false
     t.string "url",     null: false

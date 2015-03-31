@@ -1,46 +1,74 @@
 class GithubProfileController < ApplicationController
+	before_filter :authenticate_user!, only: [:create]
 
 	def create
-		github = Github.new
+		github = Github.new basic_auth: "#{ENV['GIT_U']}:#{ENV['GIT_PWD']}"
 		username = params[:github_username] #here username refers to that of github
 		metadata = {}
+		@github_profile = GithubProfile.where(:user_id => current_user.id).first
 
-		repos = (github.repos.list user: username).body
-		repos.each do |repo|
-			repo.select! {|k,v| ["name", "fork", "stargazers_count", "watchers_count"].include?(k)}
-			contribution = (github.repos.stats.contributors user: username, repo: repo.name).body
-			contribution.select! {|c| c.author.login==username}
-			repo.merge!(:owner_commits => if contribution.empty? then 0 else contribution.map(&:total).sum end)
-			repo.merge!(:languages => (github.repos.languages username, repo.name).body)
-		end
+		data1 = @github_profile.followers_and_last_updated(github)
+		metadata.merge!(:followers_count => data1[0])
+		metadata.merge!(:last_updated => data1[1])
+
+		repos = @github_profile.repos(github)
 		metadata.merge!(:repos => repos)
 
-		activities = (github.activity.events.performed username).body
-		user_activities = {}
-		user_activities.merge!(:issues_created => activities.map(&:type).select {|e| e=="IssuesEvent"}.count)
-		user_activities.merge!(:total_prs => activities.map(&:type).select {|e| e=="PullRequestEvent"}.count)
-		user_activities.merge!(:merged_prs => activities.select {|e| e.type=="PullRequestEvent" && e.payload.pull_request.merged?}.count)
-		metadata.merge!(:activities => user_activities)
+		activities = @github_profile.activities(github)
+		metadata.merge!(:activities => activities)
 
-		activities_rec = (github.activity.events.received user: username).body
-		metadata.merge!(:interested_people => activities_rec.map(&:actor).uniq.count)
+		activities_received = @github_profile.activities_received(github)
+		metadata.merge!(:interested_people => activities_received)
 
-		metadata.merge!(:followers_count => (github.users.followers.list username).body.count )
-
-		orgs = (github.orgs.list user: username).body
-		orgs.each do |org|
-			org.select! {|k,v| ["login"].include?(k)}
-			org.merge!(:members_count => (github.orgs.members.list org.login).body.count )
-		end
-
+		orgs = @github_profile.orgs(github)
 		metadata.merge!(:orgs => orgs)
 
-		@github_profile = GithubProfile.where(:user_id => current_user.id).first
+
 		@github_profile.data = metadata
+		@github_profile.data_will_change!
 		@github_profile.save!
 
 		flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
 		redirect_to profile_path(:username => current_user.username)
+	end
+
+	def update
+		github = Github.new basic_auth: "#{ENV['GIT_U']}:#{ENV['GIT_PWD']}"
+		@github_profile = current_user.github_profile
+
+		if @github_profile.nil?
+			flash[:alert] = "You don't have GitHub account integrated with your profile."
+			redirect_to :back
+		else
+			new_data = {}
+
+			data1 = @github_profile.followers_and_last_updated(github)
+			new_data.merge!(:followers_count => data1[0])
+			new_data.merge!(:last_updated => data1[1])
+
+			if @github_profile.data["last_updated"] < new_data[:last_updated]
+				repos = @github_profile.repos(github)
+				new_data.merge!(:repos => repos)
+
+				activities = @github_profile.activities(github)
+				new_data.merge!(:activities => activities)
+
+				activities_received = @github_profile.activities_received(github)
+				new_data.merge!(:interested_people => activities_received)
+
+				orgs = @github_profile.orgs(github)
+				new_data.merge!(:orgs => orgs)
+
+				@github_profile.data = new_data
+				@github_profile.data_will_change!
+				@github_profile.save!
+				flash[:notice] = "Successfully updated your GitHub profile!"
+				redirect_to profile_path(username: current_user.username)
+			else
+				flash[:notice] = "Your Github profile is already upto date."
+				redirect_to :back
+			end
+		end
 	end
 
 	def show

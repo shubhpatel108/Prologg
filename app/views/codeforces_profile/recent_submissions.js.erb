@@ -1,5 +1,5 @@
 $('#recent_subs').html("<%= escape_javascript render(:partial => 'recent_submissions')	 %>");
-$('#cfp_rec_subs').attr("href", "#");
+$('#cfp_rec_subs').attr("href", "javascript:void(0);");
 $(function() {
   $(".paginate_ajax th a, .paginate_ajax .pagination a").on("click", function(){
     $.getScript(this.href);

@@ -1,9 +1,12 @@
 class User < ActiveRecord::Base
+  include Gravtastic
+  gravtastic
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  devise :omniauthable, :omniauth_providers => [:github]
+  devise :omniauthable, :omniauth_providers => [:github, :linkedin]
 
   validates :full_name, :username, :email, :presence => true
   validates :username, :email,  :uniqueness => true
@@ -22,6 +25,7 @@ class User < ActiveRecord::Base
   has_one :codeforces_profile, dependent: :destroy
   has_one :github_profile, dependent: :destroy
   has_one :topcoder_profile, dependent: :destroy
+  has_one :linkedin_profile, dependent: :destroy
 
   has_many :mail_notifications, :foreign_key => "receiver_id"
   has_many :notifications, through: :mail_notifications, :class_name => "MailNotification", :foreign_key => "mail_notifications_id"
@@ -35,5 +39,13 @@ class User < ActiveRecord::Base
       end
       authorization
     end
+  end
+
+  def self.create_linkedin(auth, current_user)
+    authorization = LinkedinProfile.where(:user_id => current_user.id).first
+    if authorization.nil?
+      authorization = LinkedinProfile.create(:user_id => current_user.id, :uid => auth["uid"], :token => auth["credentials"].token, :secret => auth["credentials"].secret)
+    end
+    authorization
   end
 end

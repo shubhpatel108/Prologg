@@ -72,12 +72,12 @@
 
 									<li class="dropdown" style="width:203px; float:right">
 									  <a href="blank.html#fakelink" class="dropdown-toggle" data-toggle="dropdown">
-										<%= image_tag("avatar-4.jpg", class: "avatar img-circle") %>
+										<%= image_tag(current_user.gravatar_url, class: "avatar img-circle") %>
 										Hi, <strong><%= current_user.full_name.split(" ").first %></strong>
 									  </a>
 									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
 											<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-											<li><%= link_to "Edit Integrations", edit_integrations_path %></li>
+											<li><%= link_to "Edit Integrations", edit_integrations_path, remote: true, id: "edit_integrations" %></li>
 											<li><a href="blank.html#fakelink">Change password</a></li>
 											<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 									  </ul>
