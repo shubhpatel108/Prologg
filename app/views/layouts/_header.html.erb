@@ -55,7 +55,7 @@
 														</button>
 														</a>
 														<a href="#" style="padding-right: 30px;">
-															<img src="assets/img/avatar/avatar-2.jpg" class="absolute-left-content img-circle" alt="Avatar">
+															<%= image_tag(notification.actor.gravatar_url, class: "absolute-left-content img-circle") %>
 															<strong><%= notification.actor.full_name %></strong> sent you a mail.
 															<span class="small-caps"><%=distance_of_time_in_words_to_now(notification.created_at)%> ago</span>
 														</a>
