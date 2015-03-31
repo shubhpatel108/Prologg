@@ -2,7 +2,7 @@
 			<div class="the-box no-border full card-info">
 										<div class="the-box no-border text-center no-margin">
 											<h4 class="bolded"><%= @user.full_name %></h4>
-											<img src="assets/avatar-4.jpg" class="social-avatar has-margin has-light-shadow img-circle" alt="Avatar">
+											<%= image_tag(@user.gravatar_url, class: "social-avatar has-margin has-light-shadow img-rounded") %>
 											<p class="text-info">@<%= @user.username %></p>
 											<% if @user.availability? %>
 												<span class="label label-success">Available</span>
