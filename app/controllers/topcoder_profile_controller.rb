@@ -40,7 +40,7 @@ class TopcoderProfileController < ApplicationController
 		@tpf = current_user.topcoder_profile
 
 		if @tpf.nil?
-			flash[:alert] = "You don't have Github account integrated with your profile."
+			flash[:alert] = "You don't have Topcoder account integrated with your profile."
 			redirect_to :back
 		else
 			if @tpf.updated_at < Time.now - 12.hours
