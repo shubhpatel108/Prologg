@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_one :topcoder_profile, dependent: :destroy
   has_one :linkedin_profile, dependent: :destroy
 
+  belongs_to :location
+
   def self.from_omniauth(auth, current_user)
     case auth[:provider]
     when "github"
