@@ -6,6 +6,8 @@ class LinkedinProfileController < ApplicationController
 		linkedin_profile = current_user.linkedin_profile
 		data = {}
 
+		data[:location] = client.profile(:fields => 'location').location.name
+
 		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
 		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
 
@@ -16,6 +18,7 @@ class LinkedinProfileController < ApplicationController
 
 		locations = locmap.map{|h| h[:l]}
 		locations = locations.uniq
+		locations = locations.compact
 		
 		loc_count = Hash[locations.map {|x| [x, 0]}]
 		locmap.each do |data|
@@ -92,7 +95,26 @@ class LinkedinProfileController < ApplicationController
 	def show_profile
 		@user = User.where(username: params[:username]).first
 		@lip = @user.linkedin_profile.data
+		Geocoder.configure(:timeout => 5000)
 		@geocoder = Geocoder
+		@locations = Location.all
+		@places = []
+
+		@lip["loc_count"].each do |place, count|
+			existing = @locations.where(name: place).first
+			if existing.nil?
+				long_lat = @geocoder.coordinates(place)
+				if not long_lat.nil?
+					Location.create(name: place, latitude: long_lat[0], longitude: long_lat[1])
+					@places << [long_lat[0], long_lat[1], count]
+				end
+			else
+				@places << [existing.latitude, existing.longitude, count]
+			end
+		end
+
+		# @places.select! {|p| p[0]!=0 and p[1]!=0 and p[2]!=0}
+
 		respond_to do |format|
 			format.js
 		end
