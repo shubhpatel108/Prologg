@@ -1,4 +1,5 @@
 class LinkedinProfile < ActiveRecord::Base
+	belongs_to :user
 
 	def last_modified(client)
 		client.profile(:fields => 'last-modified-timestamp').last_modified_timestamp
@@ -66,5 +67,4 @@ class LinkedinProfile < ActiveRecord::Base
 
 		return companies + industries + people + spl_editions
 	end
-
 end

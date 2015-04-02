@@ -135,4 +135,15 @@ class LinkedinProfileController < ApplicationController
 			format.js
 		end
 	end
+
+	def delete
+		unless current_user.linkedin_profile.nil?
+			LinkedinProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
+	end
 end
