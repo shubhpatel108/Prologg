@@ -6,47 +6,19 @@ class LinkedinProfileController < ApplicationController
 		linkedin_profile = current_user.linkedin_profile
 		data = {}
 
-		data[:location] = client.profile(:fields => 'location').location.name
-
 		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
 		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
 
-		network = client.connections(:fields => ["industry", "location"])
+		data[:location] = linkedin_profile.location(client)
+
+		network = linkedin_profile.network(client)
 		# client.profile(id: linkedin_profile.uid)
-		locmap = network.all.map {|h| if not (h.industry.nil? or h.location.nil?) then {i: h.industry, l: h.location.name} end}
-		locmap.compact!
 
-		locations = locmap.map{|h| h[:l]}
-		locations = locations.uniq
-		locations = locations.compact
-		
-		loc_count = Hash[locations.map {|x| [x, 0]}]
-		locmap.each do |data|
-			loc_count[data[:l]] = loc_count[data[:l]] + 1
-		end
-		data[:loc_count] = loc_count
+		data[:loc_count] = linkedin_profile.network(client)
 
-		@skills = client.profile(:fields => 'skills').skills
-		if @skills.nil?
-			@skills = []
-		else
-			@skills = @skills.all.map {|h| h.skill.name}
-		end
-		data[:skills] =  @skills
+		data[:skills] =  linkedin_profile.skills(client)
 
-		awards = client.profile(:fields => 'honors-awards').honors_awards
-		if awards.nil?
-			@awards = []
-		else
-			@awards = []
-			awards.all.each do |h|
-				a = Hash.new
-				a[:name] = h[:name]
-				a[:issuer] = h[:issuer]
-				@awards << a
-			end
-		end
-		data[:awards] =  @awards
+		data[:awards] =  linkedin_profile.awards(client)
 
 		courses = client.profile(:fields => 'courses').courses
 		if courses.nil?
@@ -61,24 +33,10 @@ class LinkedinProfileController < ApplicationController
 		end
 		data[:courses] = @courses
 
-
 		current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
-		@short_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
+		linkedshort_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
 
-		f = client.profile(:fields => "following")
-		companies  = f.following.companies.all.map {|h| h.name}
-		companies.compact!
-
-		industries  = f.following.industries.all.map {|h| h.name}
-		industries.compact!
-
-		people  = f.following.people.all.map {|h| h.name}
-		people.compact!
-
-		spl_editions  = f.following.special_editions.all.map {|h| h.name}
-		spl_editions.compact!
-
-		data[:following] = companies + industries + people + spl_editions
+		data[:following] = linkedin_profile.following(client)
 
 		linkedin_profile.data = data
 		linkedin_profile.data_will_change!
@@ -94,26 +52,31 @@ class LinkedinProfileController < ApplicationController
 
 	def show_profile
 		@user = User.where(username: params[:username]).first
-		@lip = @user.linkedin_profile.data
-		Geocoder.configure(:timeout => 5000)
-		@geocoder = Geocoder
-		@locations = Location.all
-		@places = []
 
-		@lip["loc_count"].each do |place, count|
-			existing = @locations.where(name: place).first
-			if existing.nil?
-				long_lat = @geocoder.coordinates(place)
-				if not long_lat.nil?
-					Location.create(name: place, latitude: long_lat[0], longitude: long_lat[1])
-					@places << [long_lat[0], long_lat[1], count]
+		unless @user.linkedin_profile.nil?
+			@lip = @user.linkedin_profile.data
+			
+			Geocoder.configure(:timeout => 5000)
+			@geocoder = Geocoder
+			
+			@locations = Location.all
+			@places = []
+
+			unless @lip["loc_count"].nil?
+				@lip["loc_count"].each do |place, count|
+					existing = @locations.where(name: place).first
+					if existing.nil?
+						long_lat = @geocoder.coordinates(place)
+						if not long_lat.nil?
+							Location.create(name: place, latitude: long_lat[0], longitude: long_lat[1])
+							@places << [long_lat[0], long_lat[1], count]
+						end
+					else
+						@places << [existing.latitude, existing.longitude, count]
+					end
 				end
-			else
-				@places << [existing.latitude, existing.longitude, count]
 			end
 		end
-
-		# @places.select! {|p| p[0]!=0 and p[1]!=0 and p[2]!=0}
 
 		respond_to do |format|
 			format.js

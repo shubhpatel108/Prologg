@@ -23,6 +23,8 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
     def after_sign_in_path_for(resource)
-      profile_path(current_user.username)
+      unless current_user.nil?
+        profile_path(current_user.username)
+      end
     end
 end

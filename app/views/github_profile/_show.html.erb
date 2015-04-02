@@ -1,156 +1,167 @@
-<!-- <h1>Repos</h1> -->
-<div class = "directionlinestyle">
-	<div style="margin-left : 15px; font-size : 15px;">
-		<%= link_to "Home", profile_path(username: current_user.username) %>
-		<i class="fa fa-chevron-right"></i>
-		<a href="#"> Algorithm profile </a>
-		<i class="fa fa-chevron-right"></i>
-		<a href="#"> Github </a>
-	</div>
-	<hr class="seperator">
-</div>
-<!-- direction line ends here -->
-
-<div class="logoline">
+<% if not @ghp.nil? %>
+<div class="logoline" style="background: white">
 	<!-- <img src="images.jpg" class="codeforcelogo" > -->
-	<%= image_tag("git.jpg", class: "sitelogo") %>
-	<a href="index.html" class="siteusername" > @<%= @ghp.username %> </a>
-	<span>  (followed by <%= @ghp.data["followers_count"] %> people)</span>
+	<%= image_tag("git.jpg", class: "sitelogo", style: "height: 64px; width: 169px;") %>
 	<hr class="seperator" style ="margin-top:5px;">
 </div>
 
 <div class= "row">
-	<div class="col-lg-6">
-		<h4 style="margin-left : 40%"> 
-			Github Profile
-		</h4>
-		<div class="col-lg-4">
-			<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center" style="margin-top : -10px">
-					<p>No. of Repos</p>
-					<% logger.info () %>
-					<h1 class="bolded"><%= @ghp.data["repos"].count %></h1> 		
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-			<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center issuecreated" style="margin-top : -10px">
-					<p>Issues Created</p>
-					<h1 class="bolded"><%= @ghp.data["activities"]["issues_created"] %></h1> 		
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
+	<div class="col-lg-4">
+		<div class="the-box no-border full text-center">
+			<div class="the-box no-border bg-info no-margin">
+				<h4 class="less-distance">No. of Repos</h4>
+				<i class="fa fa-briefcase icon-xl-size"></i>
+				<h1 class="bolded less-distance"><%= @ghp.data["repos"].count %></h1>
+			</div><!-- /.the-box no-border bg-primary no-margin -->
 		</div>
-		<div class="col-lg-4 bg-success the-box rounded text-center" style="height : 211px">
-			<h4 class="small-heading-merge">Merge Requests</h4>
-			<span class="chart chart-widget-pie widget-easy-pie-2" data-percent="85">
-					<span class="percent"><% if @ghp.data["activities"]["total_prs"] == 0 %>
-					0
-					<% else %>
-						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %></span>
-					<% end -%>
-				<canvas height="110" width="110"></canvas>
-			</span>
-		</div>
-		<div class="col-lg-4">
-			<div class="the-box no-border bg-danger rounded tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center" style="margin-top : -10px">
-					<p>Pull Requests</p>
-					<h1 class="bolded"><%= @ghp.data["activities"]["total_prs"] %></h1> 	
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
-			<div class="the-box no-border bg-success rounded tiles-information" style ="height :90px">
-				<i class="fa fa-users icon-bg"></i>
-				<div class="tiles-inner text-center" style="margin-top : -10px">
-					<p> Influenced</p>
-					<h1 class="bolded"><%= @ghp.data["followers_count"] %></h1> 		
-				</div><!-- /.the-box no-border -->
-			</div><!-- /.col-sm-3 -->
+
+		<div class="the-box no-border full text-center">
+			<div class="the-box no-border bg-success no-margin">
+				<h4 class="less-distance">Issues Created</h4>
+				<i class="fa fa-code icon-xl-size"></i>
+				<h1 class="bolded less-distance"><%= @ghp.data["activities"]["issues_created"] %></h1>
+			</div><!-- /.the-box no-border bg-primary no-margin -->
 		</div>
 	</div>
-	<div class="col-lg-6">	
-		<h4 style="margin-left : 40%"> 
-			Public Organizations
-		</h4>
-		<div class="the-box full no-border">
-			<div class="table-responsive">
-				<table class="table table-th-block table-primary">
-					<thead>
-						<tr><th style="width: 30px;">No</th><th>Name of Organization</th><th>Number of Collaborators</th></tr>
-					</thead>
-					<tbody>
-						<% i = 1 %>
-						<% for item in  @orgs %>
-							<tr><td><%= i %></td><td><%= item["login"] %></td><td><%= item["members_count"] %></td></tr>
-							<% i = i + 1 %>
-						<% end -%>
-					</tbody>
-				</table>
-			</div><!-- /.table-responsive -->
+
+	<div class="col-lg-4">			
+		<div class="the-box no-border full text-center" style="height : 224px; background-color :#8CC152">
+			<div class="the-box no-border bg-success no-margin">
+				<h4 class="less-distance">@<%= @ghp.username %></h4>
+				<i class="fa fa-github icon-xl-size"></i>
+				<h4 class="bolded less-distance" style="margin-top:15px">followed by <%= @ghp.data["followers_count"] %> people)</h4>
+			</div><!-- /.the-box no-border bg-primary no-margin -->
 		</div>
-		<div class="col-lg-6"></div>
-		<div class="col-lg-6" style="margin-top: -50px;">
-				<%= will_paginate @orgs %>
+
+
+		<div class="bg-info the-box text-center" style="height : 225px ; margin-top : 28px">
+			<h4 class="less-distance">Merge Requests</h4>
+			<span class="chart chart-widget-pie widget-easy-pie-2" data-percent="<% if @ghp.data["activities"]["total_prs"] == 0 %>
+					50
+					<% else %>
+						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %>
+					<% end -%>" style="height : 225px ; margin-top : 25px">
+				<span class="percent"><% if @ghp.data["activities"]["total_prs"] == 0 %>
+					50
+					<% else %>
+						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %>
+					<% end -%></span>
+			<canvas height="110" width="110"></canvas></span>
+		</div>
+	</div>
+
+	<div class="col-lg-4">					
+		<div class="the-box no-border full text-center">
+			<div class="the-box no-border bg-info no-margin">
+				<h4 class="less-distance">Pull requests</h4>
+				<i class="fa fa-share-alt icon-xl-size"></i>
+				<h1 class="bolded less-distance"><%= @ghp.data["activities"]["total_prs"] %></h1>
+			</div><!-- /.the-box no-border bg-primary no-margin -->
+		</div>
+
+		<div class="the-box no-border full text-center">
+			<div class="the-box no-border bg-success no-margin">
+				<h4 class="less-distance">People Influenced</h4>
+				<i class="fa fa-group icon-xl-size"></i>
+				<h1 class="bolded less-distance"><%= @ghp.data["followers_count"] %></h1>
+			</div><!-- /.the-box no-border bg-primary no-margin -->
 		</div>
 	</div>
 </div>
 
+<div class="row">	
+	<div class="col-lg-8">			
+		<div class="paginate_ajax" >
+			<!-- <h4 style="margin-left : 40%"> 
+				REPOSITORIES
+			</h4> -->
+			<div class="the-box full no-border">
+				<div class="table-responsive">
+					<table class="table table-th-block table-primary">
+						<thead>
+							<tr><th style="width: 30px;">No</th><th>Repo_Name</th><th>Language</th><th>Number of Commits</th></tr>
+						</thead>
+						<tbody>
+							<% i = 1 %>
+							<% @repos.each_with_index do |item, index| %>
+								<tr>
+								<td><%= i %></td>
+								<td>
+								<%= item["name"] %>
+								<span class="badge badge-<%= color_star(index) %>"><i class="fa fa-star"></i><%= item["stargazers_count"] %></span>
+								
+								</td>
+								<td>
+									<% item["languages"].each do |key, value| %>
+									<span class="badge badge-<%= color_star(index) %>">
+											<%= key %> &nbsp;
+										</span>
+									<% end -%>
+								</td>
+								<td><%= item["owner_commits"] %></td></tr>
+								<% i = i + 1 %>
+							<% end -%>
+						</tbody>
+					</table>
+				</div><!-- /.table-responsive -->
+			</div>
 
-<div class="row", style="width: 1000px; margin-left: 0px;">				
-	<div class="paginate_ajax" >
-		<h4 style="margin-left : 40%"> 
-			REPOSITORIES
-		</h4>
-		<div class="the-box full no-border">
-			<div class="table-responsive">
-				<table class="table table-th-block table-primary">
-					<thead>
-						<tr><th style="width: 30px;">No</th><th>Repo_Name</th><th>Language</th><th>Number of Commits</th></tr>
-					</thead>
-					<tbody>
-						<% i = 1 %>
-						<% @repos.each_with_index do |item, index| %>
-							<tr>
-							<td><%= i %></td>
-							<td>
-							<%= item["name"] %>
-							<span class="badge badge-<%= color_star(index) %>"><i class="fa fa-star"></i><%= item["stargazers_count"] %></span>
-							
-							</td>
-							<td>
-								<% item["languages"].each do |key, value| %>
-								<span class="badge badge-<%= color_star(index) %>">
-										<%= key %> &nbsp;
-									</span>
-								<% end -%>
-							</td>
-							<td><%= item["owner_commits"] %></td></tr>
-							<% i = i + 1 %>
-						<% end -%>
-					</tbody>
-				</table>
-			</div><!-- /.table-responsive -->
+			<div class="col-lg-6"></div>
+			<div class="col-lg-6" style="margin-top: -50px;">
+				<%= will_paginate @repos %>
+			</div>
 		</div>
+	</div>
 
-		<div class="col-lg-6"></div>
-		<div class="col-lg-6" style="margin-top: -50px;">
-			<%= will_paginate @repos %>
+	<div class="col-sm-4">
+		<button class="btn btn-primary btn-sm" style="width:100%; height :37px;"><h4 style="margin-top : 1px">Organizations</h4></button>
+		<div class="list-group info-block">
+			<% i = 1 %>
+			<% if not @orgs.blank? %>
+				<% for item in  @orgs %>
+		  			<a href="element-list-media.html#fakelink" class="list-group-item active"><%= item["login"] %> <span class="badge badge-info"><%= item["members_count"] %></span></a>
+				<% i = i + 1 %>
+				<% end -%>
+	  		<% else %>
+	  			<div style="margin-top: 40px;"> 
+	  			<strong><center>No organizations to show</center></strong></div>
+	  		<% end -%>
 		</div>
 	</div>
 </div> 
 
-<script src="assets/easypiechart.min.js"></script>
+<!-- <script src="assets/easypiechart.min.js"></script> -->
 <!-- <script src="assets/jquery.easypiechart.min.js"></script> -->
  <script type="text/javascript">
-// 	$('.easy-pie-chart-2').easyPieChart({
-// 		easing: 'easeOutBounce',
-// 		barColor : '#F6BB42',
-// 		lineWidth: 3,
-// 		trackColor : false,
-// 		lineCap : 'butt',
-// 		onStep: function(from, to, percent) {
-// 			$(this.el).find('.percent').text(Math.round(percent));
-// 		}
-// 	});
-// </script>
+	// if ($('.widget-easy-pie-2').length > 0){
+	// 	$('.widget-easy-pie-2').easyPieChart({
+	// 		easing: 'easeOutBounce',
+	// 		barColor : '#F6BA48',
+	// 		lineWidth: 10,
+	// 		onStep: function(from, to, percent) {
+	// 			$(this.el).find('.percent').text(Math.round(percent));
+	// 		}
+	// 	});
+	// }
+</script>
+
+<% else %>
+<% if @user == current_user %>
+<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;">
+	<strong>You have not integrated GitHub Profile. You can Integrate it from below link.</strong>
+</div>
+<div class="row">
+	<div class="col-lg-6 col-lg-offset-2">
+		<%= image_tag("github_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">GitHub</strong>
+	</div>
+	<div class="col-lg-4">
+		<a href="<%= user_omniauth_authorize_path(:github) %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
+	</div>
+</div>
+<% else %>
+	<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;"> 
+	<strong><h3><%= @user.username %> has not integrated GitHub profile.</h3></strong>
+	</div>
+<% end -%>
+<% end -%>

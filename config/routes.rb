@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   #get '/mails/_show'
   get '/mails/new/:username', to: 'mails#new', as: :new_mails
   post '/mails/send/:username', to: 'mails#send_mail', as: :send_mails
+  get '/mails/delete/:id', to: 'mails#delete' , as: :delete_mails
 
   get '/profiles/search', to: 'profiles#search', as: :search_developer
   post '/profiles/search', to: 'profiles#search_filter'

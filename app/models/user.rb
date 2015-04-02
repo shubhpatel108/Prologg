@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
 
   belongs_to :location
 
+  has_many :mail_notifications, :foreign_key => "receiver_id"
+  has_many :notifications, through: :mail_notifications, :class_name => "MailNotification", :foreign_key => "mail_notifications_id"
+
   def self.from_omniauth(auth, current_user)
     case auth[:provider]
     when "github"
