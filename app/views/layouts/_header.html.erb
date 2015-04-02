@@ -76,6 +76,7 @@
 										Hi, <strong><%= current_user.full_name.split(" ").first %></strong>
 									  </a>
 									  <ul class="dropdown-menu square primary margin-list-rounded with-triangle">
+									  		<li><%= link_to "Show Profile", profile_path(current_user.username) %></li>
 											<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
 											<li><%= link_to "Edit Integrations", edit_integrations_path, remote: true, id: "edit_integrations" %></li>
 											<li><a href="blank.html#fakelink">Change password</a></li>

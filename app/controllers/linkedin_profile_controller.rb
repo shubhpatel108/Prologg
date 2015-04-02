@@ -91,7 +91,9 @@ class LinkedinProfileController < ApplicationController
 
 	def show_profile
 		@user = User.where(username: params[:username]).first
-		@lip = @user.linkedin_profile.data
+		if not @user.linkedin_profile.nil?
+			@lip = @user.linkedin_profile.data
+		end
 		@geocoder = Geocoder
 		respond_to do |format|
 			format.js
