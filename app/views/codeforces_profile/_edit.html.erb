@@ -1,0 +1,20 @@
+<div class="col-lg-6 col-lg-offset-2">
+	<%= image_tag("codeforces_small.jpg", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+		&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">Codeforces</strong>
+</div>
+<div class="col-lg-4">
+	<% if current_user.codeforces_profile.nil? %>
+	<a href="<%= cfp_profile_new_path %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>Add</a>&nbsp;
+	<% else %>
+	<a href="<%= cfp_update_profile_path %>" class="btn btn-success btn-perspective"><i class="fa fa-pencil-square-o"></i>Update</a>
+	<a href="javascript:void(0);"  class="btn btn-danger btn-perspective" id= "delete_codeforces"><i class="fa fa-plus-circle"></i>Remove</a>&nbsp;
+	<% end -%>
+</div>
+
+ <script type='text/javascript'>
+		$(document).ready(function() {
+		  	$('#delete_codeforces').on("click",function(){
+				ajaxLoad("<%= cfp_delete_profile_path %>");
+		  	});
+		});
+</script>

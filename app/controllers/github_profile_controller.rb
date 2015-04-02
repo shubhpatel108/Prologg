@@ -78,12 +78,23 @@ class GithubProfileController < ApplicationController
 		end
 		@ghp = @user.github_profile #ghi stands for GitHubProfile
 		if not @ghp.nil?
-			@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 )
-			@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5)
+			@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 ) unless @ghp.data["orgs"].nil?
+			@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5) unless @ghp.data["repos"].nil?
 		end
 		respond_to do |format|
 			format.js
 		end
 	end
 
+	def delete
+		#@provider = Devise.omniauth_providers[0]
+		unless current_user.github_profile.nil?
+			GithubProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
+	end
 end

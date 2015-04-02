@@ -96,4 +96,15 @@ class TopcoderProfileController < ApplicationController
 		end
 	end
 
+	def delete
+		unless current_user.topcoder_profile.nil?
+			TopcoderProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
+	end
+
 end

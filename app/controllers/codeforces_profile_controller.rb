@@ -146,4 +146,15 @@ class CodeforcesProfileController < ApplicationController
 		end
 	end
 
+	def delete
+		unless current_user.codeforces_profile.nil?
+			CodeforcesProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
+	end
+
 end
