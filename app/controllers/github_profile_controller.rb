@@ -77,8 +77,10 @@ class GithubProfileController < ApplicationController
 			render file: 'public/404', status: 404, formats: [:html]
 		end
 		@ghp = @user.github_profile #ghi stands for GitHubProfile
-		@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 )
-		@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5)
+		if not @ghp.nil?
+			@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 )
+			@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5)
+		end
 		respond_to do |format|
 			format.js
 		end
