@@ -20,6 +20,11 @@
 												</a>
 											</p>
 											<% end %>
+											<p>
+												
+												<i class="glyphicon glyphicon-eye-open"></i><Strong> <%= @user.view_count %> Views
+												</Strong>
+											</p>
 											<p class="social-icon">
 												<% unless @user.blog_link.nil? %>
 													<a href="<%= @user.blog_link.url %>" target="_blank"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress"></i></a>
@@ -38,9 +43,12 @@
 												<% end %>
 											</p>
 										</div><!-- /.the-box .no-border .bg-info .no-margin -->
-										<% if (not current_user.nil? and @user!=current_user) or not current_user.nil? %>
-						<a href="<%= new_mails_path(@user.username) %>" class="btn btn-primary btn-block btn-lg btn-square" data-remote="true" id="contact"><i class="fa fa-user"></i> Contact</a>
-				<% end %>
+										<% if (not current_user.nil? and @user!=current_user)  %>
+											
+											<a href="<%= new_mails_path(@user.username) %>" class="btn btn-primary btn-block btn-lg btn-square" data-remote="true" id="contact"><i class="fa fa-user"></i> Contact</a>
+										<% elsif current_user.nil? %>
+											<a href="<%= new_user_session_path %>" class="btn btn-primary btn-block btn-lg btn-square" ><i class="fa fa-user"></i> Contact</a>
+										<% end %>
 									</div><!-- /.the-box -->
 									<!-- END PROFILE CARD  -->
 				<%= render partial: 'submenu' %>

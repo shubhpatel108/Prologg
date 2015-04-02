@@ -12,7 +12,13 @@ class ProfilesController < ApplicationController
 	def show
 		username = params[:username]
 		@user = User.where(username: username).first
+		session[:viewed_profiles] = [] if session[:viewed_profiles].nil?	
 
+		if not @user==current_user and not session[:viewed_profiles].include?(@user.id)
+			view = @user.view_count+1
+			session[:viewed_profiles] << @user.id
+			@user.update_attributes(view_count: view)
+		end
 		if @user.nil?
 			render file: 'public/404', status: 404, formats: [:html]
 		end
