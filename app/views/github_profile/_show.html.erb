@@ -83,6 +83,7 @@
 						</thead>
 						<tbody>
 							<% i = 1 %>
+							<% if not @repos.nil?%>
 							<% @repos.each_with_index do |item, index| %>
 								<tr>
 								<td><%= i %></td>
@@ -101,6 +102,7 @@
 								<td><%= item["owner_commits"] %></td></tr>
 								<% i = i + 1 %>
 							<% end -%>
+							<% end %>
 						</tbody>
 					</table>
 				</div><!-- /.table-responsive -->
