@@ -28,7 +28,7 @@ class TopcoderProfileController < ApplicationController
 				@tpf.save!
 			end
 
-			flash[:notice] = "You have successfully integrated Codeforces in your profile."
+			flash[:notice] = "You have successfully integrated Topcoder in your profile."
 			redirect_to profile_path(username: current_user.username)
 		else
 			flash[:alert] = "It seems your credentials are not authentic or something went wrong."

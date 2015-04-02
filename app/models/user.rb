@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_one :topcoder_profile, dependent: :destroy
   has_one :linkedin_profile, dependent: :destroy
 
+  belongs_to :location
+
   has_many :mail_notifications, :foreign_key => "receiver_id"
   has_many :notifications, through: :mail_notifications, :class_name => "MailNotification", :foreign_key => "mail_notifications_id"
 

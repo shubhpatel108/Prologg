@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   post '/mails/send/:username', to: 'mails#send_mail', as: :send_mails
   get '/mails/delete/:id', to: 'mails#delete' , as: :delete_mails
 
+  get '/profiles/search', to: 'profiles#search', as: :search_developer
+  post '/profiles/search', to: 'profiles#search_filter'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
