@@ -1,5 +1,9 @@
 class LinkedinProfile < ActiveRecord::Base
 
+	def last_modified(client)
+		client.profile(:fields => 'last-modified-timestamp').last_modified_timestamp
+	end
+
 	def location(client)
 		client.profile(:fields => 'location').location.name
 	end

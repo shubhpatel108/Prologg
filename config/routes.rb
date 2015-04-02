@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get '/integrations/linkedin/create', to: 'linkedin_profile#create', as: :linkedin_profile_create
   get '/integrations/linkedin/show/:username', to: 'linkedin_profile#show_profile', as: :linkedin_show_profile
   post '/integrations/linkedin/refine', to: 'linkedin_profile#refine', as: :linkedin_refine
+  get '/integrations/linkedin/update', to: 'linkedin_profile#update', as: :linkedin_update_profile
 
   #get '/mails/_show'
   get '/mails/new/:username', to: 'mails#new', as: :new_mails
