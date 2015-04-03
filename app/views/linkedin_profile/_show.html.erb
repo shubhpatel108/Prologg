@@ -39,19 +39,29 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-0"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-0" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% if not @lip["courses"].blank?%>
 						<% @lip["courses"].each_with_index do |item, i| %>
-							<% if not @lip["courses"].blank? %>
 								<li class="media" style="height: 67.5px">
 									<button class="btn btn-<%= color(i) %> btn-block btn-lg"><i class="fa fa-linkdin-square"></i> <%= item["name"] %></button>
 								</li>
-							<% else %>
+						<% end -%>
+						<% else %>
 								<% if @user == current_user %>
-									You are not interested in any course.
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 You are not interested in any course.
+											</div>
+										</li>
+									
 								<% else %>
-									<% @user.username %> isn't interested in any course.
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 <%= @user.full_name %> is not interested in any course.
+											</div>
+										</li>
+									
 								<% end -%>
 							<% end -%>
-						<% end -%>
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-0"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
@@ -69,8 +79,9 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-2"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-2" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
-							<% @lip["awards"].each_with_index do |item, i| %>
-								<% if not @lip["awards"].blank? %>
+							<% if not @lip["awards"].blank? %>
+								<% @lip["awards"].each_with_index do |item, i| %>
+								
 									<li class="media" style="height: 67.5px">
 										<div class="media-body">
 										  <h4 class="media-heading btn btn-<%= color(i) %> btn-lg"><%= item["issuer"] %></h4> &nbsp;&nbsp;&nbsp;
@@ -78,14 +89,27 @@
 										  </p>
 										</div>
 									</li>
-								<% else %>
-									<% if @user == current_user %>
-										You don't have any awards or achievements to show.
-									<% else %>
-										<% @user.username %> doesn't have any awards or achievements to show.
-									<% end -%>
+								
+								
 								<% end -%>
+							<%else%>
+									<% if @user == current_user %>
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 You don't have any awards or achievements to show.
+											</div>
+										</li>
+										
+									<% else %>
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 <%= @user.full_name %> doesn't have any awards or achievements to show.
+											</div>
+										</li>
+										
+									<% end -%>	
 							<% end -%>
+
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-2"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
@@ -103,21 +127,33 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-1"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-1" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% if not @lip["following"].blank? %>
 						<% @lip["following"].each_with_index do |item, i| %>
-							<% if not @lip["following"].blank? %>	
 								<li class="media" style="height: 67.5px">
 									<div class="media-body">
 									  <h4 class="media-heading btn btn-<%= color(i) %> btn-block btn-lg" ><%= item %></h4>
 									</div>
 							  	</li>
-							<% else %>
+						<% end -%>
+						<% else %>
 								<% if @user == current_user %>
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 
 									You don't follow any company.
+											</div>
+										</li>
+									
 								<% else %>
-									<% @user.username %> doesn't follow any company.
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 
+									<%= @user.full_name %> doesn't follow any company.
+											</div>
+										</li>
+									
 								<% end -%>
 							<% end -%>
-						<% end -%>
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-1"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
