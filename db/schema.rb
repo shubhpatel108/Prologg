@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402092914) do
+ActiveRecord::Schema.define(version: 20150403091007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,22 @@ ActiveRecord::Schema.define(version: 20150402092914) do
     t.string "user_id", null: false
     t.string "url",     null: false
   end
+
+  create_table "languages", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "languages", ["name"], name: "index_languages_on_name", using: :btree
+
+  create_table "languages_users", id: false, force: true do |t|
+    t.integer "language_id"
+    t.integer "user_id"
+  end
+
+  add_index "languages_users", ["language_id"], name: "index_languages_users_on_language_id", using: :btree
+  add_index "languages_users", ["user_id"], name: "index_languages_users_on_user_id", using: :btree
 
   create_table "linkedin_profiles", force: true do |t|
     t.integer  "user_id",    null: false
@@ -130,8 +146,8 @@ ActiveRecord::Schema.define(version: 20150402092914) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "location_id"
     t.integer  "view_count",             default: 0
+    t.integer  "location_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   has_many :mail_notifications, :foreign_key => "receiver_id"
   has_many :notifications, through: :mail_notifications, :class_name => "MailNotification", :foreign_key => "mail_notifications_id"
 
+  has_and_belongs_to_many :languages
+
   def self.from_omniauth(auth, current_user)
     case auth[:provider]
     when "github"
