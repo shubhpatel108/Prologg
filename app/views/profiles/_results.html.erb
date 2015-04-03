@@ -1,6 +1,40 @@
 <% unless @users.nil? %>
-<% @users.each do |user| %>
-	<%= user.username %>
-	<br/>
-<% end %> 
+<div class="col-lg-12">
+<% @users.each_with_index do |user, i| %>
+
+
+
+<div class="row">
+	<div class="the-box no-border" style="min-height:162px;">
+		<div class="col-lg-2">
+			<center>
+			<img class="media-object img-rounded" src="<%= user.gravatar_url%>" alt="Avatar" width="100">
+			<h4><%= user.full_name %></h4>
+			</center>
+		</div>
+		<div class="col-lg-4">
+			<% unless user.location.nil? %>
+				<i class="fa fa-map-marker"></i> <strong><%= user.location.name %></strong>
+				<hr style="margin-top:15px;margin-bottom:15px;" />
+			<% end %>
+			<% unless user.short_bio.nil? %>
+				<p><%= user.short_bio %></p>
+			<% end %>
+		</div>
+		<div class="col-lg-6">
+			<div class="tags-cloud skill-cloud">
+				<span class="label label-danger">Ruby</span>
+				<hr style="margin-top:15px;margin-bottom:15px;" />
+			</div>
+			<div class="tags-cloud skill-cloud">
+				<span class="label label-danger">Ruby</span>
+				<hr style="margin-top:15px;margin-bottom:15px;" />
+			</div>
+
+		</div>
+		
+	</div><!-- /.the-box .bg-success .no-border-->
+</div>
+<% end %>
+</div>
 <% end %>
