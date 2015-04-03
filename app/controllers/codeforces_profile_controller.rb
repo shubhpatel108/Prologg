@@ -39,6 +39,22 @@ class CodeforcesProfileController < ApplicationController
 			tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
 			langs = data1[2]				#hash of hashes - languages => no of problems solved
 
+			database_langs = Language.all.map(&:name)
+			user_database_langs = current_user.languages.map(&:name)
+			langs.keys.each do |lang|
+				if database_langs.include?(lang)
+					unless user_database_langs.include?(lang)
+						existing_lang = Language.where(name: lang).first
+						current_user.languages << existing_lang
+					end
+				else
+					new_lang = Language.create(name: lang)
+					current_user.languages << new_lang
+				end
+			end
+			current_user.save!
+			current_user.reload
+
 			resp_rates = CodeforcesProfile.ratings(resp_rates)
 
 			@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
@@ -92,6 +108,22 @@ class CodeforcesProfileController < ApplicationController
 						solved_probs = data1[0]			#total number of problems solved
 						tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
 						langs = data1[2]				#hash of hashes - languages => no of problems solved
+
+						database_langs = Language.all.map(&:name)
+						user_database_langs = current_user.languages.map(&:name)
+						langs.keys.each do |lang|
+							if database_langs.include?(lang)
+								unless user_database_langs.include?(lang)
+									existing_lang = Language.where(name: lang).first
+									current_user.languages << existing_lang
+								end
+							else
+								new_lang = Language.create(name: lang)
+								current_user.languages << new_lang
+							end
+						end
+						current_user.save!
+						current_user.reload
 
 						resp_rates = Codeforces.ratings(resp_rates)
 
