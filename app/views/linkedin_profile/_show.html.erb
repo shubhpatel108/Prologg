@@ -40,7 +40,7 @@
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-0"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-0" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
 						<% @lip["courses"].each_with_index do |item, i| %>
-							<% if not @lip["courses"].nil? %>
+							<% if not @lip["courses"].blank? %>
 								<li class="media" style="height: 67.5px">
 									<button class="btn btn-<%= color(i) %> btn-block btn-lg"><i class="fa fa-linkdin-square"></i> <%= item["name"] %></button>
 								</li>
@@ -70,7 +70,7 @@
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-2"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-2" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
 							<% @lip["awards"].each_with_index do |item, i| %>
-								<% if not @lip["awards"].nil? %>
+								<% if not @lip["awards"].blank? %>
 									<li class="media" style="height: 67.5px">
 										<div class="media-body">
 										  <h4 class="media-heading btn btn-<%= color(i) %> btn-lg"><%= item["issuer"] %></h4> &nbsp;&nbsp;&nbsp;
@@ -104,7 +104,7 @@
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-1"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-1" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
 						<% @lip["following"].each_with_index do |item, i| %>
-							<% if not @lip["following"].nil? %>	
+							<% if not @lip["following"].blank? %>	
 								<li class="media" style="height: 67.5px">
 									<div class="media-body">
 									  <h4 class="media-heading btn btn-<%= color(i) %> btn-block btn-lg" ><%= item %></h4>
