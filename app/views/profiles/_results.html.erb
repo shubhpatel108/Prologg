@@ -44,9 +44,11 @@
 								<% remaining = 3 %>
 								<% remaining_array = user.languages.map(&:name).slice(0..2) %>
 							<% end %>
-							<% remaining_array.each do |lang| %>
-								<span class="label label-info"><%= lang %></span>
-							<% end %>
+							<%if remaining > 0%>
+								<% remaining_array.each do |lang| %>
+									<span class="label label-info"><%= lang %></span>
+								<% end %>
+							<% end%>
 							<hr style="margin-top:15px;margin-bottom:15px;" />
 						</div>
 						<div class="tags-cloud skill-cloud">
@@ -55,13 +57,16 @@
 									<span class="label label-danger"><%= skill %></span>
 								<% end %>
 								<% remaining = 3 - @skills_req.length %>
-								<% remaining_array = (user.skills.uniq - @skills_req).slice(0..(remaining-1))%>
+								<% remaining_array = (user.skills - @skills_req)%>
+								<% remaining_array = remaining_array.slice(0..(remaining-1)) unless remaining_array.empty? %>
 							<% else %>
 								<% remaining = 3 %>
-								<% remaining_array = user.skills.slice(0..2) %>
+								<% remaining_array = user.skills.slice(0..2) unless user.skills.nil? %>
 							<% end %>
-							<% remaining_array.each do |skill| %>
-								<span class="label label-info"><%= skill %></span>
+							<% if not remaining_array.nil? and remaining > 0 %>
+								<% remaining_array.each do |skill| %>
+									<span class="label label-info"><%= skill %></span>
+								<% end %>
 							<% end %>
 							<hr style="margin-top:15px;margin-bottom:15px;" />
 						</div>
