@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :mail_notifications, :foreign_key => "receiver_id"
   has_many :notifications, through: :mail_notifications, :class_name => "MailNotification", :foreign_key => "mail_notifications_id"
 
-  has_and_belongs_to_many :languages
+  has_and_belongs_to_many :languages, dependent: :destroy
 
   def self.from_omniauth(auth, current_user)
     case auth[:provider]
@@ -51,5 +51,25 @@ class User < ActiveRecord::Base
       authorization = LinkedinProfile.create(:user_id => current_user.id, :uid => auth["uid"], :token => auth["credentials"].token, :secret => auth["credentials"].secret)
     end
     authorization
+  end
+
+  def skills
+    skills = []
+    skills << self.linkedin_profile.data["skills"] unless self.linkedin_profile.nil?
+    skills << self.codeforces_profile.metadata["tags"].keys unless self.codeforces_profile.nil?
+    skills.flatten!
+  end
+
+  def self.all_skills
+    skills = []
+    LinkedinProfile.all.each do |li|
+      skills << li.data["skills"]
+    end
+    CodeforcesProfile.all.each do |cf|
+      skills << cf.metadata["tags"].keys
+    end
+    skills.flatten!
+    skills.uniq!
+    skills
   end
 end
