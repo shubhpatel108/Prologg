@@ -10,17 +10,19 @@ class CodeforcesProfileController < ApplicationController
 
 		response_info = CodeforcesProfile.connect(handle)
 		status_info = response_info[0]
-		resp_info = response_info[1]["result"][0]
 
 		response_subs = CodeforcesProfile.get_submissions(handle)
 		status_subs = response_subs[0]
-		resp_subs = response_subs[1]["result"]
 
 		response_rates = CodeforcesProfile.get_ratings(handle)
 		status_rates = response_rates[0]
-		resp_rates = response_rates[1]["result"]
 
 		if status_info == "OK" and status_subs == "OK" and status_rates == "OK"
+
+			resp_info = response_info[1]["result"][0]
+			resp_subs = response_subs[1]["result"]
+			resp_rates = response_rates[1]["result"]
+
 			@codeforces_profile = CodeforcesProfile.new(
 				user_id: current_user.id,
 				handle: resp_info["handle"],
