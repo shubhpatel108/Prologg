@@ -165,6 +165,7 @@ class ProfilesController < ApplicationController
 	end
 
 	def show_summary
+		@user = User.where(username: params[:username]).first
 		respond_to do |format|
 			format.js
 		end

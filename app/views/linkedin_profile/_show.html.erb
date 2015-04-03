@@ -39,11 +39,29 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-0"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-0" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% if not @lip["courses"].blank?%>
 						<% @lip["courses"].each_with_index do |item, i| %>
-							<li class="media" style="height: 67.5px">
-								<button class="btn btn-<%= color(i) %> btn-block btn-lg"><i class="fa fa-linkdin-square"></i> <%= item["name"] %></button>
-							</li>
+								<li class="media" style="height: 67.5px">
+									<button class="btn btn-<%= color(i) %> btn-block btn-lg"><i class="fa fa-linkdin-square"></i> <%= item["name"] %></button>
+								</li>
 						<% end -%>
+						<% else %>
+								<% if @user == current_user %>
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 You are not interested in any course.
+											</div>
+										</li>
+									
+								<% else %>
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 <%= @user.full_name %> is not interested in any course.
+											</div>
+										</li>
+									
+								<% end -%>
+							<% end -%>
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-0"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
@@ -61,16 +79,37 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-2"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-2" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
-						<li class="media" style="height: 67.5px">
-							<% @lip["awards"].each_with_index do |item, i| %>
+							<% if not @lip["awards"].blank? %>
+								<% @lip["awards"].each_with_index do |item, i| %>
 								
-								<div class="media-body">
-								  <h4 class="media-heading btn btn-<%= color(i) %> btn-lg"><%= item["issuer"] %></h4> &nbsp;&nbsp;&nbsp;
-								  <strong><%= item["name"] %></strong>
-								  </p>
-								</div>
+									<li class="media" style="height: 67.5px">
+										<div class="media-body">
+										  <h4 class="media-heading btn btn-<%= color(i) %> btn-lg"><%= item["issuer"] %></h4> &nbsp;&nbsp;&nbsp;
+										  <strong><%= item["name"] %></strong>
+										  </p>
+										</div>
+									</li>
+								
+								
+								<% end -%>
+							<%else%>
+									<% if @user == current_user %>
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 You don't have any awards or achievements to show.
+											</div>
+										</li>
+										
+									<% else %>
+										<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 <%= @user.full_name %> doesn't have any awards or achievements to show.
+											</div>
+										</li>
+										
+									<% end -%>	
 							<% end -%>
-						</li>
+
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-2"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
@@ -88,13 +127,33 @@
 				<div class="the-box no-border full newoneclass">
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next-1"><i class="fa fa-chevron-up"></i></button>
 					<ul id="widget-newsticker-1" class="widget-newsticker media-list newclassone" style="height:270px ; overflow:hidden;">
+						<% if not @lip["following"].blank? %>
 						<% @lip["following"].each_with_index do |item, i| %>
-							<li class="media" style="height: 67.5px">
-								<div class="media-body">
-								  <h4 class="media-heading btn btn-<%= color(i) %> btn-block btn-lg" ><%= item %></h4>
-								</div>
-						  	</li>
+								<li class="media" style="height: 67.5px">
+									<div class="media-body">
+									  <h4 class="media-heading btn btn-<%= color(i) %> btn-block btn-lg" ><%= item %></h4>
+									</div>
+							  	</li>
 						<% end -%>
+						<% else %>
+								<% if @user == current_user %>
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 
+									You don't follow any company.
+											</div>
+										</li>
+									
+								<% else %>
+									<li class="media" style="height: 67.5px">
+											<div class="media-body">
+											 
+									<%= @user.full_name %> doesn't follow any company.
+											</div>
+										</li>
+									
+								<% end -%>
+							<% end -%>
 					</ul>
 					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev-1"><i class="fa fa-chevron-down"></i></button>
 				</div><!-- /.the-box no-border -->
@@ -165,24 +224,23 @@
 		});
 	}
 </script>
-
 <% else %>
-<% if @user == current_user %>
-<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;">
-	<strong>You have not integrated LinkedIn Profile. You can Integrate it from below link.</strong>
-</div>
-<div class="row">
-	<div class="col-lg-6 col-lg-offset-2">
-		<%= image_tag("linkedin_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
-			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">LinkedIn</strong>
-	</div>
-	<div class="col-lg-4">
-		<a href="<%= user_omniauth_authorize_path(:linkedin) %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
-	</div>
-</div>
-<% else %>
-	<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;"> 
-	<strong><h3><%= @user.username %> has not integrated LinkedIn profile.</h3> </strong>
-	</div>
-<% end %>
+	<% if @user == current_user %>
+		<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;">
+			<strong>You have not integrated LinkedIn Profile. You can Integrate it from below link.</strong>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-2">
+				<%= image_tag("linkedin_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+					&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">LinkedIn</strong>
+			</div>
+			<div class="col-lg-4">
+				<a href="<%= user_omniauth_authorize_path(:linkedin) %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
+			</div>
+		</div>
+	<% else %>
+		<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;"> 
+		<strong><h3><%= @user.username %> has not integrated LinkedIn profile.</h3> </strong>
+		</div>
+	<% end %>
 <% end %>

@@ -1,25 +1,28 @@
 <script type="text/javascript">
   $("#header-id").remove();
-  $("body").css({"background": "#37BC9B"})
+  $("body").css({"padding-top": "0px"})
+  $(".page-content").css({"margin-left": "0px"})
+  $(".page-content").css({"background": "#37BC9B"})
 </script>
-
-
-<div class="col-sm-3">
-	<!-- space for taking profile in middle -->
+<div class="login toolkits">
+<div class="login-header text-center" style="height: 200px;">
+  <%= image_tag ("download.jpg"), class: "logo" %>
 </div>
 
-<div class="col-sm-6 edit_link_box">
+<div class="col-sm-6 col-sm-offset-3 edit_link_box">
 	<!-- BEGIN USER CARD -->
 	<div class="the-box no-border full">
-		<div class="right-action">
+		<!-- <div class="right-action">
 			<button class="btn btn-success btn-square btn-xs">Edit</button>
-		</div><!-- /.right-action -->
-		<img src="/assets/img-1.jpg" class="img-responsive" alt="Image">
+		</div> --><!-- /.right-action -->
+		<!-- <img src="/assets/img-1.jpg" class="img-responsive" alt="Image"> -->
 		<div class="the-box no-border bo-margin text-center user-info">
-			<img src="/assets/avatar-4.jpg" class="social-avatar img-circle absolute has-white-shadow" alt="Avatar">
-			<h4>Jayant Pareek</h4>
-			<p class="bordered text-muted">Web and Graphic designer</p>
-			
+			<!-- <img src="/assets/avatar-4.jpg" class="social-avatar img-circle absolute has-white-shadow" alt="Avatar"> -->
+			<%= image_tag(current_user.gravatar_url, class: "social-avatar img-circle absolute has-white-shadow") %>
+			<h4><%= current_user.full_name %></h4>
+			<% if not current_user.short_bio.blank? %>
+				<p class="bordered text-muted"><%= current_user.short_bio %></p>
+			<% end -%>
 			<div role="tabpanel">
 
 				<!-- Nav tabs -->
