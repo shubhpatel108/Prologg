@@ -58,7 +58,7 @@
           </div>
           <br/>
           <div class="row text-center">
-            <button type="submit" class="btn btn-info btn-block">Info</button>
+            <button type="submit" class="btn btn-info btn-block">GO!</button>
           </div>
           </form>
         </div>
@@ -80,5 +80,18 @@
       for (var selector in configChosen) {
         $(selector).chosen(configChosen[selector]);
       }
+    });
+    $('#search_dev').submit(function() {
+      NProgress.start();
+      NProgress.inc();
+      var valuesToSubmit = $(this).serialize();
+      $.ajax({
+        type: "POST",
+        url: $(this).attr('/profiles/search'), //sumbits it to the given url of the form
+        data: valuesToSubmit,
+      }).success(function(json){
+        NProgress.done();
+      });
+      return false; // prevents normal behaviour
     });
 </script>
