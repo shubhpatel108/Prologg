@@ -225,22 +225,5 @@
 	}
 </script>
 <% else %>
-	<% if @user == current_user %>
-		<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;">
-			<strong>You have not integrated LinkedIn Profile. You can Integrate it from below link.</strong>
-		</div>
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-2">
-				<%= image_tag("linkedin_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
-					&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">LinkedIn</strong>
-			</div>
-			<div class="col-lg-4">
-				<a href="<%= user_omniauth_authorize_path(:linkedin) %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
-			</div>
-		</div>
-	<% else %>
-		<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;"> 
-		<strong><h3><%= @user.username %> has not integrated LinkedIn profile.</h3> </strong>
-		</div>
-	<% end %>
+	<%= render partial: 'add_linkedin' %>
 <% end %>
