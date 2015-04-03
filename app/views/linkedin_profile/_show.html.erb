@@ -56,7 +56,7 @@
 								<% else %>
 										<li class="media" style="height: 67.5px">
 											<div class="media-body">
-											 <% @user.username %> is not interested in any course.
+											 <%= @user.full_name %> is not interested in any course.
 											</div>
 										</li>
 									
@@ -103,7 +103,7 @@
 									<% else %>
 										<li class="media" style="height: 67.5px">
 											<div class="media-body">
-											 <% @user.username %> doesn't have any awards or achievements to show.
+											 <%= @user.full_name %> doesn't have any awards or achievements to show.
 											</div>
 										</li>
 										
@@ -148,7 +148,7 @@
 									<li class="media" style="height: 67.5px">
 											<div class="media-body">
 											 
-									<% @user.username %> doesn't follow any company.
+									<%= @user.full_name %> doesn't follow any company.
 											</div>
 										</li>
 									
