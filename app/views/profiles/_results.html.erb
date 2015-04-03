@@ -34,11 +34,35 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="tags-cloud skill-cloud">
-							<span class="label label-danger">Ruby</span>
+							<% unless @languages_req.nil? %>
+								<% @languages_req.slice(0..2).each do |lang| %>
+									<span class="label label-danger"><%= lang %></span>
+								<% end %>
+								<% remaining = 3 - @languages_req.length %>
+								<% remaining_array = (user.languages.map(&:name).uniq - @languages_req).slice(0..(remaining-1))%>
+							<% else %>
+								<% remaining = 3 %>
+								<% remaining_array = user.languages.map(&:name).slice(0..2) %>
+							<% end %>
+							<% remaining_array.each do |lang| %>
+								<span class="label label-info"><%= lang %></span>
+							<% end %>
 							<hr style="margin-top:15px;margin-bottom:15px;" />
 						</div>
 						<div class="tags-cloud skill-cloud">
-							<span class="label label-danger">Ruby</span>
+							<% unless @skills_req.nil? %>
+								<% @skills_req.slice(0..2).each do |skill| %>
+									<span class="label label-danger"><%= skill %></span>
+								<% end %>
+								<% remaining = 3 - @skills_req.length %>
+								<% remaining_array = (user.skills.uniq - @skills_req).slice(0..(remaining-1))%>
+							<% else %>
+								<% remaining = 3 %>
+								<% remaining_array = user.skills.slice(0..2) %>
+							<% end %>
+							<% remaining_array.each do |skill| %>
+								<span class="label label-info"><%= skill %></span>
+							<% end %>
 							<hr style="margin-top:15px;margin-bottom:15px;" />
 						</div>
 					</div>

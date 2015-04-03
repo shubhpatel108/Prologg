@@ -139,18 +139,24 @@ class ProfilesController < ApplicationController
 
 		@users = @users.select {|user| user.username.downcase.include?(params[:username].downcase) and user.full_name.downcase.include?(params[:name].downcase) }
 
-		skills_req = params[:skills]
-		if not skills_req.nil? and not skills_req.empty?
+		@skills_req = params[:skills]
+		if not @skills_req.nil? and not @skills_req.empty?
 			@users = @users.select {|user|
 				lp = user.linkedin_profile
 				if lp.nil?
 					false
-				elsif lp.data["skills"] && skills_req == skills_req
+				elsif lp.data["skills"] && @skills_req == @skills_req
 					true
 				else
 					false
 				end
 			}
+		end
+
+		@languages_req = params[:languages]
+		if not @languages_req.nil? and not @languages_req.empty?
+			lang_users = Language.where(name: @languages_req).map{|l| l.users.to_a}.flatten
+			@users = @users & lang_users
 		end
 
 		respond_to do |format|
