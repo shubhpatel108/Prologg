@@ -131,8 +131,8 @@ class ProfilesController < ApplicationController
 	def search_filter
 		if not params[:locations].nil? and not params[:locations].empty?
 			locations = Location.all
-			locs = locations.select {|l| params[:locations].any? { |s| s.include?(l.name) } }
-			@users = locations.map{|l| l.users.to_a}.flatten
+			locs = locations.select {|l| params[:locations].any? { |s| l.name.include?(s) } }
+			@users = locs.map{|l| l.users.to_a}.flatten
 		else
 			@users = User.all.to_a
 		end
