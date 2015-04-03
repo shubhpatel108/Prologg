@@ -9,6 +9,8 @@ class LinkedinProfileController < ApplicationController
 		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
 		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
 
+		data[:last_modified] = linkedin_profile.last_modified(client)
+
 		data[:location] = linkedin_profile.location(client)
 
 		network = linkedin_profile.network(client)
@@ -44,6 +46,57 @@ class LinkedinProfileController < ApplicationController
 
 		flash[:notice] = "You have successfully integrated LinkedIn in your profile."
 		redirect_to profile_path(username: current_user.username)
+	end
+
+	def update
+		linkedin_profile = current_user.linkedin_profile
+		data = {}
+
+		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
+		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
+
+		data[:last_modified] = linkedin_profile.last_modified(client)
+
+		if linkedin_profile.data["last_modified"] < data[:last_modified]
+			data[:location] = linkedin_profile.location(client)
+
+			network = linkedin_profile.network(client)
+			# client.profile(id: linkedin_profile.uid)
+
+			data[:loc_count] = linkedin_profile.network(client)
+
+			data[:skills] =  linkedin_profile.skills(client)
+
+			data[:awards] =  linkedin_profile.awards(client)
+
+			courses = client.profile(:fields => 'courses').courses
+			if courses.nil?
+				@courses = []
+			else
+				@courses = []
+				courses.all.each do |h|
+					a = Hash.new
+					a[:name] = h[:name]
+					@courses << a
+				end
+			end
+			data[:courses] = @courses
+
+			current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
+			linkedshort_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
+
+			data[:following] = linkedin_profile.following(client)
+
+			linkedin_profile.data = data
+			linkedin_profile.data_will_change!
+			linkedin_profile.save!
+
+			flash[:notice] = "Successfully updated your LinkedIn profile"
+			redirect_to profile_path(username: current_user.username)
+		else
+			flash[:notice] = "Your LinkedIn profile is already upto date."
+			redirect_to :back
+		end
 	end
 
 	def refine
