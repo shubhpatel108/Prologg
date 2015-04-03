@@ -129,6 +129,20 @@
 				}
 			}
 		}
+
+	});
+	$(window).resize(function() {
+		var windowwidth = $(window).width();
+		if (windowwidth < 991) {
+			$(".sidebar-left").addClass("toggle");
+			$(".page-content").addClass("toggle");
+		};
+		if (windowwidth > 991) {
+			$(".sidebar-left").removeClass("toggle");
+			if($(".page-content").hasClass("toggle") == true){
+				$(".page-content").removeClass("toggle");
+			}
+		};
 	});
 
 	$(function () {
