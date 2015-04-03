@@ -19,6 +19,18 @@ class LinkedinProfileController < ApplicationController
 		data[:loc_count] = linkedin_profile.network(client)
 
 		data[:skills] =  linkedin_profile.skills(client)
+		skills_to_remove = []
+		database_langs = Language.all.map(&:name)
+		user_database_langs = current_user.languages.map(&:name)
+		data[:skills].each do |skill|
+			if database_langs.include?(skill) and not user_database_langs.include?(skill)
+				current_user.languages << Language.where(name: skill)
+				skills_to_remove << skill
+			end
+		end
+		current_user.save!
+		current_user.reload
+		data[:skills] = data[:skills] - skills_to_remove
 
 		data[:awards] =  linkedin_profile.awards(client)
 
@@ -67,6 +79,20 @@ class LinkedinProfileController < ApplicationController
 
 			data[:skills] =  linkedin_profile.skills(client)
 
+			#NOT optimized - not deleting those languages that are removed on linked profile
+			database_langs = Language.all.map(&:name)
+			user_database_langs = current_user.languages.map(&:name)
+			skills_to_remove = []
+			data[:skills].each do |skill|
+				if database_langs.include?(skill) and not user_database_langs.include?(skill)
+					current_user.languages << Language.where(name: skill).first
+					skills_to_remove << skill
+				end
+			end
+			current_user.save!
+			current_user.reload
+			data[:skills] = data[:skills] - skills_to_remove
+
 			data[:awards] =  linkedin_profile.awards(client)
 
 			courses = client.profile(:fields => 'courses').courses
@@ -108,10 +134,10 @@ class LinkedinProfileController < ApplicationController
 
 		unless @user.linkedin_profile.nil?
 			@lip = @user.linkedin_profile.data
-			
+
 			Geocoder.configure(:timeout => 5000)
 			@geocoder = Geocoder
-			
+
 			@locations = Location.all
 			@places = []
 
