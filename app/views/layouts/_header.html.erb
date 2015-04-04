@@ -40,7 +40,7 @@
 												<span class="badge badge-danger icon-count"  id="notifications_count" style= "position: absolute; top: 9px; left:21px;">
 												<%= notification_count %></span>
 											<%end%>
-										<i class="fa fa-bell"></i>
+											<i class="fa fa-bell"></i>
 										</a>
 										<ul class="dropdown-menu square with-triangle">
 											<li>
@@ -48,7 +48,13 @@
 											Notifications
 											</div><!-- /.nav-dropdown-heading -->
 											<div class="nav-dropdown-content scroll-nav-dropdown">
+
 												<ul>
+													<% if current_user.mail_notifications.length==0 %>
+														<center><i class="fa fa-bell icon-lg"></i></center>
+														<br>
+														<center><strong>No Notification.</strong></center> 
+													<% else %>
 													<% current_user.mail_notifications.order("id DESC").each do |notification|%>
 													<li id="msg_<%=notification.id%>"class="<% if notification.status == false %> unread <% end %>">
 														<a href="<%= delete_mails_path(notification.id) %>" style="width:60px; float:right;" method= "delete" data-remote=true>
@@ -61,7 +67,8 @@
 															<span class="small-caps"><%=distance_of_time_in_words_to_now(notification.created_at)%> ago</span>
 														</a>
 													</li>
-													<%end %>
+													<% end %>
+													<% end %>
 												</ul>
 											</div><!-- /.nav-dropdown-content scroll-nav-dropdown -->
 											<button class="btn btn-primary btn-square btn-block">See all notifications</button>
@@ -122,6 +129,20 @@
 				}
 			}
 		}
+
+	});
+	$(window).resize(function() {
+		var windowwidth = $(window).width();
+		if (windowwidth < 991) {
+			$(".sidebar-left").addClass("toggle");
+			$(".page-content").addClass("toggle");
+		};
+		if (windowwidth > 991) {
+			$(".sidebar-left").removeClass("toggle");
+			if($(".page-content").hasClass("toggle") == true){
+				$(".page-content").removeClass("toggle");
+			}
+		};
 	});
 
 	$(function () {

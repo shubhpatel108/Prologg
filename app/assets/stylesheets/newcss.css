@@ -83,10 +83,6 @@ ul.nav-user {
 	width: 325px !important;
 }
 
-.logoheader {
-	top: -150px !important;
-}
-
 .top-navbar.toggle {
 	left: 0px !important;
 	right: 0px !important;
@@ -108,8 +104,8 @@ ul.nav-user {
 .solution {
 	padding-left : 40px;
 }
-
+/*
 .edit_link_box{
-	margin-top: 0px;
-}
+	margin-top: 50px;
+}*/
 

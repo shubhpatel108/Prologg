@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require validation.js
 //= require_tree .
+//= require social-share-button

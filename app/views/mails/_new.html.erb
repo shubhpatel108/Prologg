@@ -1,22 +1,64 @@
-<div class="col-md-9 col-md-offset-1" style="margin-top:50px; background:#FFFFFF; box-shadow:0px 0px 10px #666666; border:1px solid #CCCCCC;opacity: 0.8;filter:alpha(opacity=80);">
-
-<%= form_for(:mail, :url => send_mails_path(@username)) do |f| %>
-
-<br>
-   <%= f.label(:subject, "Subject:", :class=>"input")%>
-   
-  <%= f.text_field(:subject, :placeholder => "Subject") %>
-  <br>
-  <br>
- 
-  <%= f.label(:content, "Content:",:class=>"input")%>
- 
-  <%= f.text_area(:content, :rows=>"13", :cols=>"70") %>
-  <br>
- 
-<center>  <%= submit_tag("Send" , :class => 'btn btn-primary')%></center>
-<% end %>
 
 
+<!-- BEGIN MAIL APPS NEW MAIL -->
+					<div class="mail-apps-wrap">
+						<div class="the-box bg-success no-border no-margin heading">
+							<div class="row" style="height: 75px;">
 
-</div>
+								<div class="col-sm" >
+									<h2><i class="fa fa-envelope icon-md icon-circle icon-bordered"></i> New Mail </h2>
+								</div><!-- /.col-sm-6 -->
+								
+							</div><!-- /.row -->
+						</div>
+						
+					
+						
+						<div class="the-box no-margin">
+							<form role="form">
+								<div class="row">
+									<div class="col-sm-11">
+										<%= form_for(:mail, :url => send_mails_path(@username)) do |f| %>
+										<div class="form-group">
+											<%= f.label(:subject, "Mail Subject:")%>
+ 	 										<%= f.text_field(:subject, :placeholder => "Talk about what...",  :class=>"form-control input-lg") %>
+										</div><!-- /.input-group -->
+										<div class="form-group">
+												<%= f.label(:subject, "Content:")%>
+	  											<%= f.text_area(:content ,  :class=>"form-control input-lg", :style=> "height: 250px;") %>
+										</div><!-- /.input-group -->
+
+										<% end %>
+									</div><!-- /.col-sm-8 -->
+								</div><!-- /.row -->
+								<div class="form-group">
+									<button type="submit" class="btn btn-success"><i class="fa fa-rocket"></i> Send mail</button>
+								</div>
+							</form>
+						</div><!-- /.the-box -->
+					</div><!-- /.mail-apps-wrap -->
+					<!-- END MAIL APPS NEW MAIL -->
+
+<script src="/assets/summernote.min.js"></script>			
+
+<!-- 
+ <script type="text/javascript">
+	$(document).ready(function(){
+	if ($('.summernote-sm').length > 0){
+			$('.summernote-sm').summernote({
+				height: 200,
+			  toolbar: [
+					
+				
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['font', ['strike']],
+					['fontsize', ['fontsize']],
+					['color', ['color']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['height', ['height']],
+				
+			  ]
+			});
+	 }
+	});
+</script> -->

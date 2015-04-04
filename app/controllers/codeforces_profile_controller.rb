@@ -10,17 +10,19 @@ class CodeforcesProfileController < ApplicationController
 
 		response_info = CodeforcesProfile.connect(handle)
 		status_info = response_info[0]
-		resp_info = response_info[1]["result"][0]
 
 		response_subs = CodeforcesProfile.get_submissions(handle)
 		status_subs = response_subs[0]
-		resp_subs = response_subs[1]["result"]
 
 		response_rates = CodeforcesProfile.get_ratings(handle)
 		status_rates = response_rates[0]
-		resp_rates = response_rates[1]["result"]
 
 		if status_info == "OK" and status_subs == "OK" and status_rates == "OK"
+
+			resp_info = response_info[1]["result"][0]
+			resp_subs = response_subs[1]["result"]
+			resp_rates = response_rates[1]["result"]
+
 			@codeforces_profile = CodeforcesProfile.new(
 				user_id: current_user.id,
 				handle: resp_info["handle"],
@@ -36,6 +38,22 @@ class CodeforcesProfileController < ApplicationController
 			solved_probs = data1[0]			#total number of problems solved
 			tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
 			langs = data1[2]				#hash of hashes - languages => no of problems solved
+
+			database_langs = Language.all.map(&:name)
+			user_database_langs = current_user.languages.map(&:name)
+			langs.keys.each do |lang|
+				if database_langs.include?(lang)
+					unless user_database_langs.include?(lang)
+						existing_lang = Language.where(name: lang).first
+						current_user.languages << existing_lang
+					end
+				else
+					new_lang = Language.create(name: lang)
+					current_user.languages << new_lang
+				end
+			end
+			current_user.save!
+			current_user.reload
 
 			resp_rates = CodeforcesProfile.ratings(resp_rates)
 
@@ -91,6 +109,22 @@ class CodeforcesProfileController < ApplicationController
 						tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
 						langs = data1[2]				#hash of hashes - languages => no of problems solved
 
+						database_langs = Language.all.map(&:name)
+						user_database_langs = current_user.languages.map(&:name)
+						langs.keys.each do |lang|
+							if database_langs.include?(lang)
+								unless user_database_langs.include?(lang)
+									existing_lang = Language.where(name: lang).first
+									current_user.languages << existing_lang
+								end
+							else
+								new_lang = Language.create(name: lang)
+								current_user.languages << new_lang
+							end
+						end
+						current_user.save!
+						current_user.reload
+
 						resp_rates = Codeforces.ratings(resp_rates)
 
 						@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
@@ -144,6 +178,17 @@ class CodeforcesProfileController < ApplicationController
 			format.js
 			format.html
 		end
+	end
+
+	def delete
+		unless current_user.codeforces_profile.nil?
+			CodeforcesProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
 	end
 
 end

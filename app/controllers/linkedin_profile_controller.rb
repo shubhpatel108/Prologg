@@ -9,6 +9,8 @@ class LinkedinProfileController < ApplicationController
 		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
 		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
 
+		data[:last_modified] = linkedin_profile.last_modified(client)
+
 		data[:location] = linkedin_profile.location(client)
 
 		network = linkedin_profile.network(client)
@@ -17,6 +19,18 @@ class LinkedinProfileController < ApplicationController
 		data[:loc_count] = linkedin_profile.network(client)
 
 		data[:skills] =  linkedin_profile.skills(client)
+		skills_to_remove = []
+		database_langs = Language.all.map(&:name)
+		user_database_langs = current_user.languages.map(&:name)
+		data[:skills].each do |skill|
+			if database_langs.include?(skill) and not user_database_langs.include?(skill)
+				current_user.languages << Language.where(name: skill)
+				skills_to_remove << skill
+			end
+		end
+		current_user.save!
+		current_user.reload
+		data[:skills] = data[:skills] - skills_to_remove
 
 		data[:awards] =  linkedin_profile.awards(client)
 
@@ -46,6 +60,71 @@ class LinkedinProfileController < ApplicationController
 		redirect_to profile_path(username: current_user.username)
 	end
 
+	def update
+		linkedin_profile = current_user.linkedin_profile
+		data = {}
+
+		client = LinkedIn::Client.new(ENV["LINKEDIN_KEY"], ENV["LINKEDIN_SECRET"])
+		client.authorize_from_access(linkedin_profile.token, linkedin_profile.secret)
+
+		data[:last_modified] = linkedin_profile.last_modified(client)
+
+		if linkedin_profile.data["last_modified"] < data[:last_modified]
+			data[:location] = linkedin_profile.location(client)
+
+			network = linkedin_profile.network(client)
+			# client.profile(id: linkedin_profile.uid)
+
+			data[:loc_count] = linkedin_profile.network(client)
+
+			data[:skills] =  linkedin_profile.skills(client)
+
+			#NOT optimized - not deleting those languages that are removed on linked profile
+			database_langs = Language.all.map(&:name)
+			user_database_langs = current_user.languages.map(&:name)
+			skills_to_remove = []
+			data[:skills].each do |skill|
+				if database_langs.include?(skill) and not user_database_langs.include?(skill)
+					current_user.languages << Language.where(name: skill).first
+					skills_to_remove << skill
+				end
+			end
+			current_user.save!
+			current_user.reload
+			data[:skills] = data[:skills] - skills_to_remove
+
+			data[:awards] =  linkedin_profile.awards(client)
+
+			courses = client.profile(:fields => 'courses').courses
+			if courses.nil?
+				@courses = []
+			else
+				@courses = []
+				courses.all.each do |h|
+					a = Hash.new
+					a[:name] = h[:name]
+					@courses << a
+				end
+			end
+			data[:courses] = @courses
+
+			current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
+			linkedshort_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
+
+			data[:following] = linkedin_profile.following(client)
+
+			linkedin_profile.data = data
+			linkedin_profile.data_will_change!
+			linkedin_profile.save!
+
+			flash[:notice] = "Successfully updated your LinkedIn profile"
+			redirect_to profile_path(username: current_user.username)
+		else
+			flash[:notice] = "Your LinkedIn profile is already upto date."
+			redirect_to :back
+		end
+	end
+
 	def refine
 		redirect_to profile_path(current_user.username)
 	end
@@ -55,10 +134,10 @@ class LinkedinProfileController < ApplicationController
 
 		unless @user.linkedin_profile.nil?
 			@lip = @user.linkedin_profile.data
-			
+
 			Geocoder.configure(:timeout => 5000)
 			@geocoder = Geocoder
-			
+
 			@locations = Location.all
 			@places = []
 
@@ -81,5 +160,16 @@ class LinkedinProfileController < ApplicationController
 		respond_to do |format|
 			format.js
 		end
+	end
+
+	def delete
+		unless current_user.linkedin_profile.nil?
+			LinkedinProfile.where(:user => current_user).first.destroy
+	 		current_user.save!
+	 		current_user.reload
+	 	end
+		respond_to do |format|
+			format.js
+		end	
 	end
 end

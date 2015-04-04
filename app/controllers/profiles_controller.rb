@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
 		@user = User.where(username: username).first
 		session[:viewed_profiles] = [] if session[:viewed_profiles].nil?	
 
-		if not @user==current_user and not session[:viewed_profiles].include?(@user.id)
+		if  not @user.nil? and not @user==current_user and not session[:viewed_profiles].include?(@user.id)
 			view = @user.view_count+1
 			session[:viewed_profiles] << @user.id
 			@user.update_attributes(view_count: view)
@@ -131,21 +131,21 @@ class ProfilesController < ApplicationController
 	def search_filter
 		if not params[:locations].nil? and not params[:locations].empty?
 			locations = Location.all
-			locs = locations.select {|l| params[:locations].any? { |s| s.include?(l.name) } }
-			@users = locations.map{|l| l.users.to_a}.flatten
+			locs = locations.select {|l| params[:locations].any? { |s| l.name.include?(s) } }
+			@users = locs.map{|l| l.users.to_a}.flatten
 		else
 			@users = User.all.to_a
 		end
 
 		@users = @users.select {|user| user.username.downcase.include?(params[:username].downcase) and user.full_name.downcase.include?(params[:name].downcase) }
 
-		skills_req = params[:skills]
-		if not skills_req.nil? and not skills_req.empty?
+		@skills_req = params[:skills]
+		if not @skills_req.nil? and not @skills_req.empty?
 			@users = @users.select {|user|
 				lp = user.linkedin_profile
 				if lp.nil?
 					false
-				elsif lp.data["skills"] && skills_req == skills_req
+				elsif lp.data["skills"] && @skills_req == @skills_req
 					true
 				else
 					false
@@ -153,6 +153,19 @@ class ProfilesController < ApplicationController
 			}
 		end
 
+		@languages_req = params[:languages]
+		if not @languages_req.nil? and not @languages_req.empty?
+			lang_users = Language.where(name: @languages_req).map{|l| l.users.to_a}.flatten
+			@users = @users & lang_users
+		end
+
+		respond_to do |format|
+			format.js
+		end
+	end
+
+	def show_summary
+		@user = User.where(username: params[:username]).first
 		respond_to do |format|
 			format.js
 		end

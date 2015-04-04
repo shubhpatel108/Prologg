@@ -187,7 +187,7 @@
 
 <div class = "row">
 	<div class="col-lg-12">
-	<div class="the-box  recent_sub">
+	<div class="the-box">
 		<div style="font-size : 15px; margin-bottom :  10px">
 			Recently Submitted Problems
 			<%= link_to "see Recent Submissions", "javascript:void(0);", {id: "cfp_rec_subs", class: "btn btn-primary btn-sm" } %>
@@ -245,22 +245,5 @@ Morris.Bar({
 	});
 </script>
 <% else %>
-<% if @user == current_user %>
-<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;">
-	<strong>You have not integrated Codeforces Profile. You can Integrate it from below link.</strong>
-</div>
-	<div class="row">
-	<div class="col-lg-6 col-lg-offset-2">
-		<%= image_tag("codeforces_small.jpg", class: "sitelogo", style: "width: 50px; height: 50px;") %>
-			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">Codeforces</strong>
-	</div>
-	<div class="col-lg-4">
-		<a href="<%= cfp_profile_new_path %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>Add</a>&nbsp;
-	</div>
-</div>
-<% else %>
-	<div class="row" style="margin-top: 20px; margin-left: 25%; margin-bottom: 20px;"> 
-	<strong><h3><%= @user.username %> has not integrated Codeforces profile.</h3> </strong>
-	</div>
-<% end -%>
+	<%= render partial: 'add_codeforces' %>
 <% end %>

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_filter :update_sanitized_params_signup, if: :devise_controller?
   before_filter :update_sanitized_params_edit, if: :devise_controller?
+  before_filter :set_cache_buster
 
 
 	def update_sanitized_params_signup
@@ -14,4 +15,10 @@ class ApplicationController < ActionController::Base
 	def update_sanitized_params_edit
 		devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:email, :password, :password_confirmation, :current_password, :full_name, :username, :gender, :short_bio, :availability)}
 	end
+
+	def set_cache_buster
+	    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+	    response.headers["Pragma"] = "no-cache"
+	    response.headers["Expires"] = "#{1.year.ago}"
+  end
 end

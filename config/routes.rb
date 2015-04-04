@@ -11,21 +11,28 @@ Rails.application.routes.draw do
   get '/integrations/codeforces/recent_submissions/:handle', to: 'codeforces_profile#recent_submissions', as: :cfp_submissions
   get '/integrations/codeforces/show/:username', to: 'codeforces_profile#show_cfp_profile', as: :cfp_show_profile
   get '/integrations/codeforces/update', to: 'codeforces_profile#update', as: :cfp_update_profile
+  get '/integrations/codeforces/delete', to: 'codeforces_profile#delete', as: :cfp_delete_profile
 
   get '/integrations/edit', to: 'profiles#edit_integrations', as: :edit_integrations
 
   get '/integrations/github/create', to: 'github_profile#create', as: :github_profile_create
   get '/integrations/github/show/:username', to: 'github_profile#show', as: :github_show_profile
   get '/integrations/github/update', to: 'github_profile#update', as: :github_update_profile
+  get '/integrations/github/delete', to: 'github_profile#delete', as: :github_delete_profile 
 
   get '/integrations/topcoder/new', to: 'topcoder_profile#new', as: :topcoder_profile_new
   post '/integrations/topcoder/create', to: 'topcoder_profile#create', as: :topcoder_profile_create
   get '/integrations/topcoder/show/:username', to: 'topcoder_profile#show_tcp_profile', as: :tcp_show_profile
   get '/integrations/topcoder/update', to: 'topcoder_profile#update', as: :topcoder_update_profile
+  get '/integrations/topcoder_profile/delete', to: 'topcoder_profile#delete', as: :topcoder_delete_profile
 
   get '/integrations/linkedin/create', to: 'linkedin_profile#create', as: :linkedin_profile_create
   get '/integrations/linkedin/show/:username', to: 'linkedin_profile#show_profile', as: :linkedin_show_profile
   post '/integrations/linkedin/refine', to: 'linkedin_profile#refine', as: :linkedin_refine
+  get '/integrations/linkedin/update', to: 'linkedin_profile#update', as: :linkedin_update_profile
+  get '/integrations/linkedin/delete', to: 'linkedin_profile#delete', as: :linkedin_delete_profile 
+
+  get '/profiles/summary/show/:username', to: 'profiles#show_summary', as: :show_summary
 
   #get '/mails/_show'
   get '/mails/new/:username', to: 'mails#new', as: :new_mails

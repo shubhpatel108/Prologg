@@ -1,0 +1,19 @@
+<div class="col-lg-6 col-lg-offset-2">
+		<%= image_tag("linkedin_small.png", class: "sitelogo", style: "width: 50px; height: 50px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px;">Linkedin</strong>
+</div>
+<div class="col-lg-4">
+		<% if current_user.linkedin_profile.nil? %>
+		<a href="<%= user_omniauth_authorize_path('linkedin') %>" class="btn btn-info btn-perspective"><i class="fa fa-plus-circle"></i>&nbsp;Add</a>&nbsp;
+		<%else%>
+		<a href="<%= linkedin_update_profile_path %>" class="btn btn-success btn-perspective"><i class="fa fa-pencil-square-o"></i>Update</a>
+		<a href="javascript:void(0)" class="btn btn-danger btn-perspective" id="delete_linkedin"><i class="fa fa-minus-circle"></i>&nbsp;Remove</a>&nbsp;
+		<% end -%>
+</div>
+ <script type='text/javascript'>
+		$(document).ready(function() {
+		  	$('#delete_linkedin').on("click",function(){
+				ajaxLoad("<%= linkedin_delete_profile_path %>");
+		  	});
+		});
+</script>

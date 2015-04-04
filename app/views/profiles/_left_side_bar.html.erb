@@ -21,8 +21,8 @@
 											</p>
 											<% end %>
 											<p>
-												
-												<i class="glyphicon glyphicon-eye-open"></i><Strong> <%= @user.view_count %> Views
+												<i class="glyphicon glyphicon-eye-open"></i>
+												<Strong> <%= pluralize(@user.view_count, "View") %>
 												</Strong>
 											</p>
 											<p class="social-icon">
