@@ -124,10 +124,18 @@
 				if($(".sidebar-left").hasClass("toggle") === true){
 					$(".sidebar-left").removeClass("toggle");
 				}
-				if($(".page-content").hasClass("toggle") === true){
+				if($(".page-content").hasClass("toggle") == true){
 					$(".page-content").removeClass("toggle");
 				}
 			}
+		}
+
+		if($(".page-content").hasClass("toggle") == false){
+			$(".page-content").removeAttr("style")
+		}
+
+		if($(".page-content").hasClass("toggle") == true){
+			$(".page-content").css({"width": "100%"})
 		}
 
 	});
@@ -136,11 +144,13 @@
 		if (windowwidth < 991) {
 			$(".sidebar-left").addClass("toggle");
 			$(".page-content").addClass("toggle");
+			$(".page-content").css({"width": "100%"})
 		};
 		if (windowwidth > 991) {
 			$(".sidebar-left").removeClass("toggle");
 			if($(".page-content").hasClass("toggle") == true){
 				$(".page-content").removeClass("toggle");
+				$(".page-content").removeAttr("style")
 			}
 		};
 	});
