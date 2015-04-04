@@ -170,3 +170,91 @@ overflow: hidden;
 border-bottom: 1px dotted #ddd;
 padding-bottom: 55px;
 }*/
+
+
+/* CSS for Summary Page */
+/* Useless css is to be removed */
+.first-row-ws{
+
+	background-color: white;
+	margin-top: 2%;
+}
+
+.first-paragraph{
+	font-size: 20px;
+	color: black;
+	font-family: 'Raleway', sans-serif;
+}
+
+.style-words {
+	font-family: 'Tangerine', serif;
+	font-size: 36px;
+	font-style: bold;
+}
+
+.second-row-ws{
+	background-color: white;
+	margin-top: 2%;
+}
+.third-row-ws {
+	margin-top: 2%;
+	height: 420px;
+}
+
+.para-2 {
+	background-color: white;
+	height: 401px;
+}
+
+.fifth-row-ws{
+	margin-top: 2%;
+	height: 385px;
+
+}
+.para-3 {
+	background-color: white;
+	height: 75px;
+}
+
+.newbie {
+	margin-top: 5px;
+	margin-left: -65px;
+}
+
+.timeliner-1 {
+	float: left;
+	margin-left: -15px;
+}
+.timeliner-2 {
+	float: left;
+	margin-left: 78px;
+	margin-top: -23px;
+}
+
+.heading {
+	font-family: 'Tangerine', serif;
+	font-size: 48px;
+	text-shadow: 4px 4px 4px #aaa;
+}
+
+.newicon {
+	margin-top: 50px;
+	margin-left: 39%;
+}
+
+.newicon-2 {
+	margin-top: 96px;
+	margin-left: 39%;
+}
+
+.newicon-3 {
+	margin-top: 25px;
+	margin-left: 39%;
+}
+.removeborder {
+	border: 0px #ffffff ! important;
+}
+
+.caracolor {
+	color: black !important;
+}

@@ -1,7 +1,43 @@
-<div class="sociallinks" style="float:right;">
-			<br>
-			<i class="fa fa-share-alt"></i>
-			<Strong>   Share Profile </Strong>
-			<br>
-			<%= social_share_button_tag("Prologg", :popup => true, :url => "http://prologg.me/"+"#{ @user.username}", :img => "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtuEzyLbOZbZUskhsEULL7TSJw_EKMitKgWhIMOznJmp8ETZn8hg" ) %>
+<% unless @first_name.nil? %>
+<div class="row" style="margin-top:10px;">
+	<div class="col-lg-12">
+		<div class="the-box no-border">
+			<div class="sociallinks" style="float:right;">
+				<br>
+				<i class="fa fa-share-alt"></i>
+				<Strong>Share this profile</Strong>
+				<br>
+				<%= social_share_button_tag("Prologg", :popup => true, :url => "http://prologg.me/"+"#{ @user.username}", :img => "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRtuEzyLbOZbZUskhsEULL7TSJw_EKMitKgWhIMOznJmp8ETZn8hg" ) %>
+			</div>
+			<h3 class = "heading row" style="margin-left :44% ;"><%=@first_name%>'s Bio</h3>
+			<p class="first-paragraph">
+				<span class="style-words"><%=@first_name%> </span> is a <span class="style-words">  <%= lang_adjective %>  </span> <%=@all_langs.keys.first%>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words">  <%= @all_langs.keys.slice(0..2).to_sentence  %></span>. <%= gender%>'s a nocturnal <span class="style-words">  developer/ develops</span> in parallel with <%= gender %> day job, majorly active during <span class="style-words">  weekends/weekdays/all week long  </span>. <%= gender%>'s currently exploring the field of <span class="style-words">  <%= @industry%></span>.
+			</p>
+		</div>
+	</div>
 </div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="the-box no-border">
+			Experience (rescent to older):<br/>
+			<%= @user.linkedin_profile.data["positions"]%>
+			<br/>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="the-box no-border">
+			<p class="first-paragraph">
+				<p class="first-paragraph">
+					Our <%= gender1 %> is <%= over_all_adjective %> software geek! <%= gender %> has been keenly developing on <%= @user.technical_integrations.to_sentence%><%=linkedin_skills%>. 
+					<% unless tags.empty? %><%= gender %>'s a diligent algorithmic developer and has majorly worked in <%= tags %> types of problems.
+					<% end %>
+					<% if @user.has_app_accounts%> <%= gender %>'s a laudible developer who likes to explore new areas of software development.
+					<% end %>
+				</p>
+			</p>
+		</div>
+	</div>
+</div>
+<%end%>
