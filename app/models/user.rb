@@ -39,7 +39,13 @@ class User < ActiveRecord::Base
     when "github"
       authorization = GithubProfile.where(:user_id => current_user.id).first
       if authorization.nil?
-        authorization = GithubProfile.create(:username => auth[:info][:nickname], :user_id => current_user.id)
+        authorization = GithubProfile.create(:username => auth[:info][:nickname], :user_id => current_user.id, :token => auth[:credentials].token)
+        data = {}
+        data.merge!(:followers_count => auth[:extra][:raw_info][:followers])
+        data.merge!(:last_updated => auth[:extra][:raw_info][:updated_at])
+        authorization.data = data
+        authorization.data_will_change!
+        authorization.save!
       end
       authorization
     end
