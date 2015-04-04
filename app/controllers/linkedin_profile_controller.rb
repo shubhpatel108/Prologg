@@ -47,7 +47,8 @@ class LinkedinProfileController < ApplicationController
 		end
 		data[:courses] = @courses
 
-		current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
+		data[:positions] = linkedin_profile.positions(client)
+
 		linkedshort_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
 
 		data[:following] = linkedin_profile.following(client)
@@ -108,7 +109,8 @@ class LinkedinProfileController < ApplicationController
 			end
 			data[:courses] = @courses
 
-			current_pos = client.profile(:fields => 'three-current-positions').three_current_positions.all[0]
+			data[:positions] = linkedin_profile.positions(client)
+
 			linkedshort_bio = current_pos.title +", "+ current_pos.company.name if current_user.short_bio.nil?
 
 			data[:following] = linkedin_profile.following(client)

@@ -67,4 +67,25 @@ class LinkedinProfile < ActiveRecord::Base
 
 		return companies + industries + people + spl_editions
 	end
+
+	def positions(client)
+		current = client.profile(:fields => 'three-current-positions').three_current_positions.all
+		current_pos = []
+		current.each do |pos|
+			item = {}
+			item["t"] = pos.title
+			item["c"] = pos.company.name
+			current_pos << item
+		end
+
+		past = client.profile(:fields => 'three-past-positions').three_past_positions.all
+		past_pos = []
+		past.each do |pos|
+			item = {}
+			item["t"] = pos.title
+			item["c"] = pos.company.name
+			past_pos << item
+		end
+		current_pos + past_pos
+	end
 end
