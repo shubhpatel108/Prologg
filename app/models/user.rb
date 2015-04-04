@@ -59,10 +59,26 @@ class User < ActiveRecord::Base
     authorization
   end
 
+  def tags
+    if codeforces_profile.nil?
+      []
+    else
+      codeforces_profile.metadata["tags"].keys
+    end
+  end
+
+  def linkedin_skills
+    if codeforces_profile.nil?
+      []
+    else
+      self.linkedin_profile.data["skills"]
+    end
+  end
+
   def skills
     skills = []
-    skills << self.linkedin_profile.data["skills"] unless self.linkedin_profile.nil?
-    skills << self.codeforces_profile.metadata["tags"].keys unless self.codeforces_profile.nil?
+    skills << self.linkedin_skills
+    skills << self.tags
     skills.flatten!
   end
 
@@ -78,4 +94,67 @@ class User < ActiveRecord::Base
     skills.uniq!
     skills
   end
+
+  def application_langs
+    langs_hash = {}
+
+    github = self.github_profile
+    unless github.nil?
+      github_langs = github.data["repos"].map{|l| l["languages"]}.flatten
+      list = github_langs.uniq
+
+      list.each do |lang|
+        langs_hash.merge!("#{lang}" =>github_langs.count(lang))
+      end
+    end
+
+    return langs_hash.sort {|a,b| a[1]<=>b[1]}.reverse.to_h
+  end
+
+  def algo_langs
+    langs_hash = {}
+
+    cfp = self.codeforces_profile
+    unless cfp.nil?
+      codeforces_langs = cfp.metadata["languages"]
+      langs_hash.merge!(codeforces_langs)
+    end
+
+    return langs_hash.sort {|a,b| a[1]<=>b[1]}.reverse.to_h
+  end
+
+  def all_langs(application_langs={}, algo_langs={})
+    if application_langs.empty?
+      langs_hash = self.application_langs
+    else
+      langs_hash = application_langs
+    end
+
+    if algo_langs.empty?
+      algo_langs = self.algo_langs
+    end
+
+    algo_langs.each do |lang, count|
+      if langs_hash.key?(lang)
+        langs_hash[lang] = langs_hash[lang] + count
+      else
+        langs_hash.merge!("#{lang}" => count)
+      end
+    end
+    return langs_hash.sort {|a,b| a[1]<=>b[1]}.reverse.to_h
+  end
+
+  def technical_integrations
+    ints = []
+    ints << "Github" unless self.github_profile.nil?
+    ints << "Codeforces" unless self.codeforces_profile.nil?
+    ints << "Topcoder" unless self.topcoder_profile.nil?
+    return ints
+  end
+
+  def has_app_accounts
+    return false if codeforces_profile.nil? and codeforces_profile.nil?
+    return true
+  end
+
 end
