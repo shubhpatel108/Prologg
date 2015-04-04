@@ -5,8 +5,9 @@ class LinkedinProfile < ActiveRecord::Base
 		client.profile(:fields => 'last-modified-timestamp').last_modified_timestamp
 	end
 
-	def location(client)
-		client.profile(:fields => 'location').location.name
+	def location_and_industry(client)
+		resp = client.profile(:fields => ['location', 'industry'])
+		return [resp.location.name, resp.industry]
 	end
 
 	def network(client)

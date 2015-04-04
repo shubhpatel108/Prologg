@@ -11,7 +11,9 @@ class LinkedinProfileController < ApplicationController
 
 		data[:last_modified] = linkedin_profile.last_modified(client)
 
-		data[:location] = linkedin_profile.location(client)
+		data1 = linkedin_profile.location_and_industry(client)
+		data[:location] = data1[0]
+		data[:industry] = data1[1]
 
 		network = linkedin_profile.network(client)
 		# client.profile(id: linkedin_profile.uid)
@@ -71,7 +73,10 @@ class LinkedinProfileController < ApplicationController
 		data[:last_modified] = linkedin_profile.last_modified(client)
 
 		if linkedin_profile.data["last_modified"] < data[:last_modified]
-			data[:location] = linkedin_profile.location(client)
+
+			data1 = linkedin_profile.location_and_industry(client)
+			data[:location] = data1[0]
+			data[:industry] = data1[1]
 
 			network = linkedin_profile.network(client)
 			# client.profile(id: linkedin_profile.uid)
