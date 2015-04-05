@@ -80,6 +80,7 @@
 				
 				</div>
 				<%= submit_tag "Done", class: "btn btn-primary", style: "margin-top:10px;"%>
+				<%= link_to "Cancel", profile_path(current_user.username),class: "btn btn-danger", style: "margin-top:10px;"%>
 				<% end %>
 			</div>
 		</div><!-- /.the-box .no-border .no-margin -->
