@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(version: 20150404093733) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "location_id"
     t.integer  "view_count",             default: 0
+    t.integer  "location_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
