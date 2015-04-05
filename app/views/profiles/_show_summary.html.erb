@@ -59,22 +59,22 @@
 <% end %>
 
 <% unless @github_profile.nil? %>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="the-box no-border">
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="the-box no-border"  style="height: 430px !important">
-                <i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
-                <p class="first-paragraph">
-                    <%= gender %> is a <%= time_adjective("graph") %> developer. <% if time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned adibe than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
-                </p>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="the-box no-border">
+				<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="the-box no-border"  style="height: 430px !important">
+				<i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
+				<p class="first-paragraph">
+					<%= gender %> is a <%= time_adjective("graph") %> developer. <% if not time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned adibe than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
+				</p>
+			</div>
+		</div>
+	</div>
 <% end %>
 
 <% unless @github_profile.nil? %>
