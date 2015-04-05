@@ -11,7 +11,7 @@ module SummaryHelper
 
 		if app_count > 8 or algo_count > 50
 			"supperlative"
-		elsif (app_count > 3 and algo_count > 20)
+		elsif (app_count > 3 or algo_count > 20)
 			"middling"
 		elsif (algo_count > 29)
 			"middling"
@@ -67,5 +67,41 @@ module SummaryHelper
 
 	def tags
 		@user.tags.slice(0..2).to_sentence
+	end
+
+	def day_adjective
+		days = @user.github_profile.data["punch_card"]["days"]
+
+		weekend_avg = (days[0] + days[6]) / 2
+		week_days_avg = days[1..5].sum / 5
+
+		if weekend_avg > week_days_avg
+			"<span class=\"style-words\">weekend</span>".html_safe
+		elsif weekend_avg < week_days_avg
+			"<span class=\"style-words\">weekdays</span>".html_safe
+		else
+			"<span class=\"style-words\">all week long</span>".html_safe
+		end
+	end
+
+	def time_adjective(graph = nil)
+		time = @user.github_profile.data["punch_card"]["time"]
+
+		night = time[0..2].sum + time[7]
+		day = time[3..6].sum
+
+		if graph.nil?
+			if night > day
+				"'s a nocturnal	<span class=\"style-words\">  developer </span>".html_safe
+			else
+				" <span class=\"style-words\">  develops </span> in parallel with his #{gender2} job.".html_safe
+			end
+		else
+			if night > day
+				"nocturnal"
+			else
+				"midday"
+			end
+		end
 	end
 end
