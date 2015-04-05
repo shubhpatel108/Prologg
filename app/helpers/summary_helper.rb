@@ -23,6 +23,7 @@ module SummaryHelper
 	def over_all_adjective
 		lang = @all_langs.keys.first
 		count = @all_langs[lang]
+		count = 0 if count.nil?
 		if count > 70
 			"a staunch"
 		elsif count > 20
@@ -51,6 +52,14 @@ module SummaryHelper
 	def gender2
 		if @user.gender
 			"his"
+		else
+			"her"
+		end
+	end
+
+	def gender3
+		if @user.gender
+			"him"
 		else
 			"her"
 		end

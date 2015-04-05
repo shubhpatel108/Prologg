@@ -1,4 +1,4 @@
-<% unless @first_name.nil? %>
+<% if @show_summary_page %>
 <div class="row" style="margin-top:10px;">
 	<div class="col-lg-12">
 		<div class="the-box no-border">
@@ -11,74 +11,91 @@
 			</div>
 			<h3 class = "heading row" style="margin-left :44% ;"><%=@first_name%>'s Bio</h3>
 			<p class="first-paragraph">
-				<span class="style-words"><%=@first_name%> </span> is a <span class="style-words">  <%= lang_adjective %>  </span> <%=@all_langs.keys.first%>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words">  <%= @all_langs.keys.slice(0..2).to_sentence  %></span>. <%= gender%><%= time_adjective %> majorly active during <%= day_adjective %>. <%= gender%>'s currently exploring the field of <span class="style-words">  <%= @industry%></span>.
+				<span class="style-words">
+        <% if @all_langs.empty? %>
+          <%=@first_name%> has just entered the field of software developemnt. For now, we don't have much to say about <%= gender3 %>. But we will be always be there to see <%= gender3 %> shinning very soon. 
+        <% else %>
+          <%=@first_name%> </span> is a <span class="style-words">  <%= lang_adjective %>  </span> <%=@all_langs.keys.first%>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words">  <%= @all_langs.keys.slice(0..2).to_sentence  %></span>. 
+                  <% unless @github_profile.nil? %>
+                      <%= gender%><%= time_adjective %> majorly active during <%= day_adjective %>. 
+                  <% end %>
+                  <% unless @industry.nil?%>
+                      <%= gender%>'s currently exploring the field of <span class="style-words">  <%= @industry%></span>.
+                  <% end %>
+        <% end %>
 			</p>
 		</div>
 	</div>
 </div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="time-line">
-			<div class="the-box no-border">
-					<!-- BEGIN OWL CAROUSEL -->
-					<h3 class = "heading"  style="margin-left :30%">Experience (recent to older):</h3>
-				<hr class="seperator" style ="margin-top:5px;">
-					<div id="owl-lazy-load-autoplay" class="owl-carousel" style="font-family: 'Raleway', sans-serif;">
-					<% @user.linkedin_profile.data["positions"].each do |i|%>
-						<div class="item" style="margin : 0px">		
-							<div class="">
-								<!-- BEGIN SLIDER -->
-								<div class="the-box  removeborder" style="color : #656D78">	
-									<h4 class="small-title caracolor " ><%= i["t"] %></h4>
-									<hr />
-									<h5 class="small-title caracolor "><%= i["c"] %></h5>
-								</div><!-- /.the-box -->
-									<!-- END SLIDER -->
-							</div><!-- /.col-sm-6 -->
-						</div>
-						<!-- <br/> -->
-						<!-- <br/> -->
-					<% end -%>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<% unless @linkedin_profile.nil? %>
+  <div class="row">
+  	<div class="col-lg-12">
+  		<div class="time-line">
+  			<div class="the-box no-border">
+  					<!-- BEGIN OWL CAROUSEL -->
+  					<h3 class = "heading"  style="margin-left :30%">Experience   recent to older):</h3>
+  				<hr class="seperator" style ="margin-top:5px;">
+  					<div id="owl-lazy-load-autoplay" class="owl-carousel" style="  family: 'Raleway', sans-serif;">
+  					<% @linkedin_profile.data["positions"].each do |i|%>
+  						<div class="item" style="margin : 0px">		
+  							<div class="">
+  								<!-- BEGIN SLIDER -->
+  								<div class="the-box  removeborder" style="color : #656D78">	
+  									<h4 class="small-title caracolor " ><%= i["t"] %></h4>
+  									<hr />
+  									<h5 class="small-title caracolor "><%= i["c"] %></h5>
+  								</div><!-- /.the-box -->
+  									<!-- END SLIDER -->
+  							</div><!-- /.col-sm-6 -->
+  						</div>
+  						<!-- <br/> -->
+  						<!-- <br/> -->
+  					<% end -%>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  </div>
+<% end %>
 
-<div class="row">
-	<div class="col-lg-6">
-		<div class="the-box no-border">
-			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<div class="the-box no-border"  style="height: 430px !important">
-			<i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
-			<p class="first-paragraph">
-				<%= gender %> is a <%= time_adjective("graph") %> developer. <% if time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned adibe than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
-			</p>
-		</div>
-	</div>
-</div>
+<% unless @github_profile.nil? %>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="the-box no-border">
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="the-box no-border"  style="height: 430px !important">
+                <i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
+                <p class="first-paragraph">
+                    <%= gender %> is a <%= time_adjective("graph") %> developer. <% if time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned adibe than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
+                </p>
+            </div>
+        </div>
+    </div>
+<% end %>
 
+<% unless @github_profile.nil? %>
+    <div>
+        <div class="col-lg-6">
+            <div class="the-box no-border" style="height: 430px !important">
+                <i class="fa fa-institution icon-circle icon-lg icon-default newicon-2"></i>
+                <p class="first-paragraph">
+                <%= gender%> enjoys working during the <%= day_adjective %> . <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
+    			</p>
+    		</div>
+    	</div>
+    	<div class="col-lg-6">
+    		<div class="the-box no-border">
+    			<div id="container-1" style="min-width: 310px; height: 400px; margin: 0">
+    			</div>
+    		</div>
+    	</div>
+    </div>
+<% end %>
 
-<div>
-	<div class="col-lg-6">
-		<div class="the-box no-border" style="height: 430px !important">
-			<i class="fa fa-institution icon-circle icon-lg icon-default newicon-2"></i>
-			<p class="first-paragraph">
-			<%= gender%> enjoys working during the <%= day_adjective %> . <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
-			</p>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<div class="the-box no-border">
-			<div id="container-1" style="min-width: 310px; height: 400px; margin: 0">
-			</div>
-		</div>
-	</div>
-</div>
 <% if not @user.codeforces_profile.nil? %>
 <div class="row">
 	<div class="col-lg-6">
@@ -96,13 +113,16 @@
 		</div>
 	</div>
 </div>
-<% end -%>
+<% end %>
 
 <div class="row">
 	<div class="col-lg-12">
 		<div class="the-box no-border">
 			<p class="first-paragraph">
-				Our <%= gender1 %> is <%= over_all_adjective %> software geek! <%= gender %> has been keenly developing on <%= @user.technical_integrations.to_sentence%><%=linkedin_skills%>. 
+        <% unless @user.technical_integrations.empty? %>
+				  Our <%= gender1 %> is <%= over_all_adjective %> software geek!
+         <%= gender %> has been keenly developing on <%= @user.technical_integrations.to_sentence%><%=linkedin_skills%>. 
+        <% end %>
 				<% unless tags.empty? %><%= gender %>'s a diligent algorithmic developer and has majorly worked in <%= tags %> types of problems.
 				<% end %>
 				<% if @user.has_app_accounts%> <%= gender %>'s a laudible developer who likes to explore new areas of software development.
@@ -114,182 +134,191 @@
 		</div>
 	</div>
 </div>
-<%end%>
 
 <!-- <script type="assets/modules/exporting.js"></script> -->
 <!-- <script type="assets/highcharts.js"></script> -->
 <!-- <script type="assets/ejs.js"></script> -->
 <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+<% unless @linkedin_profile.nil? %>
+  <script type="text/javascript">
+      if ($('#owl-lazy-load-autoplay').length > 0){
+        $("#owl-lazy-load-autoplay").owlCarousel({
+          autoPlay: 3000,
+          items : 2,
+          lazyLoad : true
+        });
+      }
+  </script>
+<% end %>
+
+<% unless @github_profile.nil? %>
+  <script type="text/javascript">
+      $('#container').highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Working Hours Graph'
+          },
+          xAxis: {
+              categories: ['00:00 to 6:00', '6:00 to 12:00', '12:00 to 18:00', '18:00 to 00:00']
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Number of Contibutions'
+              },
+              stackLabels: {
+                  enabled: true,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: -30,
+              verticalAlign: 'top',
+              y: 25,
+              floating: true,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              formatter: function () {
+                  return '<b>' + this.x + '</b><br/>' +
+                      this.series.name + ': ' + this.y + '<br/>' //+
+                      // 'Total: ' + this.point.stackTotal;
+              }
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: true,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              <% commits = @user.github_profile.data["punch_card"]["time"] %>
+              name: 'commits',
+              data: [<%= commits[0..1].sum %>, <%= commits[2..3].sum %>, <%= commits[4..5].sum %>, <%= commits[6..7].sum %>]
+          }]
+      });
+
+
+      $('#container-1').highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: 'Weekly Working Graph'
+          },
+          xAxis: {
+              categories: ['Mon', 'Tue', 'Wed', 'Thu','Fri','Sat','Sun']
+          },
+          yAxis: {
+              min: 0,
+              title: {
+                  text: 'Number of Contibutions'
+              },
+              stackLabels: {
+                  enabled: true,
+                  style: {
+                      fontWeight: 'bold',
+                      color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                  }
+              }
+          },
+          legend: {
+              align: 'right',
+              x: -30,
+              verticalAlign: 'top',
+              y: 25,
+              floating: true,
+              backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+              borderColor: '#CCC',
+              borderWidth: 1,
+              shadow: false
+          },
+          tooltip: {
+              formatter: function () {
+                  return '<b>' + this.x + '</b><br/>' +
+                      this.series.name + ': ' + this.y + '<br/>'// +
+                      //'Total: ' + this.point.stackTotal;
+              }
+          },
+          plotOptions: {
+              column: {
+                  stacking: 'normal',
+                  dataLabels: {
+                      enabled: true,
+                      color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                      style: {
+                          textShadow: '0 0 3px black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              name: 'commits',
+              <% commits = @user.github_profile.data["punch_card"]["days"] %>
+              data: [<%= commits[1] %>, <%= commits[2] %>, <%= commits[3] %>,<%= commits[4] %>, <%= commits[5] %>, <%= commits[6] %>, <%= commits[0] %>]
+          }]
+      });
+  </script>
+<% end %>
+
+<% unless @algo_langs.nil? %>
+  
 <script type="text/javascript">
-	if ($('#owl-lazy-load-autoplay').length > 0){
-	  $("#owl-lazy-load-autoplay").owlCarousel({
-		autoPlay: 3000,
-		items : 2,
-		lazyLoad : true
-	  });
-	}
-
-	
-    $('#container').highcharts({
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Working Hours Graph'
-        },
-        xAxis: {
-            categories: ['00:00 to 6:00', '6:00 to 12:00', '12:00 to 18:00', '18:00 to 00:00']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Number of Contibutions'
-            },
-            stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                }
-            }
-        },
-        legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: 25,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            borderColor: '#CCC',
-            borderWidth: 1,
-            shadow: false
-        },
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.x + '</b><br/>' +
-                    this.series.name + ': ' + this.y + '<br/>' //+
-                    // 'Total: ' + this.point.stackTotal;
-            }
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                        textShadow: '0 0 3px black'
-                    }
-                }
-            }
-        },
-        series: [{
-        	<% commits = @user.github_profile.data["punch_card"]["time"] %>
-            name: 'commits',
-            data: [<%= commits[0..1].sum %>, <%= commits[2..3].sum %>, <%= commits[4..5].sum %>, <%= commits[6..7].sum %>]
-        }]
-    });
-
-
-
-    $('#container-1').highcharts({
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Weekly Working Graph'
-        },
-        xAxis: {
-            categories: ['Mon', 'Tue', 'Wed', 'Thu','Fri','Sat','Sun']
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: 'Number of Contibutions'
-            },
-            stackLabels: {
-                enabled: true,
-                style: {
-                    fontWeight: 'bold',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-                }
-            }
-        },
-        legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: 25,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-            borderColor: '#CCC',
-            borderWidth: 1,
-            shadow: false
-        },
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.x + '</b><br/>' +
-                    this.series.name + ': ' + this.y + '<br/>'// +
-                    //'Total: ' + this.point.stackTotal;
-            }
-        },
-        plotOptions: {
-            column: {
-                stacking: 'normal',
-                dataLabels: {
-                    enabled: true,
-                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-                    style: {
-                        textShadow: '0 0 3px black'
-                    }
-                }
-            }
-        },
-        series: [{
-            name: 'commits',
-            <% commits = @user.github_profile.data["punch_card"]["days"] %>
-            data: [<%= commits[1] %>, <%= commits[2] %>, <%= commits[3] %>,<%= commits[4] %>, <%= commits[5] %>, <%= commits[6] %>, <%= commits[0] %>]
-        }]
-    });
-
-$(function () {
-    $('#container-2').highcharts({
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
-        title: {
-            text: 'Problem solved in different languages'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Problems',
-            data: [
-            	<% if not @algo_langs.nil? %>
-            	<% total = @algo_langs.values.sum %>
-            	<% @algo_langs.each do |key, value| %>
-            	['<%= key %>', <%= (value*100)/total %>],
-            	<% end -%>
-            	<% end -%>
-            ]
-        }]
-    });
-});
-</script>
+  $(function () {
+      $('#container-2').highcharts({
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false
+          },
+          title: {
+              text: 'Problem solved in different languages'
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                      }
+                  }
+              }
+          },
+          series: [{
+              type: 'pie',
+              name: 'Problems',
+              data: [
+                  <% if not @algo_langs.nil? %>
+                  <% total = @algo_langs.values.sum %>
+                  <% @algo_langs.each do |key, value| %>
+                  ['<%= key %>', <%= (value*100)/total %>],
+                  <% end -%>
+                  <% end -%>
+              ]
+          }]
+      });
+  });
+  </script>
+<% end %>
+<% end %>
