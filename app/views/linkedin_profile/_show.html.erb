@@ -2,7 +2,8 @@
 <div class="logoline" style="height: 64px; background: white">
 	<!-- <img src="images.jpg" class="codeforcelogo" > -->
 	<div class="col-lg-12">
-		<%= image_tag("linkedin.png", class: "sitelogo") %>
+		<%= image_tag("linkedin_small.png", class: "sitelogo", style: "width: 50px; height: 50px; margin-top: 6px;") %>
+			&nbsp;&nbsp;&nbsp; <strong style="font-size: 30px; top: 10px;">Linkedin</strong>
 	</div>
 </div>
 
@@ -223,7 +224,32 @@
 			nextButton: $('#w-newsticker-prev-2')
 		});
 	}
+
+	function initialize(locations) {
+
+  var myOptions = {
+    zoom: 4,
+    center: new google.maps.LatLng(22, 77),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  var map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+  for (var i = 0; i < locations.length; i++) {
+      var location = locations[i];
+      console.log(location);
+      var myLatLng = new google.maps.LatLng(location[0], location[1]);
+      var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|41E2BD|12|b|'+ location[2].toString(),
+          zIndex: i
+      });
+  }
+}
+initialize(<%= raw @places.to_json %>);
 </script>
+
 <% else %>
 	<%= render partial: 'add_linkedin' %>
 <% end %>
