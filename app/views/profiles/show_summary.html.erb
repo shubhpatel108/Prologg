@@ -29,5 +29,6 @@
 	$('#show_summary_link').click(function() {
 		ajaxLoad("<%=show_summary_path(username: @user.username)%>");
 		window.history.pushState({},"", "<%=show_summary_path(username: @user.username)%>");
+		
 	});
 </script>

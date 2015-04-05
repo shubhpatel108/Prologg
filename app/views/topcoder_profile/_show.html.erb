@@ -59,24 +59,46 @@
 		<div class="col-lg-6 col-md-12 col-sm-12">
 			<!-- BEGIN NEWS TICKER WIDGET -->
 			<div class="the-box no-border full">
-				<h4 class="text-center bg-primary" style="padding-top:10px;padding-bottom:10px;margin-bottom:0px;margin-top:-1px;">Achievements (<%= @tcp.data["achievements"].length %>)</h4>
-				<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
-				<ul class="widget-newsticker media-list" style=" height: 278px !important; overflow: hidden;">
-					<% @tcp.data["achievements"].each do |i| %>
-					<li class="media" style="height:90px;">
-						<a class="pull-left" href="widget-default.html#fakelink">
-							<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello", id="tooltip1">
-								<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/>
-							</div>
-						</a>
-						<div class="media-body">
-						  <h4 class="media-heading"><a href="widget-default.html#fakelink"><%= i["description"] %></a></h4>
-						  <p class="text-muted"><small>achieved on <%= date_format(i["date"]).to_date %></small></p>
-						</div>
-					</li>
-					<% end -%>
-				</ul>
-				<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>
+				<% if not @tcp.data["achievements"].nil? %>
+					<h4 class="text-center bg-primary" style="padding-top:10px;padding-bottom:10px;margin-bottom:0px;margin-top:-1px;">Achievements (<%= @tcp.data["achievements"].count %>)</h4>
+				<% else %> 
+					<!-- <h4 class="text-center bg-primary" style="padding-top:10px;padding-bottom:10px;margin-bottom:0px;margin-top:-1px;">Achievements (0)</h4> -->
+				<% end %> 
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-next"><i class="fa fa-chevron-up"></i></button>
+					<ul class="widget-newsticker media-list" >
+						<% if not @tcp.data["achievements"].nil? %>
+								<% @tcp.data["achievements"].each do |i| %>
+								<li class="media" style="height: 90px;">
+									<a class="pull-left" href="javascript:void(0)">
+										<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello", id="tooltip1">
+											<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/>
+										</div>
+									</a>
+									<div class="media-body">
+									  <h4 class="media-heading"><a href="widget-default.html#fakelink"><%= i["description"] %></a></h4>
+									  <p class="text-muted"><small>achieved on <%= date_format(i["date"]).to_date %></small></p>
+									</div>
+								</li>
+								<% end -%>
+						<% else %>
+							<li class="media" style="height: 90px">
+									<a class="pull-left" href="javascript:void(0)">
+										<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello", id="tooltip1">
+											<!-- <img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/> -->
+										</div>
+									</a>
+									<div class="media-body">
+										<% if @user == current_user %>
+											You have no achievements to show
+										<% else %>
+											<%= @user.full_name %> doesn't have any achievement to show
+										<% end -%>
+									</div>
+								</li>
+						<% end -%>
+					</ul>
+					<button class="btn btn-block btn-primary btn-square" id="w-newsticker-prev"><i class="fa fa-chevron-down"></i></button>
+
 			</div><!-- /.the-box no-border -->
 			<!-- END NEWS TICKER WIDGET -->
 		</div>
@@ -103,7 +125,15 @@
 	if ($('.widget-newsticker').length > 0){
 		$('.widget-newsticker').newsTicker({
 			row_height: 135,
-			max_rows: 3,
+			<% if not @tcp.data["achievements"].nil? %>
+				<% if @tcp.data["achievements"].count > 3 %>
+					max_rows: 3,
+				<% elsif @tcp.data["achievements"].count > 1 %>
+					max_rows: 1,
+				<% end -%>
+			<% else %>
+				max_rows: 0.5,
+			<% end -%>
 			speed: 600,
 			direction: 'up',
 			duration: 4000,

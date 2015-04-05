@@ -165,9 +165,24 @@ class ProfilesController < ApplicationController
 	end
 
 	def show_summary
+		@show_summary_page = true
 		@user = User.where(username: params[:username]).first
+		@first_name = @user.full_name.split(" ").first
+
+		@algo_langs = @user.algo_langs
+		@application_langs = @user.application_langs
+		@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
+
+		@github_profile = @user.github_profile
+
+		@linkedin_profile = @user.linkedin_profile
+		unless @linkedin_profile.nil?
+			@industry = @linkedin_profile.data["industry"]
+		end
+
 		respond_to do |format|
 			format.js
+			format.html
 		end
 	end
 end

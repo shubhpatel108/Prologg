@@ -1,6 +1,6 @@
-<%= render partial: 'left_side_bar' %>
+<%= render partial: 'profiles/left_side_bar' %>
 <div id="individual_profile">
-	<%= render partial: 'show_summary' %>
+	<%= render partial: 'show' %>
 </div>
 
 <script type="text/javascript">
@@ -28,6 +28,5 @@
 	});
 	$('#show_summary_link').click(function() {
 		ajaxLoad("<%=show_summary_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=show_summary_path(username: @user.username)%>");
 	});
 </script>

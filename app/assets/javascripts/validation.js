@@ -108,20 +108,10 @@ $(function($) {
             field: 'user[password]',
             message: 'The password and its confirm are not the same'
           }
-          
         }
-        
       }
-
-
-
-
-
-
-
-
-
     }
+
   });
 
   $('#profile_edit_form').bootstrapValidator({
@@ -201,7 +191,6 @@ $('#edit_linkss_form').bootstrapValidator({
        validating: 'glyphicon glyphicon-refresh'
     },
     fields: {
-      
 
       "user[email]" : {
         validators: {

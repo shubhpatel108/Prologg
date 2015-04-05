@@ -87,7 +87,7 @@
 									  		<li><%= link_to "Show Profile", profile_path(current_user.username) %></li>
 											<li><%= link_to "Edit Profile", edit_user_registration_path %></li>
 											<li><%= link_to "Edit Integrations", edit_integrations_path, remote: true, id: "edit_integrations" %></li>
-											<li><a href="blank.html#fakelink">Change password</a></li>
+											<li><%= link_to "Edit Links", edit_links_path, id: "edit_links" %></li>
 											<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 									  </ul>
 									</li>
@@ -124,10 +124,18 @@
 				if($(".sidebar-left").hasClass("toggle") === true){
 					$(".sidebar-left").removeClass("toggle");
 				}
-				if($(".page-content").hasClass("toggle") === true){
+				if($(".page-content").hasClass("toggle") == true){
 					$(".page-content").removeClass("toggle");
 				}
 			}
+		}
+
+		if($(".page-content").hasClass("toggle") == false){
+			$(".page-content").removeAttr("style")
+		}
+
+		if($(".page-content").hasClass("toggle") == true){
+			$(".page-content").css({"width": "100%"})
 		}
 
 	});
@@ -136,11 +144,13 @@
 		if (windowwidth < 991) {
 			$(".sidebar-left").addClass("toggle");
 			$(".page-content").addClass("toggle");
+			$(".page-content").css({"width": "100%"})
 		};
 		if (windowwidth > 991) {
 			$(".sidebar-left").removeClass("toggle");
 			if($(".page-content").hasClass("toggle") == true){
 				$(".page-content").removeClass("toggle");
+				$(".page-content").removeAttr("style")
 			}
 		};
 	});

@@ -5,8 +5,9 @@ class LinkedinProfile < ActiveRecord::Base
 		client.profile(:fields => 'last-modified-timestamp').last_modified_timestamp
 	end
 
-	def location(client)
-		client.profile(:fields => 'location').location.name
+	def location_and_industry(client)
+		resp = client.profile(:fields => ['location', 'industry'])
+		return [resp.location.name, resp.industry]
 	end
 
 	def network(client)
@@ -66,5 +67,26 @@ class LinkedinProfile < ActiveRecord::Base
 		spl_editions.compact!
 
 		return companies + industries + people + spl_editions
+	end
+
+	def positions(client)
+		current = client.profile(:fields => 'three-current-positions').three_current_positions.all
+		current_pos = []
+		current.each do |pos|
+			item = {}
+			item["t"] = pos.title
+			item["c"] = pos.company.name
+			current_pos << item
+		end
+
+		past = client.profile(:fields => 'three-past-positions').three_past_positions.all
+		past_pos = []
+		past.each do |pos|
+			item = {}
+			item["t"] = pos.title
+			item["c"] = pos.company.name
+			past_pos << item
+		end
+		current_pos + past_pos
 	end
 end
