@@ -6,9 +6,9 @@
   $("#footer-id").remove();
 </script>
 <div class="login toolkits">
-<div class="login-header text-center">
-      <%= image_tag ("download.jpg"), class: "logo" %>
-    </div>
+
+  <%= render partial: "layouts/center_logo"%>
+
 <div class="login-wrapper">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "signupform"}) do |f| %>
   <%= devise_error_messages! %>
