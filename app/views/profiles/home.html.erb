@@ -17,28 +17,28 @@
 $("#header-id").remove();
 $("body").css({"padding-top": "0px"});
 $(".page-content").css({"margin-left": "0px"});
-$(".page-content").css({"background": "#37BC9B"});
+$(".page-content").css({"background": "black"});
 </script>
 
-<div class="row alpha_wrapper" style="  height : 695px">
+<div class="row alpha_wrapper" style="min-height:695px">
 	<div id="alpha_2">
 	</div><!-- alpha_2 ends -->
 	<div id="text_holder_2">	
-    	<div class="col-lg-2 main-logo-container">
+        <div class="col-lg-2 col-sm-8 main-logo-container">
             <div class="main-logo">
                 <%= link_to image_tag("logo.png"), home_path %>
             </div>
         </div>
     	<div class="col-lg-12">
-    		<p class = "heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 30px;font-size: 3em;">
-    		let your code speak for you
+    		<p class = "homepage-heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 30px;font-size: 3em;">
+            let your code speak for you
     		</p>	
     	</div>
     	<div class="row" style="margin-top : 150px">
     		<!-- <div class="col-lg-1">	
     		</div> -->
     		<div class="col-lg-4 col-lg-offset-2">
-                <div class="score-text text-center">
+                <div class="score-text text-center hm-text">
                 	 [Pro-logg]
                      <br/>
                      <br/>
@@ -48,7 +48,7 @@ $(".page-content").css({"background": "#37BC9B"});
                      origin: India
                 </div>
                 <br/>
-                <div class="text-center">
+                <div class="text-center hm-button">
                     <% if user_signed_in? %>
                         <%= link_to "Your Profile", profile_path(current_user.username), class: "btn btn-lg btn-info", style: "color: black; margin-top: 200px;" %>
                     <% else %>
@@ -84,14 +84,14 @@ $(".page-content").css({"background": "#37BC9B"});
     	</div>
 	</div>
 </div>
-<div class="row" id="three" style="background-color : #39424e ">
+<div class="row" id="three" style="background-color : #242A34 ">
 	<div class="col-lg-2 main-logo-container">
         <div class="main-logo">
             <%= link_to image_tag("logo.png"), home_path %>
         </div>
     </div>
 	<div class="col-lg-12" style="margin-top :0px;">
-		<p class = "heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 10px;font-size: 3em;">
+		<p class = "homepage-heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 10px;font-size: 3em;">
 		 An entire hub for Developers </p>
 	</div>
     <div class="row">
@@ -152,10 +152,11 @@ $(".page-content").css({"background": "#37BC9B"});
             </div>
         </div>
 		<div class="row" style="margin-top : 150px">
-			<div class="col-lg-4 col-lg-offset-4">
-            <iframe width="50%" height="315"
-				src="http://www.youtube.com/embed/Bznxx12Ptl0">
-			</iframe> 
+			<div class="col-lg-6 col-lg-offset-3">
+                <div class="videoWrapper">
+                    <!-- Copy & Pasted from YouTube -->
+                    <iframe width="560" height="349" src="http://www.youtube.com/embed/n_dZNLr2cME?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+                </div> 
 			</div>
 		</div>
 	</div>

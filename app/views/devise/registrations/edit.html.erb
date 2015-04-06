@@ -7,9 +7,9 @@
   $(".page-content").css({"background": "#37BC9B"})
 </script>
 <div class="login toolkits">
-  <div class="login-header text-center">
-    <%= image_tag ("download.jpg"), class: "logo" %>
-  </div>
+
+  <%= render partial: "layouts/center_logo"%>
+
   <div class="login-wrapper">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {id: "profile_edit_form", novalidate: "novalidate" , method: :put}) do |f| %>
     <%= devise_error_messages! %>
@@ -24,12 +24,12 @@
       <p class="form-control no-border input-lg rounded" >  
         <i class="fa fa-user  gendericon"></i>
          Gender
-      <i class="fa fa-male  gendericon"></i>
-      <%= f.radio_button :gender , 'male', checked: true %>
-      <%= label :gender_male, 'Male' %>
-      <i class="fa fa-female  gendericon"></i>
-      <%= f.radio_button :gender , 'female' %>
-      <%= label :gender_female, 'Female', { :class => 'femaleicon' } %>
+        <i class="fa fa-male  gendericon"></i>
+        <%= f.radio_button :gender, true, checked: true %>
+        <%= label :gender_male, 'Male' %>
+        <i class="fa fa-female  gendericon"></i>
+        <%= f.radio_button :gender, false %>
+        <%= label :gender_female, 'Female' , { :class => 'femaleicon' }  %>
       </p>
     </div>
 
