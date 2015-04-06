@@ -65,3 +65,13 @@
 <strong><%= render "devise/shared/links" %></strong>
 </div><!-- /.login-wrapper -->
 </div>
+
+<script type="text/javascript">
+  $(window).resize(function() {
+    var windowwidth = $(window).width();
+    if (windowwidth > 991) {
+        $(".page-content").addClass("toggle");
+        $(".page-content").css({"background": "#37BC9B"})
+    };
+  });
+</script>
