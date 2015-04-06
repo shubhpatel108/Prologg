@@ -38,7 +38,7 @@
 												<% end %>
 												<% codeforces_profile = @user.codeforces_profile %>
 												<% unless codeforces_profile.nil? %>
-													<a href="<%= codeforces_link(codeforces_profile.username) %>" target="_blank" data-toggle="links" data-placement="top" title="Codeforces"><i class="fa fa-cubes icon-xs icon-circle icon-default"></i></a>
+													<a href="<%= codeforces_link(codeforces_profile.handle) %>" target="_blank" data-toggle="links" data-placement="top" title="Codeforces"><i class="fa fa-cubes icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 												<% topcoder_profile = @user.topcoder_profile %>
 												<% unless topcoder_profile.nil? %>
