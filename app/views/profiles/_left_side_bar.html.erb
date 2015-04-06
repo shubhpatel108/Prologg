@@ -28,20 +28,36 @@
 												</Strong>
 											</p>
 											<p class="social-icon">
+												<% github_profile = @user.github_profile %>
+												<% unless github_profile.nil? %>
+													<a href="<%= github_link(github_profile.username) %>" target="_blank"><i class="fa fa-github icon-xs icon-circle icon-default"></i></a>
+												<% end %>
+												<% linkedin_profile = @user.linkedin_profile %>
+												<% unless linkedin_profile.nil? %>
+													<a href="<%= linkedin_link(linkedin_profile.uid) %>" target="_blank"><i class="fa fa-linkedin icon-xs icon-circle icon-default"></i></a>
+												<% end %>
+												<% codeforces_profile = @user.codeforces_profile %>
+												<% unless codeforces_profile.nil? %>
+													<a href="<%= codeforces_link(codeforces_profile.username) %>" target="_blank"><i class="fa fa-cubes icon-xs icon-circle icon-default"></i></a>
+												<% end %>
+												<% topcoder_profile = @user.topcoder_profile %>
+												<% unless topcoder_profile.nil? %>
+													<a href="<%= topcoder_link(topcoder_profile.handle) %>" target="_blank"><i class="fa fa-tumblr icon-xs icon-circle icon-default"></i></a>
+												<% end %>
 												<% unless @user.blog_link.nil? %>
-													<a href="<%= @user.blog_link.url %>" target="_blank"><i class="fa fa-wordpress icon-xs icon-circle icon-wordpress"></i></a>
+													<a href="<%= @user.blog_link.url %>" target="_blank"><i class="fa fa-wordpress icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 												<% unless @user.gplus_link.nil? %>
-													<a href="<%= @user.gplus_link.nurl %>" target="_blank"><i class="fa fa-google-plus icon-xs icon-circle icon-google-plus"></i></a>
+													<a href="<%= @user.gplus_link.nurl %>" target="_blank"><i class="fa fa-google-plus icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 												<% unless @user.facebook_link.nil? %>
-													<a href="<%= @user.facebook_link.nurl %>" target="_blank"><i class="fa fa-facebook icon-xs icon-circle icon-facebook"></i></a>
+													<a href="<%= @user.facebook_link.nurl %>" target="_blank"><i class="fa fa-facebook icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 												<% unless @user.twitter_link.nil? %>
-													<a href="<%= @user.twitter_link.nurl %>" target="_blank"><i class="fa fa-twitter icon-xs icon-circle icon-twitter"></i></a>
+													<a href="<%= @user.twitter_link.nurl %>" target="_blank"><i class="fa fa-twitter icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 												<% unless @user.quora_link.nil? %>
-													<a href="<%= @user.quora_link.url %>" target="_blank"><i class="fa fa-reddit-square icon-xs icon-circle icon-dribbble"></i></a>
+													<a href="<%= @user.quora_link.url %>" target="_blank"><i class="fa fa-reddit-square icon-xs icon-circle icon-default"></i></a>
 												<% end %>
 											</p>
 										</div><!-- /.the-box .no-border .bg-info .no-margin -->
