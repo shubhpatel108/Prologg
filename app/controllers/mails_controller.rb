@@ -7,12 +7,16 @@ class MailsController < ApplicationController
   end
 
   def send_mail
-		user = User.where(username: params[:username]).first
-		mail=params[:mail]
-		sender= current_user
-	    ContactMailer.send_mail(user.email, mail["subject"], mail["content"],sender).deliver
-	    MailNotification.create(:sender_id => sender.id, :receiver_id => user.id)
-		redirect_to(profile_path(user.username))
+		if params[:mail][:content].empty? or params[:mail][:content].empty?
+			redirect_to profile_path(params[:username]), alert: "Please don't leave subject or content empty."
+		else
+			user = User.where(username: params[:username]).first
+			mail=params[:mail]
+			sender= current_user
+			ContactMailer.send_mail(user.email, mail["subject"], mail["content"],sender).deliver
+			MailNotification.create(:sender_id => sender.id, :receiver_id => user.id)
+			redirect_to profile_path(user.username), notice: "Message delivered!"
+		end
 	end
 
 	def delete

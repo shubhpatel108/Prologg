@@ -1,5 +1,3 @@
-
-
 <!-- BEGIN MAIL APPS NEW MAIL -->
 <div class="mail-apps-wrap">
 	<div class="the-box bg-success no-border no-margin heading">
@@ -9,18 +7,18 @@
 			</div><!-- /.col-sm-6 -->
 		</div><!-- /.row -->
 	</div>
-						
+
 	<div class="the-box no-margin">
 		<div class="row">
 			<div class="col-sm-11">
-				<%= form_for(:mail, :url => send_mails_path(@username)) do |f| %>
+				<%= form_for(:mail, :url => send_mails_path(@username), html: {id: "send_mail"}) do |f| %>
 					<div class="form-group">
-						<%= f.label(:subject, "Mail Subject:")%>
+						<%= f.label("Mail Subject:")%>
 						<%= f.text_field(:subject, :placeholder => "Talk about what...",  :class=>"form-control input-lg") %>
 					</div><!-- /.input-group -->
 					<div class="form-group">
-						<%= f.label(:subject, "Content:")%>
-						<%= f.text_area(:content ,  :class=>"form-control input-lg", :style=> "height: 250px;") %>
+						<%= f.label("Content:")%>
+						<%= f.text_area(:content , :class=>"form-control input-lg", :style=> "height: 250px;") %>
 					</div><!-- /.input-group -->
 					<div class="form-group">
 						<button type="submit" class="btn btn-success"><i class="fa fa-rocket"></i> Send mail</button>
