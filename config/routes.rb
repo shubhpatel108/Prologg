@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks'}
   root to: 'profiles#index'
+  get '/home', to: 'profiles#home', as: :home
 
   get '/:username', to: 'profiles#show', as: :profile
   get '/users/edit_links', to: 'profiles#edit_links', as: :edit_links

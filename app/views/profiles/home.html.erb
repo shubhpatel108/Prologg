@@ -1,0 +1,166 @@
+<script type="text/javascript">
+	$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
+$("#header-id").remove();
+$("body").css({"padding-top": "0px"});
+$(".page-content").css({"margin-left": "0px"});
+$(".page-content").css({"background": "#37BC9B"});
+</script>
+
+<div class="row alpha_wrapper" style="  height : 695px">
+	<div id="alpha_2">
+	</div><!-- alpha_2 ends -->
+	<div id="text_holder_2">	
+    	<div class="col-lg-2 main-logo-container">
+            <div class="main-logo">
+                <%= link_to image_tag("logo.png"), home_path %>
+            </div>
+        </div>
+    	<div class="col-lg-12">
+    		<p class = "heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 30px;font-size: 3em;">
+    		let your code speak for you
+    		</p>	
+    	</div>
+    	<div class="row" style="margin-top : 150px">
+    		<!-- <div class="col-lg-1">	
+    		</div> -->
+    		<div class="col-lg-4 col-lg-offset-2">
+                <div class="score-text text-center">
+                	 [Pro-logg]
+                     <br/>
+                     <br/>
+                     adj. & acronymn for Professoinal (people)
+                     <br/>
+                     <br/>
+                     origin: India
+                </div>
+                <br/>
+                <div class="text-center">
+                    <% if user_signed_in? %>
+                        <%= link_to "Your Profile", profile_path(current_user.username), class: "btn btn-lg btn-info", style: "color: black; margin-top: 200px;" %>
+                    <% else %>
+                        <%= link_to "Sign-in", new_user_session_path, class: "btn btn-lg btn-info", style: "color: black; margin-top: 200px;" %>
+                    <% end %>
+                </div>
+    		</div> 
+    		<hr class="vertical"/>
+        	<!-- <div class="col-lg-1">	
+        	</div> -->
+        	<div class="col-lg-4 col-lg-offset-1">
+        		<div class="score-text text-center">
+				    Track your daily progress.
+                    <br/><br/>Analyze and enhance your skills. <br/><br/>Because we speak for you.
+ 				 </div>
+                 <br/>
+                <div class="text-center">
+                    <% if user_signed_in? %>
+                        <%= link_to "Search a companion", search_developer_path, class: "btn btn-lg btn-info", style: "color: black; margin-top: 200px;" %>
+                    <% else %>
+                        <%= link_to "Register", new_user_registration_path, class: "btn btn-lg btn-info", style: "color: black; margin-top: 200px;" %>
+                    <% end %>
+                </div>
+        	</div>
+    	</div>
+        <div class="last-row">
+            <div class="col-lg-12">
+        		<div class="col-lg-5">
+        		</div>
+        		<a href="#three">
+        		<i class="fa fa-chevron-down icon-lg" style = "margin-top: 5%;margin-left: 5%;"></i></a>
+        	</div>
+    	</div>
+	</div>
+</div>
+<div class="row" id="three" style="background-color : #39424e ">
+	<div class="col-lg-2 main-logo-container">
+        <div class="main-logo">
+            <%= link_to image_tag("logo.png"), home_path %>
+        </div>
+    </div>
+	<div class="col-lg-12" style="margin-top :0px;">
+		<p class = "heading row" style="text-align : center;font-family: Raleway;color: white;margin-top: 10px;font-size: 3em;">
+		 An entire hub for Developers </p>
+	</div>
+    <div class="row">
+        <%= link_to "Search Developers", search_developer_path, class: "btn btn-lg btn-success", style: "color: black;margin-left:42%;" %>
+    </div>
+	<div class="row" style="margin-top :0%" >
+    	<ul id="UL_1" >
+    	<div class="col-lg-4">
+        	<li id="LI_2">
+        		<div id="DIV_3" style="margin-left : 40%;">
+        			 <span id="SPAN_4"><img alt="People" src="https://d3keuzeb2crhkn.cloudfront.net/hackerrank/assets/people-95ead8799bad0f6f790e1c4b07e59faf.png" id="IMG_5" />
+        			 <div style="margin-top:25px">
+        			 	8.4K Developers
+        			 </div>
+        			 </span>
+        		</div>
+        	</li>
+    	</div>
+    	<div class="col-lg-4">
+        	<li id="LI_8">
+        		<div id="DIV_9" style="margin-left : 40%;">
+        			 <span id="SPAN_10"><img alt="Python-logo" src="https://d3keuzeb2crhkn.cloudfront.net/hackerrank/assets/python-logo-3ecf8d0c174f0206c25d2a084ee898ef.png" id="IMG_11" />
+        			 <div style="margin-top:25px">
+        			 	30 Languages
+        			 </div>
+        			 </span>
+        		</div>
+        	</li>
+    	</div>
+    	<div class="col-lg-4">
+        	<li id="LI_14">
+        		<div id="DIV_15" style="margin-left : 40%;">
+        			 <span id="SPAN_16"><img alt="Medal_of_honor" src="https://d3keuzeb2crhkn.cloudfront.net/hackerrank/assets/medal_of_honor-82477001d4cc45c954cf89f98d2ea4f1.png" id="IMG_17" />
+        			 <div style="margin-top:25px">
+        			 	610 Integrations
+        			 </div></span>
+        		</div>
+        	</li>
+    	</div>
+        </ul>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-5">
+			
+		</div>
+		<a href="#four">
+		<i class="fa fa-chevron-down icon-lg" style = "margin-top: 0%;margin-left: 5%;"></i></a>
+	</div>
+</div>
+
+<div class="row" id = "four" style="height : 635px; ">
+	<div id="alpha_3">
+	</div><!-- alpha_2 ends -->
+	<div id="text_holder_2">
+        <div class="col-lg-2 main-logo-container">
+            <div class="main-logo">
+                <%= link_to image_tag("logo.png"), home_path %>
+            </div>
+        </div>
+		<div class="row" style="margin-top : 150px">
+			<div class="col-lg-4 col-lg-offset-4">
+            <iframe width="50%" height="315"
+				src="http://www.youtube.com/embed/Bznxx12Ptl0">
+			</iframe> 
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
