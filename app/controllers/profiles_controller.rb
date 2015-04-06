@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 		if user_signed_in?
 			redirect_to profile_path(current_user.username)
 		else
-			redirect_to index
+			redirect_to :home
 		end
 	end
 
