@@ -22,13 +22,12 @@
     <p class="form-control no-border input-lg rounded" >  
       <i class="fa fa-user  gendericon"></i>
        Gender
-    <i class="fa fa-male  gendericon"></i>
-    <%= f.radio_button :gender , 'male', checked: true %>
-    <%= label :gender_male, 'Male' %>
-    <i class="fa fa-female  gendericon"></i>
-    <%= f.radio_button :gender , 'female' %>
-    <%= label :gender_female , 'Female' , { :class => 'femaleicon' }  %>
-    
+      <i class="fa fa-male  gendericon"></i>
+      <%= f.radio_button :gender, true, checked: true %>
+      <%= label :gender_male, 'Male' %>
+      <i class="fa fa-female  gendericon"></i>
+      <%= f.radio_button :gender, false %>
+      <%= label :gender_female, 'Female' , { :class => 'femaleicon' }  %>
     </p>
   </div>
   <div class="form-group has-feedback lg right-feedback no-label">
