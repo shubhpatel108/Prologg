@@ -9,10 +9,12 @@
 											<% else %>
 												<span class="label label-warning">Unavailable</span>
 											<% end %>
-											<p class="text-muted">
+											<p class="text-muted short-bio">
 												<%= @user.short_bio unless @user.short_bio.nil? %>
 											</p>
-											<p class="bordered"><i class="fa fa-map-marker"></i> <strong>San Francisco, CA</strong></p>
+											<% unless @user.location.nil? %>
+												<p class="bordered"><i class="fa fa-map-marker"></i> <strong><%= @user.location.name %></strong></p>
+											<% end%>
 											<% unless @user.website_link.nil? %>
 											<p>
 												<a href="<%= @user.website_link.url %>" target="_blank">
