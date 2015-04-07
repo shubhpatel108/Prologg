@@ -2,7 +2,9 @@
 	<li>
 		<a href="javascript:void(0);" id="show_summary_link"><i class="fa fa-dashboard icon-sidebar"></i>
 		Profile
-		<span class="label label-success span-sidebar">UPDATED</span>
+		<% if not @user.profile_updated_at < 2.days.ago %>
+			<span class="label label-success span-sidebar">UPDATED</span>
+		<% end -%>
 		</a>
 	</li>
 	<li >
@@ -10,7 +12,6 @@
 			<i class="fa fa-desktop icon-sidebar"></i>
 			<i class="fa fa-angle-right chevron-icon-sidebar"></i>
 			Projects
-			<span class="badge badge-warning span-sidebar">9</span>
 			</a>
 		<ul class="submenu">
 			<li><%= link_to "Github", "javascript:void(0);", id: 'github_profile' %></li>
@@ -29,5 +30,7 @@
 		</ul>
 	</li>
 	
-	<li class="static text-center">Last updated on <%= @user.profile_updated_at%></li>
+	<% if not @user.profile_updated_at.nil? %>
+		<li class="static text-center">Last updated on <%= @user.profile_updated_at.strftime("%B %d, %Y")%></li>
+	<% end -%>
 </ul>
