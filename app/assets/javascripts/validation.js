@@ -1,5 +1,5 @@
 $(function($) {
-  $('#signinnform').bootstrapValidator({
+  $('#signinform').bootstrapValidator({
     message: 'This value is not valid',
     feedbackIcons: {
       valid: 'glyphicon glyphicon-ok',
@@ -192,13 +192,10 @@ $(function($) {
       },
       fields: {
 
-        "user[email]" : {
+        "blog_link" : {
           validators: {
-            notEmpty: {
-              message: 'The email address is required and can\'t be empty'
-            },
-            emailAddress: {
-              message: 'The input is not a valid email address'
+            uri: {
+              message: 'Please enter a valid URL starting with http(s)://'
             }
           }
         }
