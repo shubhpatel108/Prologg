@@ -37,12 +37,12 @@
 		<div class="bg-info the-box text-center" style="height : 225px ; margin-top : 28px">
 			<h4 class="less-distance">Merge Requests</h4>
 			<span class="chart easy-pie-chart-3" data-percent="<% if @ghp.data["activities"]["total_prs"] == 0 %>
-					50
+					0
 					<% else %>
 						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %>
 					<% end -%>" style="height : 225px ; margin-top : 25px">
 				<span class="percent"><% if @ghp.data["activities"]["total_prs"] == 0 %>
-					50
+					0
 					<% else %>
 						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %>
 					<% end -%></span>
