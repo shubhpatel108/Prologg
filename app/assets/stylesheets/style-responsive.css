@@ -95,11 +95,11 @@ SMALL DESKTOP 768px <> 991px
 	body{overflow-x: hidden;}
 	.wrapper{overflow-x: hidden;}
 	.top-navbar.toggle{
-		left: 250px;
-		right: -250px;
+		left: 300px;
+		right: -300px;
 	}
 	.sidebar-left{
-		left: -250px;
+		left: -300px;
 		top: 0;
 	}
 	.sidebar-left.toggle{
@@ -125,12 +125,12 @@ SMALL DESKTOP 768px <> 991px
 		margin-left: 0px;
 	}
 	.page-content.toggle{
-		margin-left: 250px;
-		margin-right: -250px;
+		margin-left: 300px;
+		margin-right: -300px;
 	}
 	.page-content.toggle-left{
-		margin-left: -250px;
-		margin-right: 250px;
+		margin-left: -300px;
+		margin-right: 300px;
 	}
 	
 	/**
@@ -268,8 +268,8 @@ TABLET < 767px
 		height: auto;
 	}
 	.top-navbar.toggle{
-		left: 250px;
-		right: -250px;
+		left: 300px;
+		right: -300px;
 	}
 	.logo-brand {
 		width: 100%;
@@ -283,13 +283,13 @@ TABLET < 767px
 	}
 	.sidebar-left{
 		top: 0;
-		left: -250px;
+		left: -300px;
 	}
 	.sidebar-right{
 		top: 60px;
-		right: -250px;
+		right: -300px;
 		bottom: 0;
-		width: 250px;
+		width: 300px;
 	}
 	.sidebar-left.toggle{
 		left: 0px;
@@ -300,12 +300,12 @@ TABLET < 767px
 	}
 	.page-content.toggle{
 		left: 0;
-		margin-left: 250px;
-		margin-right: -250px;
+		margin-left: 300px;
+		margin-right: -300px;
 	}
 	.page-content.toggle-left{
-		margin-left: -250px;
-		margin-right: 250px;
+		margin-left: -300px;
+		margin-right: 300px;
 	}
 	.sidebar-right.toggle-left{
 		right: 0px;
