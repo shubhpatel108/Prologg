@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_one :twitter_link, dependent: :destroy
   has_one :blog_link, dependent: :destroy
   has_one :quora_link, dependent: :destroy
+  has_one :stack_link, dependent: :destroy
 
   has_one :codeforces_profile, dependent: :destroy
   has_one :github_profile, dependent: :destroy
