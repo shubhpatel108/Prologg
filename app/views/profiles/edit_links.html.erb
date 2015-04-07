@@ -37,7 +37,7 @@
 				</ul>
 
 				<!-- Tab panes -->
-				<%= form_tag({controller: "/profiles", action: "update_links" , html: {id: "profile_edit_form", novalidate: "novalidate"}}) do %>
+				<%= form_tag({controller: "profiles", action: "update_links"}, {id: "edit_links_form"}) do %>
 				<div class="tab-content">
 				
 				<div role="tabpanel" class="tab-pane active" id="website">
