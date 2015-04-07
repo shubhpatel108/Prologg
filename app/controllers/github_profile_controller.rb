@@ -22,6 +22,10 @@ class GithubProfileController < ApplicationController
 		orgs = @github_profile.orgs(github)
 		metadata.merge!(:orgs => orgs)
 
+		#Update Last updated at attribute
+		current_user.profile_updated_at = Time.now
+		current_user.save!
+		current_user.reload
 
 		@github_profile.data = metadata
 		@github_profile.data_will_change!
@@ -59,6 +63,11 @@ class GithubProfileController < ApplicationController
 
 				orgs = @github_profile.orgs(github)
 				new_data.merge!(:orgs => orgs)
+
+				#Update Last updated at attribute
+				current_user.profile_updated_at = Time.now
+				current_user.save!
+				current_user.reload
 
 				@github_profile.data = new_data
 				@github_profile.data_will_change!

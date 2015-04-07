@@ -30,6 +30,9 @@ class LinkedinProfileController < ApplicationController
 				skills_to_remove << skill
 			end
 		end
+
+		#Update Last updated at attribute
+		current_user.profile_updated_at = Time.now
 		current_user.save!
 		current_user.reload
 		data[:skills] = data[:skills] - skills_to_remove
@@ -95,6 +98,9 @@ class LinkedinProfileController < ApplicationController
 					skills_to_remove << skill
 				end
 			end
+
+			#Update Last updated at attribute
+			current_user.profile_updated_at = Time.now
 			current_user.save!
 			current_user.reload
 			data[:skills] = data[:skills] - skills_to_remove

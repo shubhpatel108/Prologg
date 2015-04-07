@@ -52,6 +52,9 @@ class CodeforcesProfileController < ApplicationController
 					current_user.languages << new_lang
 				end
 			end
+
+			#Update Last updated at attribute
+			current_user.profile_updated_at = Time.now
 			current_user.save!
 			current_user.reload
 
@@ -122,6 +125,9 @@ class CodeforcesProfileController < ApplicationController
 								current_user.languages << new_lang
 							end
 						end
+
+						#Update Last updated at attribute
+						current_user.profile_updated_at = Time.now
 						current_user.save!
 						current_user.reload
 

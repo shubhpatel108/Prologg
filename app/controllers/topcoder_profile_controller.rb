@@ -28,6 +28,11 @@ class TopcoderProfileController < ApplicationController
 				@tpf.save!
 			end
 
+			#Update Last updated at attribute
+			current_user.profile_updated_at = Time.now
+			current_user.save!
+			current_user.reload
+
 			flash[:notice] = "You have successfully integrated Topcoder in your profile."
 			redirect_to profile_path(username: current_user.username)
 		else
@@ -65,6 +70,11 @@ class TopcoderProfileController < ApplicationController
 						@tpf.data = data
 						@tpf.data_will_change!
 						@tpf.save!
+
+						#Update Last updated at attribute
+						current_user.profile_updated_at = Time.now
+						current_user.save!
+						current_user.reload
 
 						flash[:notice] = "You have successfully integrated Topcoder in your profile."
 						redirect_to profile_path(username: current_user.username)
