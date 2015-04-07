@@ -68,6 +68,11 @@ class ProfilesController < ApplicationController
 			@quora_link = current_user.quora_link.url
 		end
 
+		if current_user.stack_link.nil?
+			@stack_link = ""
+		else
+			@stack_link = current_user.stack_link.nurl
+		end
 	end
 
 	def update_links
@@ -76,6 +81,7 @@ class ProfilesController < ApplicationController
 		params[:gplus_link] = GplusLink.normalize_url(params[:gplus_link])
 		params[:facebook_link] = FacebookLink.normalize_url(params[:facebook_link])
 		params[:twitter_link] = TwitterLink.normalize_url(params[:twitter_link])
+		params[:stack_link] = StackLink.normalize_url(params[:stack_link])
 
 		if not u.website_link.nil?
 			u.website_link.url = params[:website_link]
@@ -117,6 +123,13 @@ class ProfilesController < ApplicationController
 			u.quora_link.save!
 		elsif params[:quora_link]!=""
 			QuoraLink.create(user_id: u.id, url: params[:quora_link])
+		end
+
+		if not u.stack_link.nil?
+			u.stack_link.url = params[:stack_link]
+			u.stack_link.save!
+		elsif params[:stack_link]!=""
+			StackLink.create(user_id: u.id, url: params[:stack_link])
 		end
 
 		redirect_to :root

@@ -44,6 +44,9 @@
 												<% unless topcoder_profile.nil? %>
 													<a href="<%= topcoder_link(topcoder_profile.handle) %>" target="_blank" data-toggle="links" data-placement="top" title="Topcoder"><i class="fa fa-tumblr icon-xs icon-circle icon-default"></i></a>
 												<% end %>
+												<% unless @user.stack_link.nil? %>
+													<a href="<%= @user.stack_link.nurl %>" target="_blank" data-toggle="links" data-placement="top" title="StackOverFlow"><i class="fa fa-stack-overflow icon-xs icon-circle icon-default"></i></a>
+												<% end %>
 												<% unless @user.blog_link.nil? %>
 													<a href="<%= @user.blog_link.url %>" target="_blank" data-toggle="links" data-placement="top" title="Blog"><i class="fa fa-wordpress icon-xs icon-circle icon-default"></i></a>
 												<% end %>

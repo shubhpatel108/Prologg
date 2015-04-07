@@ -33,6 +33,7 @@
 				<li role="presentation" ><a href="#fb" aria-controls="home" role="tab" data-toggle="tab">Facebook</a></li>
 				<li role="presentation"><a href="#twitter" aria-controls="messages" role="tab" data-toggle="tab">Twitter</a></li>
 				<li role="presentation"><a href="#quora" aria-controls="settings" role="tab" data-toggle="tab">Quora</a></li>
+				<li role="presentation"><a href="#stack" aria-controls="settings" role="tab" data-toggle="tab">StackOverflow</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -73,6 +74,12 @@
 					<div class="input-group">
 						<span class="input-group-addon danger">@</span>
 						<%= text_field_tag :quora_link, @quora_link, placeholder: "https://www.quora.com/example-user" , class: "form-control"%>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="stack">
+					<div class="input-group">
+						<span class="input-group-addon warning">@</span>
+						<%= text_field_tag :stack_link, @stack_link, placeholder: "http://stackoverflow.com/users/id/name" , class: "form-control"%>
 					</div>
 				</div>
 
