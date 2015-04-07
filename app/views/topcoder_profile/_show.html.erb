@@ -68,9 +68,9 @@
 					<ul class="widget-newsticker media-list" >
 						<% if not @tcp.data["achievements"].nil? %>
 								<% @tcp.data["achievements"].each do |i| %>
-								<li class="media" style="height: 90px;">
+								<li class="media"  style="height: 90px;">
 									<a class="pull-left" href="javascript:void(0)">
-										<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello", id="tooltip1">
+										<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello">
 											<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/>
 										</div>
 									</a>
@@ -124,7 +124,7 @@
 <script type="text/javascript">
 	if ($('.widget-newsticker').length > 0){
 		$('.widget-newsticker').newsTicker({
-			row_height: 135,
+			row_height: 90,
 			<% if not @tcp.data["achievements"].nil? %>
 				<% if @tcp.data["achievements"].count > 3 %>
 					max_rows: 3,
@@ -143,6 +143,8 @@
 			nextButton: $('#w-newsticker-next')
 		});
 	}
+
+	$("[data-toggle=tooltip]").tooltip();
 </script>
 <% else %>
 	<%= render partial: 'add_topcoder' %>
