@@ -36,7 +36,7 @@
 
 		<div class="bg-info the-box text-center" style="height : 225px ; margin-top : 28px">
 			<h4 class="less-distance">Merge Requests</h4>
-			<span class="chart chart-widget-pie widget-easy-pie-2" data-percent="<% if @ghp.data["activities"]["total_prs"] == 0 %>
+			<span class="chart easy-pie-chart-3" data-percent="<% if @ghp.data["activities"]["total_prs"] == 0 %>
 					50
 					<% else %>
 						<%= (@ghp.data["activities"]["merged_prs"])*100/(@ghp.data["activities"]["total_prs"]) %>
@@ -79,7 +79,7 @@
 				<div class="table-responsive">
 					<table class="table table-th-block table-primary">
 						<thead>
-							<tr><th style="width: 30px;">No</th><th>Repo_Name</th><th>Language</th><th>Number of Commits</th></tr>
+							<tr><th style="width: 30px;">No</th><th>Repo_Name</th><th>Language</th></tr>
 						</thead>
 						<tbody>
 							<% i = 1 %>
@@ -94,12 +94,13 @@
 								</td>
 								<td>
 									<% item["languages"].each do |key, value| %>
-									<span class="badge badge-<%= color_star(index) %>">
-											<%= key %> &nbsp;
-										</span>
+										<% unless key.nil? %>
+											<span class="badge badge-<%= color_star(index) %>">
+												<%= key %> &nbsp;
+											</span>
+										<% end %>
 									<% end -%>
 								</td>
-								<td><%= item["owner_commits"] %></td></tr>
 								<% i = i + 1 %>
 							<% end -%>
 							<% end %>
@@ -108,7 +109,7 @@
 				</div><!-- /.table-responsive -->
 			</div>
 
-			<div class="col-lg-6" style="margin-top: -50px;">
+			<div class="col-lg-12" style="margin-top: -50px;">
 				<%= will_paginate @repos %>
 			</div>
 		</div>
@@ -120,7 +121,7 @@
 			<% i = 1 %>
 			<% if not @orgs.blank? %>
 				<% for item in  @orgs %>
-		  			<a href="element-list-media.html#fakelink" class="list-group-item active"><%= item["login"] %> <span class="badge badge-info"><%= item["members_count"] %></span></a>
+					<a href="javascript:void(0);" class="list-group-item active"><%= item["login"] %> <span class="badge badge-info"><%= item["members_count"] %></span></a>
 				<% i = i + 1 %>
 				<% end -%>
 	  		<% else %>
@@ -134,16 +135,15 @@
 <!-- <script src="assets/easypiechart.min.js"></script> -->
 <!-- <script src="assets/jquery.easypiechart.min.js"></script> -->
  <script type="text/javascript">
-	// if ($('.widget-easy-pie-2').length > 0){
-	// 	$('.widget-easy-pie-2').easyPieChart({
-	// 		easing: 'easeOutBounce',
-	// 		barColor : '#F6BA48',
-	// 		lineWidth: 10,
-	// 		onStep: function(from, to, percent) {
-	// 			$(this.el).find('.percent').text(Math.round(percent));
-	// 		}
-	// 	});
-	// }
+	$('.easy-pie-chart-3').easyPieChart({
+		easing: 'easeOutBounce',
+		barColor : '#E9573F',
+		lineWidth: 10,
+		lineCap : 'square',
+		onStep: function(from, to, percent) {
+			$(this.el).find('.percent').text(Math.round(percent));
+		}
+	});
 </script>
 
 <% else %>
