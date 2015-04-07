@@ -144,6 +144,13 @@
 			$(this.el).find('.percent').text(Math.round(percent));
 		}
 	});
+
+	$(function() {
+	  $(".paginate_ajax th a, .paginate_ajax .pagination a").on("click", function(){
+	    $.getScript(this.href);
+	    return false;
+	  });
+	});
 </script>
 
 <% else %>

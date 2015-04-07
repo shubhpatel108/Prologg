@@ -1,7 +1,1 @@
 $('#individual_profile').html("<%= escape_javascript render(:partial => 'github_profile/show')	 %>");
-$(function() {
-  $(".paginate_ajax th a, .paginate_ajax .pagination a").on("click", function(){
-    $.getScript(this.href);
-    return false;
-  });
-});
