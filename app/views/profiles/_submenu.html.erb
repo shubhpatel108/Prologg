@@ -2,8 +2,10 @@
 	<li>
 		<a href="javascript:void(0);" id="show_summary_link"><i class="fa fa-dashboard icon-sidebar"></i>
 		Profile
-		<% if not @user.profile_updated_at < 2.days.ago %>
-			<span class="label label-success span-sidebar">UPDATED</span>
+		<% if not @user.profile_updated_at.nil? %>	
+			<% if not @user.profile_updated_at < 2.days.ago %>
+				<span class="label label-success span-sidebar">UPDATED</span>
+			<% end -%>
 		<% end -%>
 		</a>
 	</li>
