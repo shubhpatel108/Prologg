@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  $(".page-content").css({"margin-left": "0px"});
+  $(".sidebar-left").hide();
+// </script>
 <h1 class="page-heading text-center" >Integrations</h1>
 <hr>
 <%- if Devise.mappings[:user].omniauthable? %>
@@ -18,13 +22,3 @@
 	
 	<%= render partial: "topcoder_profile/edit" %>
 </div>
-
-<!-- 
-<%= link_to "Add Codeforces Account", cfp_profile_new_path %><br />
-<%= link_to "Add Topcoder Account", topcoder_profile_new_path %><br />
-
-<%= link_to "Update Codeforces Account", cfp_update_profile_path %><br />
-<%= link_to "Update Github Account", github_update_profile_path %><br />
-<%= link_to "Update Topcoder Account", topcoder_update_profile_path %><br />
- -->
-
