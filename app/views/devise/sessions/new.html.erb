@@ -41,3 +41,35 @@
 
   <strong><%= render "devise/shared/links" %></strong>
 </div>
+<script type="text/javascript">
+  $('#signinform').bootstrapValidator({
+    message: 'This value is not valid',
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+       validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      "user[email]" : {
+        validators: {
+          notEmpty: {
+            message: 'The email address is required and can\'t be empty'
+          },
+          emailAddress: {
+            message: 'The input is not a valid email address'
+          }
+        }
+      },
+
+      "user[password]" : {
+        message: 'The password field cannot be empty',
+        validators: {
+          notEmpty: {
+            message: 'The password is required and can\'t be empty'
+          }
+          
+        }
+      }
+    }
+  });
+</script>

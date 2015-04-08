@@ -93,3 +93,23 @@
 	</div><!-- /.the-box .no-border .full -->
 	<!-- END USER CARD -->
 </div>
+<script type="text/javascript">
+	$('#edit_links_form').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+
+        "blog_link" : {
+          validators: {
+            uri: {
+              message: 'Please enter a valid URL starting with http(s)://'
+            }
+          }
+        }
+      }
+    });
+</script>
