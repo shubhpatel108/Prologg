@@ -1,4 +1,17 @@
-<%= form_tag(controller: "codeforces_profile", action: "create") do %>
-	<%= text_field_tag :handle %>
-	<%= submit_tag "Go" %>
-<% end %>
+<script type="text/javascript">
+  $(".page-content").css({"margin-left": "0px"});
+  $(".page-content").css({"background": "#37BC9B"})
+</script>
+<div class="login toolkits">
+	<div class="login-wrapper">
+		<%= form_tag(controller: "codeforces_profile", action: "create") do %>
+		  	<div class="form-group has-feedback lg left-feedback no-label">
+				<%= text_field_tag :handle, nil, class: "form-control no-border input-lg rounded", placeholder: "Handle" %>
+				<span class="fa fa-envelope form-control-feedback"></span>
+			</div>
+			<div class="actions">
+				<%= submit_tag "Go", class: "btn btn-warning btn-lg btn-perspective btn-block" %>
+			</div>
+		<% end %>
+	</div>
+</div>
