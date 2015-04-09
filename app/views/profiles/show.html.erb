@@ -27,7 +27,6 @@
 		ajaxLoad("<%=new_mails_path(username: @user.username)%>");
 	});
 	$('#show_summary_link').click(function() {
-		ajaxLoad("<%=show_summary_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=show_summary_path(username: @user.username)%>");
+		ajaxLoad("<%=profile_path(username: @user.username)%>");
 	});
 </script>
