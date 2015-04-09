@@ -70,10 +70,10 @@ class User < ActiveRecord::Base
   end
 
   def linkedin_skills
-    if codeforces_profile.nil?
+    if linkedin_profile.nil?
       []
     else
-      self.linkedin_profile.data["skills"]
+      linkedin_profile.data["skills"]
     end
   end
 
