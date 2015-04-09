@@ -20,6 +20,17 @@ module SummaryHelper
 		end
 	end
 
+	def lang_adj_tt(adj)
+		case adj
+		when "superlative"
+			"with more than 8 repositories or 50 algorithms problems"
+		when "middling"
+			"with more than 3 repositories or 30 algorithms problems"
+		when "neopyte"
+			"a starter who is enthusiastic and progressive"
+		end
+	end
+
 	def over_all_adjective
 		lang = @all_langs.keys.first
 		count = @all_langs[lang]
@@ -30,6 +41,17 @@ module SummaryHelper
 			"a neotoric"
 		else
 			"an aspiting"
+		end
+	end
+
+	def over_all_tt(adj)
+		case adj
+		when "a staunch"
+			"on Top of the world"
+		when "a neotoric"
+			"Second in hierarchy, after 'Staunch'"
+		when "an aspiting"
+			"last in hierarchy but quickly quickly progressing"
 		end
 	end
 
@@ -70,7 +92,7 @@ module SummaryHelper
 		if skills.empty?
 			""
 		else
-			" and is an appreciable enthusiast to learn about " + skills.to_sentence
+			(" and is an appreciable enthusiast to learn about <span class='text-danger style-words' data-toggle='sum' data-placement='top' title='profoundly endorsed by others'>" + skills.to_sentence + "</span>").html_safe
 		end
 	end
 
@@ -85,11 +107,11 @@ module SummaryHelper
 		week_days_avg = days[1..5].sum / 5
 
 		if weekend_avg > week_days_avg
-			"<span class=\"style-words\">weekend</span>".html_safe
+			"weekend".html_safe
 		elsif weekend_avg < week_days_avg
-			"<span class=\"style-words\">weekdays</span>".html_safe
+			"weekdays".html_safe
 		else
-			"<span class=\"style-words\">all week long</span>".html_safe
+			"all week long".html_safe
 		end
 	end
 
@@ -101,9 +123,9 @@ module SummaryHelper
 
 		if graph.nil?
 			if night > day
-				"'s a nocturnal	<span class=\"style-words\">  developer </span>".html_safe
+				"'s <span class=\"style-words text-success\">a nocturnal developer </span>,".html_safe
 			else
-				" <span class=\"style-words\">  develops </span> in parallel with his #{gender2} job.".html_safe
+				" <span class=\"style-words text-success\"> develops in parallel with his #{gender2} job</span>,".html_safe
 			end
 		else
 			if night > day
