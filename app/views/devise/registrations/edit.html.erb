@@ -1,5 +1,3 @@
-
-<!-- <h2>Edit <%= resource_name.to_s.humanize %></h2> -->
 <script type="text/javascript">
   $("#header-id").remove();
   $("body").css({"padding-top": "0px"})
@@ -11,6 +9,7 @@
   <%= render partial: "layouts/center_logo"%>
 
   <div class="login-wrapper">
+  <% resource.build_location if resource.location.nil? %>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {id: "profile_edit_form", novalidate: "novalidate" , method: :put}) do |f| %>
     <%= devise_error_messages! %>
 
@@ -63,6 +62,17 @@
       <%= f.text_area :short_bio, class: "form-control no-border input-lg rounded solution", placeholder: "short_bio" %>
       <span class="fa fa-pencil form-control-feedback iconposition"></span>
     </div>
+
+    <%= f.fields_for :location do |location_fields|%>
+      <div class="form-group has-feedback lg right-feedback no-label">
+        <%= location_fields.label :location %><br />
+        <select id="location_select" name="user[location_attributes][name]" value="current_user.locatino.name" class="form-control chosen-select">
+          <% Location.all.each do |location| %>
+            <option value="<%= location.name %>"><%= location.name %></option>
+          <% end %>
+        </select>
+      </div>
+    <% end %>
 
     <div class="form-group has-feedback lg right-feedback no-label" >
       <!-- <%= f.label :password %> --><i>(leave blank if you don't want to change it)</i><br />
@@ -166,4 +176,41 @@
       }
     }
   });
+</script>
+<script type="text/javascript">
+  var select, chosen;
+
+  // cache the select element as we'll be using it a few times
+  select = $(".chosen-select");
+
+  // init the chosen plugin
+  select.chosen();
+
+  // get the chosen object (any type, single or multiple)
+  chosen = $('.chosen-container');
+  // chosen = $('.chosen-select-single');
+  // chosen = $('.chosen-container-multi');
+
+  // Bind the keyup event to the search box input
+  chosen.find('input').keyup( function(e)
+  {
+    // if we hit Enter and the results list is empty (no matches) add the option
+    if (e.which == 13 && chosen.find('li.no-results').length > 0)
+    {
+        var option = $("<option>").val(this.value).text(this.value);
+
+        // add the new option
+        select.prepend(option);
+        // automatically select it
+        select.find(option).prop('selected', true);
+        // trigger the update
+        select.trigger("chosen:updated");
+    }
+});
+</script>
+
+<script type="text/javascript">
+  var locationa = "<%=raw current_user.location.name %>";
+  document.getElementById('location_select').value = locationa;
+  $('#location_select').trigger('chosen:updated');
 </script>

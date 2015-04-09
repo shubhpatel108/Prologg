@@ -3,45 +3,10 @@
     height: 330px;
     text-align: center;
     text-decoration: none solid rgb(57, 66, 78);
-    width: 1172.390625px;
-    border: 0px none rgb(57, 66, 78);
-    font: normal normal normal 16px/22.399999618530273px 'Whitney SSm A', 'Whitney SSm B', verdana, 'Lucida Grande', sans-serif;
-    list-style: none outside none;
+    width: 100%;
     margin: 0px -7.5px -64px;
-    outline: rgb(57, 66, 78) none 0px;
     padding: 0px;
 }/*#UL_1*/
-
-#UL_1:after {
-    clear: both;
-    color: rgb(57, 66, 78);
-    display: table;
-    text-align: center;
-    text-decoration: none solid rgb(57, 66, 78);
-    width: 1px;
-    content: '';
-    border: 0px none rgb(57, 66, 78);
-    font: normal normal normal 16px/22.399999618530273px 'Whitney SSm A', 'Whitney SSm B', verdana, 'Lucida Grande', sans-serif;
-    list-style: none outside none;
-    margin: 0px;
-    outline: rgb(57, 66, 78) none 0px;
-    padding: 0px;
-}/*#UL_1:after*/
-
-#UL_1:before {
-    color: rgb(57, 66, 78);
-    display: table;
-    text-align: center;
-    text-decoration: none solid rgb(57, 66, 78);
-    width: 1px;
-    content: '';
-    border: 0px none rgb(57, 66, 78);
-    font: normal normal normal 16px/22.399999618530273px 'Whitney SSm A', 'Whitney SSm B', verdana, 'Lucida Grande', sans-serif;
-    list-style: none outside none;
-    margin: 0px;
-    outline: rgb(57, 66, 78) none 0px;
-    padding: 0px;
-}/*#UL_1:before*/
 
 #LI_2, #LI_8, #LI_14, #LI_20 {
     box-sizing: border-box;
@@ -351,14 +316,7 @@
 
 
 .score-text {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 1em;
-    line-height: 1em;
+    margin-bottom: 6px;
     font-size: 1.5em;
     color: white;
     font-family: Raleway ;
@@ -388,9 +346,7 @@
 }
 
 #text_holder_2 {
-	
 	position: absolute;
-	
 	width: 100%;
 }
 
@@ -418,13 +374,10 @@
     margin-top: 20px;
 }
 
-.main-logo-container {
-    margin-left: 37%;
-}
-
 .homepage-heading{
-    font-family: 'Tangerine', serif;
-    font-size: 24px;
+    font-size: 3em;
+    font-family: Raleway;
+    color: white;
 }
 
 .videoWrapper {
@@ -449,18 +402,17 @@
     margin-top : 150px;
 }
 
+.arrow-1 {
+    margin-top: 10%;
+}
+
 @media screen and (max-width:599px) {
     .main-logo img {
         width: 200px;
         margin-top: 10px;
     }
 
-    .main-logo-container {
-        margin-left: 10%;
-    }
-
     .homepage-heading{
-        font-family: 'Tangerine', serif;
         font-size: 16px !important;
     }
 
@@ -475,5 +427,25 @@
 
     .hm-sub-row {
         margin-top : 20px !important;
+    }
+
+    .arrow-1 {
+    margin-top: 4% !important;
+    }
+
+    .hm-text {
+        margin-top: 10% !important;
+    }
+
+    #alpha_wrapper {
+        height: 560px !important;
+    }
+
+    #alpha_2 {
+        height: 560px !important;
+    }
+
+    #alpha_3 {
+        height: 400px !important;
     }
 }
