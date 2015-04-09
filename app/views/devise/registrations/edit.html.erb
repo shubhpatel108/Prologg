@@ -32,6 +32,12 @@
       </p>
     </div>
 
+    <div class="form-group has-feedback lg right-feedback no-label  disabled">
+      <!-- <%= f.label :username %><br /> -->
+      <%= f.text_field :username, class: "form-control no-border input-lg rounded solution", placeholder: "Username", disabled: true %>
+      <span class="fa fa-user form-control-feedback iconposition"></span>
+    </div>
+
     <div class="form-group has-feedback lg right-feedback no-label">
       <!-- <%= f.label :email %><br /> -->
       <%= f.email_field :email, class: "form-control no-border input-lg rounded solution", placeholder: "Email" %>
