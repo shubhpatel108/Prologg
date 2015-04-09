@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'profiles#index'
   get '/home', to: 'profiles#home', as: :home
 
+  get '/profiles/search', to: 'profiles#search', as: :search_developer
+  post '/profiles/search', to: 'profiles#search_filter', as: :search_developer_post
+  
   get '/:username', to: 'profiles#show', as: :profile
   get '/users/edit_links', to: 'profiles#edit_links', as: :edit_links
   post '/users/update_links', to: 'profiles#update_links'
@@ -39,9 +42,6 @@ Rails.application.routes.draw do
   get '/mails/new/:username', to: 'mails#new', as: :new_mails
   post '/mails/send/:username', to: 'mails#send_mail', as: :send_mails
   get '/mails/delete/:id', to: 'mails#delete' , as: :delete_mails
-
-  get '/profiles/search', to: 'profiles#search', as: :search_developer
-  post '/profiles/search', to: 'profiles#search_filter'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
