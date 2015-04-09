@@ -16,7 +16,19 @@ class ProfilesController < ApplicationController
 		username = params[:username]
 		@user = User.where(username: username).first
 		session[:viewed_profiles] = [] if session[:viewed_profiles].nil?	
+		@show_summary_page = true
+		@first_name = @user.full_name.split(" ").first
 
+		@algo_langs = @user.algo_langs
+		@application_langs = @user.application_langs
+		@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
+
+		@github_profile = @user.github_profile
+
+		@linkedin_profile = @user.linkedin_profile
+		unless @linkedin_profile.nil?
+			@industry = @linkedin_profile.data["industry"]
+		end
 		if  not @user.nil? and not @user==current_user and not session[:viewed_profiles].include?(@user.id)
 			view = @user.view_count+1
 			session[:viewed_profiles] << @user.id
@@ -24,6 +36,11 @@ class ProfilesController < ApplicationController
 		end
 		if @user.nil?
 			render file: 'public/404', status: 404, formats: [:html]
+		end
+
+		respond_to do |format|
+			format.js
+			format.html
 		end
 	end
 
@@ -174,28 +191,6 @@ class ProfilesController < ApplicationController
 
 		respond_to do |format|
 			format.js
-		end
-	end
-
-	def show_summary
-		@show_summary_page = true
-		@user = User.where(username: params[:username]).first
-		@first_name = @user.full_name.split(" ").first
-
-		@algo_langs = @user.algo_langs
-		@application_langs = @user.application_langs
-		@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
-
-		@github_profile = @user.github_profile
-
-		@linkedin_profile = @user.linkedin_profile
-		unless @linkedin_profile.nil?
-			@industry = @linkedin_profile.data["industry"]
-		end
-
-		respond_to do |format|
-			format.js
-			format.html
 		end
 	end
 end

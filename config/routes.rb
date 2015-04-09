@@ -33,8 +33,6 @@ Rails.application.routes.draw do
   get '/integrations/linkedin/update', to: 'linkedin_profile#update', as: :linkedin_update_profile
   get '/integrations/linkedin/delete', to: 'linkedin_profile#delete', as: :linkedin_delete_profile 
 
-  get '/profiles/summary/show/:username', to: 'profiles#show_summary', as: :show_summary
-
   #get '/mails/_show'
   get '/mails/new/:username', to: 'mails#new', as: :new_mails
   post '/mails/send/:username', to: 'mails#send_mail', as: :send_mails
