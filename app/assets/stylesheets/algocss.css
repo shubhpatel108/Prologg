@@ -181,15 +181,16 @@ padding-bottom: 55px;
 }
 
 .first-paragraph{
-	font-size: 20px;
+	font-size: 1.2em;
 	color: #777;
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
+	word-spacing: 2px;
 }
 
 .style-words {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	/*font-family: 'Tangerine', serif;*/
-	font-size: 22px;
+	font-size: 1.1em;
 	font-weight: 600;
 	/*text-decoration: underline;*/
 	border-bottom: 1px solid #777;
