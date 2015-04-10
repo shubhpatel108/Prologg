@@ -135,4 +135,27 @@ module SummaryHelper
 			end
 		end
 	end
+
+	def codeforces_tt(rank)
+		case rank.downcase
+		when "international grandmaster"
+			"Rating 2600+, on Top of the world"
+		when "grandmaster"
+			"Rating range: 2200-2599, second from top"
+		when "international master"
+			"Rating range: 2050-2199, third from top"
+		when "master"
+			"Rating range: 1900-2049, fourth in hierarchy"
+		when "candidate master"
+			"Rating range: 1700-1899, fifth in hierarchy"
+		when "expert"
+			"Rating range: 1500-1699, sixth in hierarchy"
+		when "specialist"
+			"Rating range: 1350-1499, seventh in hierarchy"
+		when "pupil"
+			"Rating range: 1200-1349, eigth in hierarchy"
+		when "newbie"
+			"Rating range: 0-1199, ninth in hierarchy"
+		end
+	end
 end

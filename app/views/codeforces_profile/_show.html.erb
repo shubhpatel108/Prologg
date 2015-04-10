@@ -90,7 +90,7 @@
 			<div class="col-lg-6">
 				
 				<!-- BEGIN TODAY VISITOR TILES -->
-				<div class="panel panel-danger panel-square panel-no-border text-center">
+				<div class="panel panel-danger panel-square panel-no-border text-center" data-toggle="code_rank" data-placement="top" title="<%=codeforces_tt( @cfp.rank)%>">
 				  <div class="panel-heading">
 					<h3 class="panel-title">CURRENT RANKING</h3>
 				  </div>
@@ -120,7 +120,7 @@
 			<div class="col-lg-6">
 				
 				<!-- BEGIN TODAY VISITOR TILES -->
-				<div class="panel panel-danger panel-square panel-no-border text-center">
+				<div class="panel panel-danger panel-square panel-no-border text-center" data-toggle="code_rank" data-placement="top" title="<%=codeforces_tt( @cfp.max_rank)%>">
 				  <div class="panel-heading">
 					<h3 class="panel-title">MAX RANKING</h3>
 				  </div>
@@ -247,3 +247,11 @@ Morris.Bar({
 <% else %>
 	<%= render partial: 'add_codeforces' %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(function () {
+      $('[data-toggle="code_rank"]').tooltip();
+    });
+  });
+</script>
