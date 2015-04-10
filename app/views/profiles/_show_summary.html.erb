@@ -53,6 +53,7 @@
             </div>
   				<hr class="seperator" style ="margin-top:5px;">
   					<div id="owl-lazy-load-autoplay" class="owl-carousel" style="  family: 'Raleway', sans-serif;">
+            <% if not @linkedin_profile.data["positions"].blank?%>
   					<% @linkedin_profile.data["positions"].each_with_index do |i, index|%>
   						<div class="item" style="margin : 0px">		
   							<div class="">
@@ -67,7 +68,8 @@
   						</div>
   						<!-- <br/> -->
   						<!-- <br/> -->
-  					<% end -%>
+  					<% end %>
+            <% end %>
   				</div>
   			</div>
   		</div>
