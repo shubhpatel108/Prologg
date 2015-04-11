@@ -49,10 +49,10 @@
             <div class="row">
   				    <h3 class = "heading text-center">Experience (recent to older)</h3>
             </div>
-  				<hr class="seperator" style ="margin-top:5px;">
-            <% if @linkedin_profile.data["positions"].empty? %>
+  				  <hr class="seperator" style ="margin-top:5px;">
+            <% unless @linkedin_profile.data["positions"].empty? %>
               <div id="owl-lazy-load-autoplay" class="owl-carousel" style="  family: 'Raleway', sans-serif;">
-      					<% @linkedin_profile.data["positions"].each_with_index do |i, index|%>
+      					<% @linkedin_profile.data["positions"].each do |i|%>
       						<div class="item" style="margin : 0px">		
       							<div class="">
       								<!-- BEGIN SLIDER -->
@@ -69,7 +69,7 @@
             <% else %>
               <div>
                 <p class="first-paragraph text-center">
-                  User doesn't have significant experience, but re are pretty sure <%= gender %> is planning something big.
+                  User doesn't have significant experience, but we are pretty sure <%= gender %> is planning something big.
                 </p>
               </div>
             <% end %>

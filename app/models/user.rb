@@ -111,6 +111,15 @@ class User < ActiveRecord::Base
       end
     end
 
+    main_langs = self.languages.map(&:name)
+    main_langs.each do |lang|
+      if langs_hash.include?(lang)
+        langs_hash["#{lang}"] = langs_hash["#{lang}"] + 1
+      else
+        langs_hash.merge!("#{lang}" => 1)
+      end 
+    end
+
     return langs_hash.sort {|a,b| a[1]<=>b[1]}.reverse.to_h
   end
 
