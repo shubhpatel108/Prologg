@@ -10,7 +10,7 @@ module SummaryHelper
 		app_count = 0 if app_count.nil?
 
 		if app_count > 8 or algo_count > 50
-			"supperlative"
+			"superlative"
 		elsif (app_count > 3 or algo_count > 20)
 			"middling"
 		elsif (algo_count > 29)
@@ -40,7 +40,7 @@ module SummaryHelper
 		elsif count > 20
 			"a neotoric"
 		else
-			"an aspiting"
+			"an aspiring"
 		end
 	end
 
