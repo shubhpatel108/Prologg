@@ -16,7 +16,7 @@ module SummaryHelper
 		elsif (algo_count > 29)
 			"middling"
 		else
-			"neopyte"
+			"neophyte"
 		end
 	end
 
@@ -26,7 +26,7 @@ module SummaryHelper
 			"with more than 8 repositories or 50 algorithms problems"
 		when "middling"
 			"with more than 3 repositories or 30 algorithms problems"
-		when "neopyte"
+		when "neophyte"
 			"a starter who is enthusiastic and progressive"
 		end
 	end
@@ -38,7 +38,7 @@ module SummaryHelper
 		if count > 70
 			"a staunch"
 		elsif count > 20
-			"a neotoric"
+			"a neoteric"
 		else
 			"an aspiring"
 		end
@@ -48,10 +48,10 @@ module SummaryHelper
 		case adj
 		when "a staunch"
 			"on Top of the world"
-		when "a neotoric"
+		when "a neoteric"
 			"Second in hierarchy, after 'Staunch'"
 		when "an aspiring"
-			"last in hierarchy but quickly quickly progressing"
+			"last in hierarchy but quickly progressing"
 		end
 	end
 
