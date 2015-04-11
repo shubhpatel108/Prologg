@@ -72,8 +72,12 @@
 								<% @tcp.data["achievements"].each do |i| %>
 								<li class="media"  style="height: 90px;">
 									<a class="pull-left" href="javascript:void(0)">
-										<div class="crop" style="width: 90px; height: 70px; overflow: hidden;" data-toggle="tooltip" title="Hello">
-											<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 425px; height: 1530px; margin: -1190px -0px -0px -255px;"/>
+										<div class="crop" style="width: 48px; height: 42px; overflow: hidden;" data-toggle="tooltip" title="Hello">
+										<% if not i["badgeLink"].blank? %>
+ 											<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 255px; height: 918px; margin: <%= i["badgeLink"]["topOffset"]*3 %>px -0px -0px <%= i["badgeLink"]["leftOffset"]*3 %>px;"/>
+ 										<% else %>
+ 											<img src="http://www.topcoder.com/images/badge.grid.small.png"  style="width: 255px; height: 918px; margin: -714px -0px -0px 0px;"/>
+ 										<% end -%>
 										</div>
 									</a>
 									<div class="media-body">
@@ -141,8 +145,8 @@
 			duration: 4000,
 			autostart: 1,
 			pauseOnHover: 1,
-			prevButton: $('#w-newsticker-prev'),
-			nextButton: $('#w-newsticker-next')
+			prevButton: $('#w-newsticker-next'),
+			nextButton: $('#w-newsticker-prev')
 		});
 	}
 
