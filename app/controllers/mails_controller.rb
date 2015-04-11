@@ -1,8 +1,10 @@
 class MailsController < ApplicationController
   def new
   	@username = params[:username]
+  	@user = User.where(username: params[:username]).first
   	respond_to do |format|
   		format.js
+  		format.html
   	end
   end
 
