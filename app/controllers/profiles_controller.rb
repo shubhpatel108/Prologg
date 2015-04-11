@@ -189,6 +189,10 @@ class ProfilesController < ApplicationController
 			@users = @users & lang_users
 		end
 
+		unless params[:availability]=="on"
+			@users.select! { |u| u.availability }
+		end
+
 		respond_to do |format|
 			format.js
 		end
