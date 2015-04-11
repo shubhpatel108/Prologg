@@ -29,7 +29,7 @@ class CodeforcesProfile < ActiveRecord::Base
 	end
 
 	def self.get_recent_submissions(handle)
-		url = "http://codeforces.com/api/user.status?handle=#{handle}&from=1&count=5"
+		url = "http://codeforces.com/api/user.status?handle=#{handle}&from=1&count=8"
 		resp = self.get(url)
 		return [resp["status"], resp]
 	end
