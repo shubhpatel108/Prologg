@@ -158,7 +158,7 @@
               text: 'Working Hours Graph'
           },
           xAxis: {
-              categories: ['00:00 to 6:00', '6:00 to 12:00', '12:00 to 18:00', '18:00 to 00:00']
+              categories: ['00:00 to 3:00', '3:00 to 6:00', '6:00 to 9:00', '9:00 to 12:00', '12:00 to 15:00', '15:00 to 18:00', '18:00 to 21:00', '21:00 to 00:00']
           },
           yAxis: {
               min: 0,
@@ -206,7 +206,7 @@
           series: [{
               <% commits = @user.github_profile.data["punch_card"]["time"] %>
               name: 'commits',
-              data: [<%= commits[0..1].sum %>, <%= commits[2..3].sum %>, <%= commits[4..5].sum %>, <%= commits[6..7].sum %>]
+              data: [<%= commits[0] %>, <%= commits[1] %>, <%= commits[2] %>, <%= commits[3] %>, <%= commits[4] %>, <%= commits[5] %>, <%= commits[6] %>, <%= commits[7] %>]
           }]
       });
 
