@@ -14,7 +14,9 @@ LARGE DESKTOP > 1200px
 =================================
 **/
 @media (min-width: 1200px) {
-
+	.page-content {
+		min-height: 500px;
+	}
 }
 
 
@@ -513,6 +515,12 @@ TABLET < 767px
 		border-bottom: 1px solid #F3F8FE;
 	}
 	
+	/**
+	-------------------------------------------
+	Integration page
+	-------------------------------------------
+	**/
+
 }
 
 

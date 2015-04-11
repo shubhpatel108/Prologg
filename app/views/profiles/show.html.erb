@@ -2,31 +2,4 @@
 <div id="individual_profile">
 	<%= render partial: 'show_summary' %>
 </div>
-
-<script type="text/javascript">
-	$('#cfp_profile').click(function() {
-		ajaxLoad("<%=cfp_show_profile_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=cfp_show_profile_path(username: @user.username)%>");
-	});
-	$('#tcp_profile').click(function() {
-		ajaxLoad("<%=tcp_show_profile_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=tcp_show_profile_path(username: @user.username)%>");
-	});
-	$('#github_profile').click(function() {
-		ajaxLoad("<%=github_show_profile_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=github_show_profile_path(username: @user.username)%>");
-	});
-	$('#linkedin_profile').click(function() {
-		ajaxLoad("<%=linkedin_show_profile_path(username: @user.username)%>");
-		window.history.pushState({},"", "<%=linkedin_show_profile_path(username: @user.username)%>");
-	});
-	$('#edit_integrations').click(function() {
-		ajaxLoad("<%=edit_integrations_path%>");
-	});
-	$('#contact').click(function() {
-		ajaxLoad("<%=new_mails_path(username: @user.username)%>");
-	});
-	$('#show_summary_link').click(function() {
-		ajaxLoad("<%=profile_path(username: @user.username)%>");
-	});
-</script>
+<%= render partial: 'profiles/ajax_links' %>
