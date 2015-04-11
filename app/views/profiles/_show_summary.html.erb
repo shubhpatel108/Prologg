@@ -13,9 +13,8 @@
         <h3 class = "heading row"><%=@first_name%>'s Bio</h3>
       </div>
 			<p class="first-paragraph text-justify">
-				<span class="style-words">
         <% if @all_langs.empty? %>
-          <%=@first_name%></span> has just entered the field of software development. For now, we don't have much to say about <%= gender3 %>. But we will be always be there to see <%= gender3 %> shinning very soon. 
+          <span class="style-words"><%=@first_name%></span> has just entered the field of software development. For now, we don't have much to say about <%= gender3 %>. But we will be always be there to see <%= gender3 %> shinning very soon. 
         <% else %>
           <span class="style-words"><%=@first_name%></span> is a <span class="style-words text-danger" data-toggle="sum" data-placement="top" title="<%=lang_adj_tt( lang_adjective)%>"><%= lang_adjective %></span> <span class="style-words text-info" data-toggle="sum" data-placement="top" title="most frequently used language"><%=@all_langs.keys.first%></span>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words text-warning" data-toggle="sum" data-placement="top" title="other languages"> <%= @all_langs.keys.slice(0..2).to_sentence  %></span>.
           <% unless @github_profile.nil? %>
@@ -96,22 +95,24 @@
 <% end %>
 
 <% unless @github_profile.nil? %>
-    <div>
+  <div>
+    <div class="row">
         <div class="col-lg-6">
-            <div class="the-box no-border" style="height: 430px !important">
-                <i class="fa fa-institution icon-circle icon-lg icon-default newicon-2"></i>
-                <p class="first-paragraph text-center">
-                <%= gender%> enjoys working during the <%= day_adjective %> . <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
-    			</p>
-    		</div>
-    	</div>
-    	<div class="col-lg-6">
-    		<div class="the-box no-border">
-    			<div id="container-1" style="min-width: 310px; height: 400px; margin: 0">
-    			</div>
-    		</div>
-    	</div>
+          <div class="the-box no-border" style="height: 430px !important">
+            <i class="fa fa-institution icon-circle icon-lg icon-default newicon-2"></i>
+            <p class="first-paragraph text-center">
+              <%= gender%> enjoys working during the <%= day_adjective %> . <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="the-box no-border">
+            <div id="container-1" style="min-width: 310px; height: 400px; margin: 0">
+            </div>
+          </div>
+        </div>
     </div>
+  </div>
 <% end %>
 
 <% if not @codeforces_profile.nil? %>
