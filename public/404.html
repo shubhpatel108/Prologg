@@ -6,6 +6,8 @@
 <div class="login toolkits">
   <div class="login-wrapper">
       <h1 class="error-number">4<i class="fa fa-meh-o icon-xl icon-square icon-primary"></i>4</h1>
+      <h4>The page you were looking for doesn't exist.</h4>
+      <p>You may have mistyped the address or the page may have moved.</p>
       <p class="text-center"><strong><a href="<%= home_path %>">Back to homepage</a></strong></p>
       <% if user_signed_in? %>
         <p class="text-center"><strong><a href="<%= profile_path(current_user.username) %>">Back to Profile</a></strong></p>
