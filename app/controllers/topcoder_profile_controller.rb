@@ -58,12 +58,11 @@ class TopcoderProfileController < ApplicationController
 			redirect_to :back
 		else
 			if @tpf.updated_at < Time.now - 12.hours
-
-				handle = @tpf.handle
-				response_info = TopcoderProfile.connect(handle)
-				status_info = response_info["status"]
-
 				begin
+					handle = @tpf.handle
+					response_info = TopcoderProfile.connect(handle)
+					status_info = response_info["status"]
+
 					if status_info=="OK"
 						response_info = TopcoderProfile.refine_basic_info(response_info)
 
@@ -100,7 +99,7 @@ class TopcoderProfileController < ApplicationController
 					@tpf.data = old_data
 					@tpf.data_will_change!
 					@tpf.save!
-
+					current_user.reload
 					flash[:alert] = "It seems your credentials are not authentic or something went wrong."
 					redirect_to :back
 				end
