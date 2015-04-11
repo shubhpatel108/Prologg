@@ -55,16 +55,18 @@ class GithubProfile < ActiveRecord::Base
 
 		repos = (github.repos.list user: self.username).body
 		repos.each do |repo|
-			unless repo.fork
+			if not repo.fork and not repo.private
 				resp = (github.repos.stats.punch_card user: self.username, repo: repo.name).body
-				resp.each do |r|
-					days[r[0]] = days[r[0]] + r[2]
-					time[r[1]] = time[r[1]] + r[2]
+				unless resp.empty?
+					resp.each do |r|
+						days[r[0]] = days[r[0]] + r[2]
+						time[r[1]] = time[r[1]] + r[2]
+					end
+					r = {}
+					r[:name] = repo.name
+					r[:languages] = [repo["language"]]
+					repositories << r
 				end
-				r = {}
-				r[:name] = repo.name
-				r[:languages] = [repo["language"]]
-				repositories << r
 			end
 		end
 
