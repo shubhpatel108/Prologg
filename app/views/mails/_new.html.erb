@@ -18,7 +18,7 @@
 					</div><!-- /.input-group -->
 					<div class="form-group">
 						<%= f.label("Content:")%>
-						<%= f.text_area(:content , :class=>"form-control input-lg", :style=> "height: 250px;") %>
+						<%= f.text_area(:content , :class=>"form-control input-lg summernote-sm", :style=> "height: 250px;") %>
 					</div><!-- /.input-group -->
 					<div class="form-group">
 						<button type="submit" class="btn btn-success"><i class="fa fa-rocket"></i> Send mail</button>
@@ -30,9 +30,8 @@
 </div><!-- /.mail-apps-wrap -->
 <!-- END MAIL APPS NEW MAIL -->
 
-<script src="/assets/summernote.min.js"></script>			
+<!-- <script src="/assets/summernote.min.js"></script>			 -->
 
-<!-- 
  <script type="text/javascript">
 	$(document).ready(function(){
 	if ($('.summernote-sm').length > 0){
@@ -52,4 +51,4 @@
 			});
 	 }
 	});
-</script> -->
+</script>
