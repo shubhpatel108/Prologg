@@ -406,6 +406,10 @@
     margin-top: 10%;
 }
 
+.arrow-2 {
+    margin-top: 2%;
+}
+
 @media screen and (max-width:599px) {
     .main-logo img {
         width: 200px;
