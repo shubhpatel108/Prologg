@@ -50,25 +50,29 @@
   				    <h3 class = "heading text-center">Experience (recent to older)</h3>
             </div>
   				<hr class="seperator" style ="margin-top:5px;">
-  					<div id="owl-lazy-load-autoplay" class="owl-carousel" style="  family: 'Raleway', sans-serif;">
-            <% if not @linkedin_profile.data["positions"].blank?%>
-  					<% @linkedin_profile.data["positions"].each_with_index do |i, index|%>
-  						<div class="item" style="margin : 0px">		
-  							<div class="">
-  								<!-- BEGIN SLIDER -->
-  								<div class="the-box removeborder">
-  									<h4 class="small-title caracolor " ><%= i["t"] %></h4>
-  									<hr />
-  									<h5 class="small-title caracolor "><%= i["c"] %></h5>
-  								</div><!-- /.the-box -->
-  									<!-- END SLIDER -->
-  							</div><!-- /.col-sm-6 -->
-  						</div>
-  						<!-- <br/> -->
-  						<!-- <br/> -->
-  					<% end %>
+            <% if @linkedin_profile.data["positions"].empty? %>
+              <div id="owl-lazy-load-autoplay" class="owl-carousel" style="  family: 'Raleway', sans-serif;">
+      					<% @linkedin_profile.data["positions"].each_with_index do |i, index|%>
+      						<div class="item" style="margin : 0px">		
+      							<div class="">
+      								<!-- BEGIN SLIDER -->
+      								<div class="the-box removeborder">
+      									<h4 class="small-title caracolor " ><%= i["t"] %></h4>
+      									<hr />
+      									<h5 class="small-title caracolor "><%= i["c"] %></h5>
+      								</div><!-- /.the-box -->
+      									<!-- END SLIDER -->
+      							</div><!-- /.col-sm-6 -->
+      						</div>
+                <% end %>
+              </div>
+            <% else %>
+              <div>
+                <p class="first-paragraph text-center">
+                  User doesn't have significant experience, but re are pretty sure <%= gender %> is planning something big.
+                </p>
+              </div>
             <% end %>
-  				</div>
   			</div>
   		</div>
   	</div>
@@ -115,13 +119,12 @@
   </div>
 <% end %>
 
-<% if not @codeforces_profile.nil? %>
 <div class="row">
-	<div class="col-lg-6">
-		<div class="the-box no-border">
+  <div class="col-lg-6">
+    <div class="the-box no-border">
       <% unless @algo_langs.empty? %>
-  			<div id="container-2" style="min-width: 310px; height: 400px; margin: 0 auto">
-  			</div>
+        <div id="container-2" style="min-width: 310px; height: 400px; margin: 0 auto">
+        </div>
       <% else %>
         <div style="min-width: 310px; height: 100px; margin: 0 auto">
           <center>
@@ -130,10 +133,10 @@
           </center>
         </div>
       <% end %>
-		</div>
-	</div>
-	<div class="col-lg-6">
-		<div class="the-box no-border" >
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="the-box no-border" >
       <% unless @algo_langs.empty? %>
         <div style="height: 430px !important">
           <i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
@@ -149,8 +152,8 @@
           </center>
         </div>
       <% end %>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
 <script type="assets/modules/exporting.js"></script>
@@ -338,7 +341,6 @@
     });
     </script>
   <% end %>
-<% end %>
 
 <script type="text/javascript">
   $(document).ready(function(){
