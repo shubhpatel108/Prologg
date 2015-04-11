@@ -50,7 +50,7 @@ module SummaryHelper
 			"on Top of the world"
 		when "a neotoric"
 			"Second in hierarchy, after 'Staunch'"
-		when "an aspiting"
+		when "an aspiring"
 			"last in hierarchy but quickly quickly progressing"
 		end
 	end
@@ -137,6 +137,8 @@ module SummaryHelper
 	end
 
 	def codeforces_tt(rank)
+		return "Not Ranked" if rank.nil? or rank.empty?
+
 		case rank.downcase
 		when "international grandmaster"
 			"Rating 2600+, on Top of the world"
