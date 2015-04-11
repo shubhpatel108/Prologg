@@ -9,6 +9,7 @@ class FacebookLink < ActiveRecord::Base
 			url.gsub!("www.", "")
 			url.gsub!("facebook.com/", "")
 		end
+		return url
 	end
 
 	def nurl

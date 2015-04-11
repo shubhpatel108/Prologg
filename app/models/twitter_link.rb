@@ -9,6 +9,7 @@ class TwitterLink < ActiveRecord::Base
 			url.gsub!("www.", "")
 			url.gsub!("twitter.com/", "")
 		end
+		return url
 	end
 
 	def nurl

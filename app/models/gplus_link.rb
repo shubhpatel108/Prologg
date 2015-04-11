@@ -9,6 +9,7 @@ class GplusLink < ActiveRecord::Base
 			url.gsub!("www.", "")
 			url.gsub!("plus.google.com/", "")
 		end
+		return url
 	end
 
 	def nurl

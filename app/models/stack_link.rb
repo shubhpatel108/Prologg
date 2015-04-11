@@ -9,6 +9,7 @@ class StackLink < ActiveRecord::Base
 			url.gsub!("www.", "")
 			url.gsub!("stackoverflow.com/users/", "")
 		end
+		return url
 	end
 
 	def nurl
