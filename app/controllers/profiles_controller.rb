@@ -15,32 +15,32 @@ class ProfilesController < ApplicationController
 	def show
 		username = params[:username]
 		@user = User.where(username: username).first
-		session[:viewed_profiles] = [] if session[:viewed_profiles].nil?	
-		@first_name = @user.full_name.split(" ").first
-
-		@algo_langs = @user.algo_langs
-		@application_langs = @user.application_langs
-		@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
-
-		@github_profile = @user.github_profile
-		@codeforces_profile = @user.codeforces_profile
-
-		@linkedin_profile = @user.linkedin_profile
-		unless @linkedin_profile.nil?
-			@industry = @linkedin_profile.data["industry"]
-		end
-		if  not @user.nil? and not @user==current_user and not session[:viewed_profiles].include?(@user.id)
-			view = @user.view_count+1
-			session[:viewed_profiles] << @user.id
-			@user.update_attributes(view_count: view)
-		end
 		if @user.nil?
 			render file: 'public/404', status: 404, formats: [:html]
-		end
+		else
+			session[:viewed_profiles] = [] if session[:viewed_profiles].nil?
+			@first_name = @user.full_name.split(" ").first
 
-		respond_to do |format|
-			format.js
-			format.html
+			@algo_langs = @user.algo_langs
+			@application_langs = @user.application_langs
+			@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
+
+			@github_profile = @user.github_profile
+			@codeforces_profile = @user.codeforces_profile
+
+			@linkedin_profile = @user.linkedin_profile
+			unless @linkedin_profile.nil?
+				@industry = @linkedin_profile.data["industry"]
+			end
+			if  not @user.nil? and not @user==current_user and not session[:viewed_profiles].include?(@user.id)
+				view = @user.view_count+1
+				session[:viewed_profiles] << @user.id
+				@user.update_attributes(view_count: view)
+			end
+			respond_to do |format|
+				format.js
+				format.html
+			end
 		end
 	end
 
