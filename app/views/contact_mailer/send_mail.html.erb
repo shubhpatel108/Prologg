@@ -1,2 +1,2 @@
-This mail is from <strong><%= @sender.username %></strong>.<br>
-<%= @content %>
+This mail is from <a href="<%= profile_url(username: @sender.username) %>"><strong><%= @sender.full_name %></strong>.</a><br>
+<%= @content.html_safe %>
