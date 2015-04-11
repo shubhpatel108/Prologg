@@ -23,6 +23,7 @@ class ProfilesController < ApplicationController
 		@all_langs = @user.all_langs(@application_langs.dup, @algo_langs.dup)
 
 		@github_profile = @user.github_profile
+		@codeforces_profile = @user.codeforces_profile
 
 		@linkedin_profile = @user.linkedin_profile
 		unless @linkedin_profile.nil?

@@ -15,9 +15,9 @@
 			<p class="first-paragraph text-justify">
 				<span class="style-words">
         <% if @all_langs.empty? %>
-          <%=@first_name%></span><span class="style-words"> has just entered the field of software development. For now, we don't have much to say about <%= gender3 %>. But we will be always be there to see <%= gender3 %> shinning very soon. 
+          <%=@first_name%></span> has just entered the field of software development. For now, we don't have much to say about <%= gender3 %>. But we will be always be there to see <%= gender3 %> shinning very soon. 
         <% else %>
-          <%=@first_name%></span> is a <span class="style-words text-danger" data-toggle="sum" data-placement="top" title="<%=lang_adj_tt( lang_adjective)%>"><%= lang_adjective %></span> <span class="style-words text-info" data-toggle="sum" data-placement="top" title="most frequently used language"><%=@all_langs.keys.first%></span>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words text-warning" data-toggle="sum" data-placement="top" title="other languages"> <%= @all_langs.keys.slice(0..2).to_sentence  %></span>.
+          <span class="style-words"><%=@first_name%></span> is a <span class="style-words text-danger" data-toggle="sum" data-placement="top" title="<%=lang_adj_tt( lang_adjective)%>"><%= lang_adjective %></span> <span class="style-words text-info" data-toggle="sum" data-placement="top" title="most frequently used language"><%=@all_langs.keys.first%></span>-maniac. <%= gender%>'s been maintaining a striking list of repositories with assorted languages like <span class="style-words text-warning" data-toggle="sum" data-placement="top" title="other languages"> <%= @all_langs.keys.slice(0..2).to_sentence  %></span>.
           <% unless @github_profile.nil? %>
               <%= gender%><span data-toggle="sum" data-placement="top" title="based on his local time zone"><%= time_adjective %></span> majorly active during <span data-toggle="sum" data-placement="top" title="tells if <%= gender%> is free on weekends" class="style-words text-info"><%= day_adjective %></span>. 
           <% end %>
@@ -86,7 +86,7 @@
 			<div class="the-box no-border"  style="height: 430px !important">
 				<i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
 				<p class="first-paragraph text-center">
-					<%= gender %> is a <%= time_adjective("graph") %> developer. <% if not time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned adibe than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
+					<%= gender %> is a <%= time_adjective("graph") %> developer. <% if not time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned abode than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
 				</p>
 			</div>
 		</div>
@@ -112,20 +112,40 @@
     </div>
 <% end %>
 
-<% if not @user.codeforces_profile.nil? %>
+<% if not @codeforces_profile.nil? %>
 <div class="row">
 	<div class="col-lg-6">
 		<div class="the-box no-border">
-			<div id="container-2" style="min-width: 310px; height: 400px; margin: 0 auto">
-			</div>
+      <% unless @algo_langs.empty? %>
+  			<div id="container-2" style="min-width: 310px; height: 400px; margin: 0 auto">
+  			</div>
+      <% else %>
+        <div style="min-width: 310px; height: 100px; margin: 0 auto">
+          <center>
+            <strong>Graph for Languages used in Algorithms</strong><br/>
+            We don't have enough data to judge <%= @first_name%>'s algorithmic skills. But we never <%= gender2 %> talent.
+          </center>
+        </div>
+      <% end %>
 		</div>
 	</div>
 	<div class="col-lg-6">
-		<div class="the-box no-border"  style="height: 430px !important">
-			<i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
-			<p class="first-paragraph text-center">
-				<%= gender %> is quite a cogent developer who loves to spend time enhancing his algothmic skills. <%= gender %> mostly uses <%=@all_langs.keys.first%> but is quite competent in <%= @all_langs.keys.slice(0..2).to_sentence %> too. <%= gender %>'s been progressive and meritorious. hence, tagged as a <%= @user.codeforces_profile.rank %>.
-			</p>
+		<div class="the-box no-border" >
+      <% unless @algo_langs.empty? %>
+        <div style="height: 430px !important">
+          <i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
+          <p class="first-paragraph text-center">
+            <%= gender %> is quite a cogent developer who loves to spend time enhancing his algothmic skills. <%= gender %> mostly uses <%=@all_langs.keys.first%> but is quite competent in <%= @all_langs.keys.slice(0..2).to_sentence %> too. <%= gender %>'s been progressive and meritorious. hence, tagged as a <%= @codeforces_profile.data["rank"] %>.
+          </p>
+        </div>
+      <% else %>
+        <div style="min-width: 310px; height: 100px; margin: 0 auto">
+          <center>
+            <strong>Algortimic personality description</strong><br/>
+            We don't have enough data to judge <%= @first_name%>'s algorithmic skills. But we never <%= gender2 %> talent.
+          </center>
+        </div>
+      <% end %>
 		</div>
 	</div>
 </div>
@@ -202,7 +222,7 @@
               }
           },
           series: [{
-              <% commits = @user.github_profile.data["punch_card"]["time"] %>
+              <% commits = @github_profile.data["punch_card"]["time"] %>
               name: 'commits',
               data: [<%= commits[0] %>, <%= commits[1] %>, <%= commits[2] %>, <%= commits[3] %>, <%= commits[4] %>, <%= commits[5] %>, <%= commits[6] %>, <%= commits[7] %>]
           }]
@@ -264,58 +284,57 @@
           },
           series: [{
               name: 'commits',
-              <% commits = @user.github_profile.data["punch_card"]["days"] %>
+              <% commits = @github_profile.data["punch_card"]["days"] %>
               data: [<%= commits[1] %>, <%= commits[2] %>, <%= commits[3] %>,<%= commits[4] %>, <%= commits[5] %>, <%= commits[6] %>, <%= commits[0] %>]
           }]
       });
   </script>
 <% end %>
 
-<% unless @algo_langs.nil? %>
-  
-<script type="text/javascript">
-  $(function () {
-      $('#container-2').highcharts({
-          chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false
-          },
-          title: {
-              text: 'Problem solved in different languages'
-          },
-          tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: true,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                      style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              type: 'pie',
-              name: 'Problems',
-              data: [
-                  <% if not @algo_langs.nil? %>
-                  <% total = @algo_langs.values.sum %>
-                  <% @algo_langs.each do |key, value| %>
-                  ['<%= key %>', <%= (value*100)/total %>],
-                  <% end -%>
-                  <% end -%>
-              ]
-          }]
-      });
-  });
-  </script>
-<% end %>
+  <% unless @algo_langs.empty? %>
+    <script type="text/javascript">
+      $(function () {
+        $('#container-2').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Problem solved in different languages'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Problems',
+                data: [
+                    <% if not @algo_langs.nil? %>
+                    <% total = @algo_langs.values.sum %>
+                    <% @algo_langs.each do |key, value| %>
+                    ['<%= key %>', <%= (value*100)/total %>],
+                    <% end -%>
+                    <% end -%>
+                ]
+            }]
+        });
+    });
+    </script>
+  <% end %>
 <% end %>
 
 <script type="text/javascript">
