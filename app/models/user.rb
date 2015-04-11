@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     if codeforces_profile.nil?
       []
     else
-      codeforces_profile.metadata["tags"].keys
+      codeforces_profile.data["tags"].keys
     end
   end
 
@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
       skills << li.data["skills"]
     end
     CodeforcesProfile.all.each do |cf|
-      skills << cf.metadata["tags"].keys
+      skills << cf.data["tags"].keys
     end
     skills.flatten!
     skills.uniq!
@@ -119,7 +119,7 @@ class User < ActiveRecord::Base
 
     cfp = self.codeforces_profile
     unless cfp.nil?
-      codeforces_langs = cfp.metadata["languages"]
+      codeforces_langs = cfp.data["languages"]
       langs_hash.merge!(codeforces_langs)
     end
 

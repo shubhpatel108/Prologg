@@ -11,60 +11,72 @@ class CodeforcesProfileController < ApplicationController
 		response_info = CodeforcesProfile.connect(handle)
 		status_info = response_info[0]
 
-		response_subs = CodeforcesProfile.get_submissions(handle)
-		status_subs = response_subs[0]
+		if status_info == "OK"
 
-		response_rates = CodeforcesProfile.get_ratings(handle)
-		status_rates = response_rates[0]
+			response_subs = CodeforcesProfile.get_submissions(handle)
+			status_subs = response_subs[0]
 
-		if status_info == "OK" and status_subs == "OK" and status_rates == "OK"
+			response_rates = CodeforcesProfile.get_ratings(handle)
+			status_rates = response_rates[0]
 
-			resp_info = response_info[1]["result"][0]
-			resp_subs = response_subs[1]["result"]
-			resp_rates = response_rates[1]["result"]
+			if status_subs == "OK" and status_rates == "OK"
 
-			@codeforces_profile = CodeforcesProfile.new(
-				user_id: current_user.id,
-				handle: resp_info["handle"],
-				contribution: resp_info["contribution"],
-				rank: resp_info["rank"],
-				max_rank: resp_info["maxRank"],
-				rating: resp_info["rating"],
-				max_rating: resp_info["maxRating"],
-				last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s')
-			)
+				resp_info = response_info[1]["result"][0]
+				resp_subs = response_subs[1]["result"]
+				resp_rates = response_rates[1]["result"]
 
-			data1 = CodeforcesProfile.problems_lang_tags(resp_subs)
-			solved_probs = data1[0]			#total number of problems solved
-			tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
-			langs = data1[2]				#hash of hashes - languages => no of problems solved
+				@codeforces_profile = CodeforcesProfile.new(
+					user_id: current_user.id,
+					handle: resp_info["handle"]
+				)
 
-			database_langs = Language.all.map(&:name)
-			user_database_langs = current_user.languages.map(&:name)
-			langs.keys.each do |lang|
-				if database_langs.include?(lang)
-					unless user_database_langs.include?(lang)
-						existing_lang = Language.where(name: lang).first
-						current_user.languages << existing_lang
+				data1 = CodeforcesProfile.problems_lang_tags(resp_subs)
+				solved_probs = data1[0]			#total number of problems solved
+				tags_count = data1[1]			#hash of hashes - tags => total no. of problems in which it is found.
+				langs = data1[2]				#hash of hashes - languages => no of problems solved
+
+				database_langs = Language.all.map(&:name)
+				user_database_langs = current_user.languages.map(&:name)
+				langs.keys.each do |lang|
+					if database_langs.include?(lang)
+						unless user_database_langs.include?(lang)
+							existing_lang = Language.where(name: lang).first
+							current_user.languages << existing_lang
+						end
+					else
+						new_lang = Language.create(name: lang)
+						current_user.languages << new_lang
 					end
-				else
-					new_lang = Language.create(name: lang)
-					current_user.languages << new_lang
 				end
+
+				#Update Last updated at attribute
+				current_user.profile_updated_at = Time.now
+				current_user.save!
+				current_user.reload
+
+				resp_rates = CodeforcesProfile.ratings(resp_rates)
+
+				@codeforces_profile.data = {
+												solved_probs: solved_probs,
+												languages: langs,
+												tags: tags_count,
+												ratings: resp_rates,
+												handle: resp_info["handle"],
+												contribution: resp_info["contribution"],
+												rank: resp_info["rank"],
+												max_rank: resp_info["maxRank"],
+												rating: resp_info["rating"],
+												max_rating: resp_info["maxRating"],
+												last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s') 
+											}
+				@codeforces_profile.save!
+
+				flash[:notice] = "You have successfully integrated Codeforces in your profile."
+				redirect_to profile_path(username: current_user.username)
+			else
+				flash[:alert] = "It seems your credentials are not authentic or something went wrong."
+				redirect_to :back
 			end
-
-			#Update Last updated at attribute
-			current_user.profile_updated_at = Time.now
-			current_user.save!
-			current_user.reload
-
-			resp_rates = CodeforcesProfile.ratings(resp_rates)
-
-			@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
-			@codeforces_profile.save!
-
-			flash[:notice] = "You have successfully integrated Codeforces in your profile."
-			redirect_to profile_path(username: current_user.username)
 		else
 			flash[:alert] = "It seems your credentials are not authentic or something went wrong."
 			redirect_to :back
@@ -87,7 +99,7 @@ class CodeforcesProfileController < ApplicationController
 			if status_info == "OK"
 				new_last_online = DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s')
 
-				if @codeforces_profile.last_online < new_last_online
+				if @codeforces_profile.data["last_online"] < new_last_online
 
 					response_subs = CodeforcesProfile.get_submissions(handle)
 					status_subs = response_subs[0]
@@ -98,14 +110,6 @@ class CodeforcesProfileController < ApplicationController
 					resp_rates = response_rates[1]["result"]
 
 					if status_subs == "OK" and status_rates == "OK"
-						@codeforces_profile.update_attributes(
-							contribution: resp_info["contribution"],
-							rank: resp_info["rank"],
-							max_rank: resp_info["maxRank"],
-							rating: resp_info["rating"],
-							max_rating: resp_info["maxRating"],
-							last_online: new_last_online
-						)
 
 						data1 = CodeforcesProfile.problems_lang_tags(resp_subs)
 						solved_probs = data1[0]			#total number of problems solved
@@ -131,10 +135,22 @@ class CodeforcesProfileController < ApplicationController
 						current_user.save!
 						current_user.reload
 
-						resp_rates = Codeforces.ratings(resp_rates)
+						resp_rates = CodeforcesProfile.ratings(resp_rates)
 
-						@codeforces_profile.metadata = { solved_probs: solved_probs, languages: langs, tags: tags_count, ratings: resp_rates }
-						@codeforces_profile.metadata_will_change!
+						@codeforces_profile.data = {
+												solved_probs: solved_probs,
+												languages: langs,
+												tags: tags_count,
+												ratings: resp_rates,
+												handle: resp_info["handle"],
+												contribution: resp_info["contribution"],
+												rank: resp_info["rank"],
+												max_rank: resp_info["maxRank"],
+												rating: resp_info["rating"],
+												max_rating: resp_info["maxRating"],
+												last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s') 
+											}
+						@codeforces_profile.data_will_change!
 						@codeforces_profile.save!
 						flash[:notice] = "Successfully updated your Codeforces profile!"
 						redirect_to profile_path(username: current_user.username)

@@ -21,9 +21,11 @@
 		<div class="the-box no-border tags-cloud skill-cloud">
 			<h4 class="small-heading more-margin-bottom">SKILL CLOUD</h4>
 			<p>
-				<% @lip["skills"].each_with_index do |item, i| %>
-					<a href="#fakelink"><span class="label label-<%= color(i) %>"><%= item %></span></a> 
-				<% end -%>
+				<% if not @lip["skills"].blank?%>
+					<% @lip["skills"].each_with_index do |item, i| %>
+						<a href="#fakelink"><span class="label label-<%= color(i) %>"><%= item %></span></a> 
+					<% end %>
+				<% end %>
 			</p>
 		</div>
 	</div>

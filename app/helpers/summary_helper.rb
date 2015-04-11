@@ -10,7 +10,7 @@ module SummaryHelper
 		app_count = 0 if app_count.nil?
 
 		if app_count > 8 or algo_count > 50
-			"supperlative"
+			"superlative"
 		elsif (app_count > 3 or algo_count > 20)
 			"middling"
 		elsif (algo_count > 29)
@@ -40,7 +40,7 @@ module SummaryHelper
 		elsif count > 20
 			"a neotoric"
 		else
-			"an aspiting"
+			"an aspiring"
 		end
 	end
 
@@ -50,7 +50,7 @@ module SummaryHelper
 			"on Top of the world"
 		when "a neotoric"
 			"Second in hierarchy, after 'Staunch'"
-		when "an aspiting"
+		when "an aspiring"
 			"last in hierarchy but quickly quickly progressing"
 		end
 	end
@@ -133,6 +133,31 @@ module SummaryHelper
 			else
 				"midday"
 			end
+		end
+	end
+
+	def codeforces_tt(rank)
+		return "Not Ranked" if rank.nil? or rank.empty?
+
+		case rank.downcase
+		when "international grandmaster"
+			"Rating 2600+, on Top of the world"
+		when "grandmaster"
+			"Rating range: 2200-2599, second from top"
+		when "international master"
+			"Rating range: 2050-2199, third from top"
+		when "master"
+			"Rating range: 1900-2049, fourth in hierarchy"
+		when "candidate master"
+			"Rating range: 1700-1899, fifth in hierarchy"
+		when "expert"
+			"Rating range: 1500-1699, sixth in hierarchy"
+		when "specialist"
+			"Rating range: 1350-1499, seventh in hierarchy"
+		when "pupil"
+			"Rating range: 1200-1349, eigth in hierarchy"
+		when "newbie"
+			"Rating range: 0-1199, ninth in hierarchy"
 		end
 	end
 end
