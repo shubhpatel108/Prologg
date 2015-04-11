@@ -16,7 +16,6 @@ class ProfilesController < ApplicationController
 		username = params[:username]
 		@user = User.where(username: username).first
 		session[:viewed_profiles] = [] if session[:viewed_profiles].nil?	
-		@show_summary_page = true
 		@first_name = @user.full_name.split(" ").first
 
 		@algo_langs = @user.algo_langs
@@ -175,7 +174,7 @@ class ProfilesController < ApplicationController
 				lp = user.linkedin_profile
 				if lp.nil?
 					false
-				elsif lp.data["skills"] && @skills_req == @skills_req
+				elsif not lp.data["skills"].nil? && lp.data["skills"].include?(@skills_req)
 					true
 				else
 					false
