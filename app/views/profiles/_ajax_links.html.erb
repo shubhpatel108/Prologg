@@ -17,11 +17,14 @@
 	});
 	$('#edit_integrations').click(function() {
 		ajaxLoad("<%=edit_integrations_path%>");
+		window.history.pushState({},"", "<%=edit_integrations_path(username: @user.username)%>");
 	});
 	$('#contact').click(function() {
 		ajaxLoad("<%=new_mails_path(username: @user.username)%>");
+		window.history.pushState({},"", "<%=new_mails_path(username: @user.username)%>");
 	});
 	$('#show_summary_link').click(function() {
 		ajaxLoad("<%=profile_path(username: @user.username)%>");
+		window.history.pushState({},"", "<%=profile_path(username: @user.username)%>");
 	});
 </script>
