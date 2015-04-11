@@ -319,7 +319,7 @@
     margin-bottom: 6px;
     font-size: 1.5em;
     color: white;
-    font-family: Raleway ;
+    font-family: 'Source Sans Pro', sans-serif;
     margin-top: 100px;
 }
 
@@ -375,8 +375,8 @@
 }
 
 .homepage-heading{
-    font-size: 3em;
-    font-family: Raleway;
+    font-size: 2.5em;
+    font-family: 'Source Sans Pro', sans-serif;
     color: white;
 }
 
