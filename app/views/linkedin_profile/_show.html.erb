@@ -241,10 +241,19 @@
       var location = locations[i];
       console.log(location);
       var myLatLng = new google.maps.LatLng(location[0], location[1]);
+      if(i > locations.length-4)
+      {
+		color = "FE7569"
+      }
+      else
+      {
+		color = "41E2BD"
+      }
       var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|41E2BD|12|b|'+ location[2].toString(),
+          icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|'+color+'|12|b|'+ location[2].toString(),
+          title: location[3],
           zIndex: i
       });
   }

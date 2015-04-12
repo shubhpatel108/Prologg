@@ -184,11 +184,14 @@ class LinkedinProfileController < ApplicationController
 								@places << [long_lat[0], long_lat[1], count]
 							end
 						else
-							@places << [existing.latitude, existing.longitude, count]
+							@places << [existing.latitude, existing.longitude, count, place]
 						end
 					end
 				end
 			end
+
+			@places = @places.sort_by { |place| place[2] }
+
 			respond_to do |format|
 				format.js
 				format.html
