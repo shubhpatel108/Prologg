@@ -21,10 +21,12 @@
 		<div class="the-box no-border tags-cloud skill-cloud">
 			<h4 class="small-heading more-margin-bottom">SKILL CLOUD</h4>
 			<p>
-				<% if not @lip["skills"].blank?%>
+				<% if not @lip["skills"].empty? %>
 					<% @lip["skills"].each_with_index do |item, i| %>
 						<a href="#fakelink"><span class="label label-<%= color(i) %>"><%= item %></span></a> 
 					<% end %>
+				<% else %>
+					<p>Not endorsed by many but as <%= gender.downcase %> is now on Prologg, <%= gender.downcase %> will inspire millions.</p>
 				<% end %>
 			</p>
 		</div>
