@@ -195,12 +195,12 @@ class CodeforcesProfileController < ApplicationController
 		begin
 			response = CodeforcesProfile.get_recent_submissions(handle)
 			status = response[0]
-			@resp = response[1]["result"].paginate(page: params[:page], per_page: 4 )
 
 			if status=="OK"
+				@resp = response[1]["result"].paginate(page: params[:page], per_page: 4)
 				@resp.each do |sub|
 					sub.select! {|k,v| ["problem", "programmingLanguage", "creationTimeSeconds", "verdict"].include?(k) }
-					sub["problem"].select! {|k,v| ["name"].include?(k) }
+					sub["problem"].select! { |k,v| ["name"].include?(k) }
 				end
 				respond_to do |format|
 					format.js
