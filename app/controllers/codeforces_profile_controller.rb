@@ -57,6 +57,9 @@ class CodeforcesProfileController < ApplicationController
 
 					resp_rates = CodeforcesProfile.ratings(resp_rates)
 
+					resp_info["firstName"] = "" if resp_info["firstName"].nil?
+					resp_info["lastName"] = "" if resp_info["lastName"].nil?
+
 					@codeforces_profile.data = {
 													solved_probs: solved_probs,
 													languages: langs,
@@ -68,7 +71,8 @@ class CodeforcesProfileController < ApplicationController
 													max_rank: resp_info["maxRank"],
 													rating: resp_info["rating"],
 													max_rating: resp_info["maxRating"],
-													last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s') 
+													last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s'),
+													real_name: [resp_info["firstName"], resp_info["lastName"]].join(" ")
 												}
 					@codeforces_profile.save!
 

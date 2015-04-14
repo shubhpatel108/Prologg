@@ -36,20 +36,24 @@
 <div class="row">
 	<div class="col-lg-6">
 		
-		<div class="alert alert-warning alert-block square fade in alert-dismissable">
+		<div class="alert alert-warning alert-block square fade in alert-dismissable" data-toggle="code_rank" data-placement="top" title="Due to unavailability of Codeforces authentication system and user's email">
 		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		  <p><strong>Warning!</strong></p>
-		  <p>This account is unverifed.</p>
+		  <p>This account is unverifed 
+		  <% unless @cfp.data["real_name"].empty? %>
+		  and belongs to <%= @cfp.data["real_name"] %>
+		  <% end %>.
+		  </p>
 		</div>
 		<!-- BEGIN WEATHER WIDGET 2 -->
 		<div class="panel panel-info panel-square panel-no-border">
 		  <div class="panel-heading">
 			<div class="col-lg-6 text-center">
-			  PROBLEMS SOLVED
+			  	PROBLEMS SOLVED
 			  </div>
 			  
-			  <div class="col-lg-6 text-center">
-			  CONTRIBUTIONS MADE
+			  <div class="col-lg-6 text-center" data-toggle="code_rank" data-placement="top" title="Problem statements created">
+			  	CONTRIBUTIONS MADE
 			  </div>
 			</div>
 		  	<div class="panel-body bg-info">
@@ -167,7 +171,7 @@
 
 <div class="row">
 	<div class="col-lg-6">
-		<div class="the-box no-border">
+		<div class="the-box no-border" data-toggle="code_rank" data-placement="top" title="Shows user's congnitive interest and strength">
 		<h4 class="small-title">Tags on Problem solved</h4>
 		<% if @cfp.data["tags"].empty? %>
 			<div style="height:100px;">
