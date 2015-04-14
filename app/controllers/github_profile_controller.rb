@@ -32,7 +32,7 @@ class GithubProfileController < ApplicationController
 			@github_profile.data_will_change!
 			@github_profile.save!
 
-			flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
+			flash[:notice] = "You have successfully integrated GitHub in your profile."
 			redirect_to profile_path(:username => current_user.username)
 		rescue Exception => e
 			@github_profile.destroy
@@ -45,7 +45,7 @@ class GithubProfileController < ApplicationController
 		@github_profile = current_user.github_profile
 
 		if @github_profile.nil?
-			flash[:alert] = "You don't have Github account integrated with your profile."
+			flash[:alert] = "You don't have GitHub account integrated with your profile."
 			redirect_to :back
 		else
 			old_data = @github_profile.data
@@ -88,7 +88,7 @@ class GithubProfileController < ApplicationController
 						flash[:notice] = "Successfully updated your GitHub profile!"
 						redirect_to profile_path(username: current_user.username)
 					else
-						flash[:notice] = "Your Github profile is already upto date."
+						flash[:notice] = "Your GitHub profile is already upto date."
 						redirect_to :back
 					end
 				end
