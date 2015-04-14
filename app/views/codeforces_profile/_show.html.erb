@@ -40,7 +40,7 @@
 		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		  <p><strong>Warning!</strong></p>
 		  <p>This account is unverifed 
-		  <% unless @cfp.data["real_name"].empty? %>
+		  <% if not @cfp.data["real_name"].nil? and not @cfp.data["real_name"].empty? %>
 		  and belongs to <%= @cfp.data["real_name"] %>
 		  <% end %>.
 		  </p>
