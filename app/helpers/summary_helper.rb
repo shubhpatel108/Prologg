@@ -101,22 +101,26 @@ module SummaryHelper
 	end
 
 	def day_adjective
-		days = @user.github_profile.data["punch_card"]["days"]
+		days = @github_profile.data["punch_card"]["days"]
 
 		weekend_avg = (days[0] + days[6]) / 2
 		week_days_avg = days[1..5].sum / 5
 
-		if weekend_avg > week_days_avg
-			"weekend".html_safe
-		elsif weekend_avg < week_days_avg
-			"weekdays".html_safe
+		if weekend_avg==0 and week_days_avg==0
+			"kainai"
 		else
-			"all week long".html_safe
+			if weekend_avg > week_days_avg
+				"weekend".html_safe
+			elsif weekend_avg < week_days_avg
+				"weekdays".html_safe
+			else
+				"all week long".html_safe
+			end
 		end
 	end
 
 	def time_adjective(graph = nil)
-		time = @user.github_profile.data["punch_card"]["time"]
+		time = @github_profile.data["punch_card"]["time"]
 
 		night = time[0..2].sum + time[7]
 		day = time[3..6].sum
@@ -130,8 +134,10 @@ module SummaryHelper
 		else
 			if night > day
 				"nocturnal"
-			else
+			elsif night!=0
 				"midday"
+			else
+				"kainai"
 			end
 		end
 	end

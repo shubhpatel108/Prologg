@@ -91,7 +91,11 @@
 			<div class="the-box no-border"  style="height: 430px !important">
 				<i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
 				<p class="first-paragraph text-center">
-					<%= gender %> is a <%= time_adjective("graph") %> developer. <% if not time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned abode than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
+          <% if time_adjective("graph")=="kainai" %>
+            User doesn't have significant experience, so it's hard to tell his working habbit. But <%= gender %> should a smart <%= gender1 %>.
+          <% else %>
+					  <%= gender %> is a <%= time_adjective("graph") %> developer. <% if not time_adjective("graph") == "nocturnal" %><%= gender %> prefers his airconditioned abode than the screechy sun and turns his senses to code <% else %><%= gender %> enjoys the delight of moonlight and stillness of night rather than retro lights.<% end -%>
+          <% end %>
 				</p>
 			</div>
 		</div>
@@ -105,7 +109,11 @@
           <div class="the-box no-border" style="height: 430px !important">
             <i class="fa fa-institution icon-circle icon-lg icon-default newicon-2"></i>
             <p class="first-paragraph text-center">
-              <%= gender%> enjoys working during the <%= day_adjective %> . <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
+            <% if day_adjective=="kainai" %>
+              User doesn't have significant experience, so it's hard to tell if <%= gender %> is a weekend lover. But <%= gender %> should a dedicated <%= gender1 %>.
+            <% else %>
+              <%= gender%> enjoys working during the <%= day_adjective %>. <%= gender%> codes as <% if day_adjective == "weekend" %>an odd job. <% else %>a day job.<% end -%> <%= gender%> spends quite a time in polishing skills.
+            <% end %>
             </p>
           </div>
         </div>
@@ -129,7 +137,7 @@
         <div style="min-width: 310px; height: 100px; margin: 0 auto">
           <center>
             <strong>Graph for Languages used in Algorithms</strong><br/>
-            We don't have enough data to judge <%= @first_name%>'s algorithmic skills. But we never <%= gender2 %> talent.
+            We don't have enough data to judge <%= @first_name%>'s algorithmic skills. But we never doubt <%= gender2 %> talent.
           </center>
         </div>
       <% end %>
@@ -138,10 +146,10 @@
   <div class="col-lg-6">
     <div class="the-box no-border" >
       <% unless @algo_langs.empty? %>
-        <div style="height: 430px !important">
+        <div style="height: 400px !important">
           <i class="fa fa-graduation-cap icon-circle icon-lg icon-default newicon"></i>
           <p class="first-paragraph text-center">
-            <%= gender %> is quite a cogent developer who loves to spend time enhancing his algothmic skills. <%= gender %> mostly uses <%=@all_langs.keys.first%> but is quite competent in <%= @all_langs.keys.slice(0..2).to_sentence %> too. <%= gender %>'s been progressive and meritorious. hence, tagged as a <%= @codeforces_profile.data["rank"] %>.
+            <%= gender %> is quite a cogent developer who loves to spend time enhancing his algothmic skills. <%= gender %> mostly uses <%=@all_langs.keys.first%> but is quite competent in <%= @all_langs.keys.slice(0..2).to_sentence %> too. <%= gender %>'s been progressive and meritorious. Hence, tagged as a <%= @codeforces_profile.data["rank"] %>.
           </p>
         </div>
       <% else %>
