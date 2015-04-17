@@ -72,7 +72,7 @@ class CodeforcesProfileController < ApplicationController
 													rating: resp_info["rating"],
 													max_rating: resp_info["maxRating"],
 													last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s'),
-													real_name: [resp_info["firstName"], resp_info["lastName"]].join(" ")
+													real_name: [resp_info["firstName"], resp_info["lastName"]].join(" ").strip
 												}
 					@codeforces_profile.save!
 
@@ -164,7 +164,8 @@ class CodeforcesProfileController < ApplicationController
 													max_rank: resp_info["maxRank"],
 													rating: resp_info["rating"],
 													max_rating: resp_info["maxRating"],
-													last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s') 
+													last_online: DateTime.strptime(resp_info["lastOnlineTimeSeconds"].to_s, '%s'), 
+													real_name: [resp_info["firstName"], resp_info["lastName"]].join(" ").strip
 												}
 							@codeforces_profile.data_will_change!
 							@codeforces_profile.save!
