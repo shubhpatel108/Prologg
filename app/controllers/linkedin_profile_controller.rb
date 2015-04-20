@@ -188,9 +188,8 @@ class LinkedinProfileController < ApplicationController
 						end
 					end
 				end
+				@places = @places.sort_by { |place| place[2] }
 			end
-
-			@places = @places.sort_by { |place| place[2] }
 
 			respond_to do |format|
 				format.js
