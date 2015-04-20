@@ -110,7 +110,6 @@ class GithubProfileController < ApplicationController
 		else
 			@ghp = @user.github_profile #ghi stands for GitHubProfile
 			if not @ghp.nil?
-				@orgs = @ghp.data["orgs"].paginate(page: params[:page], per_page: 4 ) unless @ghp.data["orgs"].nil?
 				@repos = @ghp.data["repos"].paginate(page: params[:page], per_page: 5) unless @ghp.data["repos"].nil?
 			end
 			respond_to do |format|
