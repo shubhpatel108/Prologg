@@ -84,13 +84,12 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "smtp.zoho.com",
-    :port => 465 ,
-    :user_name => 'contact@thecollegestore.in',
-    :password => 'saq1sazx',
+    :address => "smtpcorp.com",
+    :port => 2525,
+    :user_name => 'teameureka.sen@gmail.com',
+    :password => 'wefoundit',
     :authentication => :plain,
-    :domain => 'thecollegestore.in',
-    :enable_starttls_auto => false,
-    :ssl => true
+    :domain => 'smtpcorp.com',
+    :enable_starttls_auto => false
   }
 end
