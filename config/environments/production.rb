@@ -84,12 +84,13 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "webmail.daiict.ac.in",
-    :port => 25,
-    :user_name => '201201210@daiict.ac.in',
-    :password => ENV['MAILER_PASSWORD'],
+    :address => "smtp.zoho.com",
+    :port => 465 ,
+    :user_name => 'contact@thecollegestore.in',
+    :password => 'saq1sazx',
     :authentication => :plain,
-    :domain => 'daiict.ac.in',
+    :domain => 'thecollegestore.in',
     :enable_starttls_auto => false
+    :ssl => true
   }
 end
