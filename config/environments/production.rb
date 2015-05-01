@@ -90,7 +90,7 @@ Rails.application.configure do
     :password => 'saq1sazx',
     :authentication => :plain,
     :domain => 'thecollegestore.in',
-    :enable_starttls_auto => false
+    :enable_starttls_auto => false,
     :ssl => true
   }
 end
