@@ -129,7 +129,7 @@ module SummaryHelper
 			if night > day
 				"'s <span class=\"style-words text-success\">a nocturnal developer </span>,".html_safe
 			else
-				" <span class=\"style-words text-success\"> develops in parallel with his #{gender2} job</span>,".html_safe
+				" <span class=\"style-words text-success\"> develops in parallel with #{gender2} job</span>,".html_safe
 			end
 		else
 			if night > day
