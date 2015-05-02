@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
   validates :full_name, :username, :email, :presence => true
   validates :username, :email,  :uniqueness => true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
-  validates_length_of :username, within: 5..20, too_long: 'pick a shorter username', too_short: 'pick a longer username'
+  validates_length_of :username, within: 6..30, too_long: 'pick a shorter username', too_short: 'pick a longer username'
   validates_length_of :short_bio, within: 0..200, too_long: 'You can not use more than 200 characters'
-  validates :username, format: { with: /\A[a-zA-Z0-9]+\Z/ }
+  validates :username, format: { with: /\A[a-zA-Z0-9_\.]+\Z/ }
   attr_readonly :username
 
   has_one :gplus_link, dependent: :destroy
