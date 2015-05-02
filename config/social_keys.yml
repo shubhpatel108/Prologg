@@ -1,13 +1,21 @@
 development:
-  github_key: "YOUR_KEY"
-  github_secret: "YOUR_SECRET"
+  github_key: "2640bc0a7c6459146baa"
+  github_secret: "26abfd4aea65fefd52a8de70c63d9ea022881a6f"
 
-  linkedin_key: "YOUR_KEY"
-  linkedin_secret: "YOUR_SECRET"
+  linkedin_key: "78e40gu5vwn8x1"
+  linkedin_secret: "gP91NvIYECRy1hBX"
+
+  tc_key: "ada98c716dc5161262799a6b45c30754"
+
+  mailer_password: '12345678o'
 
 production:
-  github_key: "YOUR_KEY"
-  github_secret: "YOUR_SECRET"
+  github_key: "2640bc0a7c6459146baa"
+  github_secret: "26abfd4aea65fefd52a8de70c63d9ea022881a6f"
 
-  linkedin_key: "YOUR_KEY"
-  linkedin_secret: "YOUR_SECRET"
+  linkedin_key: "78e40gu5vwn8x1"
+  linkedin_secret: "gP91NvIYECRy1hBX"
+
+  tc_key: "ada98c716dc5161262799a6b45c30754"
+
+  mailer_password: '12345678o'
